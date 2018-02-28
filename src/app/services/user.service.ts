@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { User } from '../models/user.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UserService {
@@ -6,7 +9,7 @@ export class UserService {
 	private isUserLoggedIn;
 	private username;
 
-  constructor() { 
+  constructor(private http: HttpClient) { 
   	this.isUserLoggedIn = false;
   }
 
@@ -17,4 +20,9 @@ export class UserService {
   getUserLoggedIn() {
   	return this.isUserLoggedIn;
   }
+
+  login(user:User): Observable<any> {
+    return this.http.post('liga de backend de user', user, {withCredentials: true});
+  }
+
 }

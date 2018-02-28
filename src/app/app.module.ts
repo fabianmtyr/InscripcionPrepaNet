@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {FormsModule} from '@angular/forms';
-//import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -50,6 +51,8 @@ const appRoutes:Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
+    HttpModule,
+    HttpClientModule,
   ],
   providers: [UserService, AuthguardGuard],
   bootstrap: [AppComponent]

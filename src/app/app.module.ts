@@ -18,6 +18,7 @@ import { RegistroComponent } from './registro/registro.component';
 
 // Servicios
 import { UserService } from './services/user.service';
+import { RegistroService } from './services/registro.service';
 
 //Guardias
 import { AuthguardGuard } from './guards/authguard.guard';
@@ -61,7 +62,7 @@ const appRoutes:Routes = [
     HttpModule,
     HttpClientModule,
   ],
-  providers: [UserService, AuthguardGuard],
+  providers: [RegistroService,UserService, AuthguardGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -13,6 +13,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
+import { RegistroComponent } from './registro/registro.component';
+
 
 // Servicios
 import { UserService } from './services/user.service';
@@ -31,6 +33,10 @@ const appRoutes:Routes = [
     path: 'login',
     component: LoginComponent
   },
+    {
+    path: 'registro',
+    component: RegistroComponent
+  },
   {
     path: 'dashboard',
     canActivate: [AuthguardGuard],
@@ -42,6 +48,7 @@ const appRoutes:Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
+    RegistroComponent,
     HeaderComponent,
     FooterComponent,
     DashboardComponent,

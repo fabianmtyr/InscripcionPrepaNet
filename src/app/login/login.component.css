@@ -5,6 +5,10 @@
 	align-items: center;
 }
 
+body{
+	font-family: 'Open Sans', sans-serif;
+}
+
 div.input {
 	position: relative;
 }

@@ -10,11 +10,26 @@ import { Candidato } from '../models/candidato.model';
 })
 export class RegistroComponent implements OnInit {
 
-userModel = new Candidato;
+candidatoModel = new Candidato;
 
   constructor(private router:Router, private registro:RegistroService) { }
 
-  ngOnInit() {
-  }
+  registraCandidato(){
+      
+    var nme = this.candidatoModel.name;
+    var lnme = this.candidatoModel.lastnames;
+    var mail = this.candidatoModel.correo;
+    var mat = this.candidatoModel.matricula;
 
+  	if(true) {
+  		this.registro.register(this.candidatoModel).subscribe();
+  		this.router.navigate(['dashboard']);
+  	}
+  }
+  
+  
+    ngOnInit() {
+  
+
+    }   
 }

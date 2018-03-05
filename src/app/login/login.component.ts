@@ -18,16 +18,6 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
-    /*
-  	e.preventDefault();
-  	console.log(e);
-  	var username = e.target.elements[0].value;
-  	var password = e.target.elements[1].value;
-    */
-
-    var un = this.userModel.username;
-    var pw = this.userModel.password;
-
   	if(this.userModel.username == 'admin' && this.userModel.password == 'admin') {
   		this.user.setUserLoggedIn();
   		this.router.navigate(['dashboard']);

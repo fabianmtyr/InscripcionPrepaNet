@@ -3,14 +3,14 @@
 	<form (ngSubmit)="loginUser()">
 		<div class="input">
 			<label>Nombre de Usuario</label>
-			<input [(ngModel)]="userModel.username" name="username" type="text">
+			<input [(ngModel)]="userModel.email" name="email" type="text">
 		</div>
 		<div class="input">
 			<label>Contrase&ntilde;a</label>
 			<input [(ngModel)]="userModel.password" name="password" type="password">
 		</div>
 		<div class="input">
-			<input type="submit" value="Ingresar">
+			<button type="submit" class="btn btn-primary">Ingresar</button>
 		</div>
 	</form>
 </div>

@@ -43,10 +43,15 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.userModel).subscribe(
       (response) => {
         console.log(response);
-        if (response){
-        this.userService.setUserLoggedIn();
-        this.router.navigate(['dashboard']);
-      }else{ console.log("No se encontro el usuario");}
+        if (response)
+          {
+            this.userService.setUserLoggedIn();
+            this.router.navigate(['dashboard']);
+          }
+        else
+          { 
+            console.log("No se encontro el usuario");
+          }
       },
       (error) => console.log(error)
       );

@@ -10,3 +10,14 @@ h5{
 	font-family: 'Open Sans', sans-serif;
 
 }
+
+body{
+
+	margin: 50px;
+}
+
+.row{
+
+	margin-top: 25px;
+	margin-bottom: 25px;
+}

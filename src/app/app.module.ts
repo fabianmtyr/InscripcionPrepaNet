@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
+import { RegistroAdminsComponent } from './dashboard/registro-admins/registro-admins.component';
 
 // Servicios
 import { UserService } from './services/user.service';
@@ -35,6 +36,11 @@ const appRoutes:Routes = [
     path: 'dashboard',
     canActivate: [AuthguardGuard],
     component: DashboardComponent
+  },
+  {
+    path: 'dashboard/registro-admins',
+    canActivate: [AuthguardGuard],
+    component: RegistroAdminsComponent
   }
 ]
 
@@ -45,7 +51,8 @@ const appRoutes:Routes = [
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
-    HomeComponent
+    HomeComponent,
+    RegistroAdminsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,29 @@
+<div class="login-container" >
+	<form (ngSubmit)="addUser()">
+		<div class="form-group">
+			<div class="input">
+				<label>Nombre</label>
+				<input [(ngModel)]="user.fname" name="fname" type="text">
+			</div>
+			<div class="input">
+				<label>Apellido</label>
+				<input [(ngModel)]="user.lname" name="lname" type="text"> 
+			</div>
+			<div class="input">
+				<label>Correo</label>
+				<input [(ngModel)]="user.email" name="email" type="text">
+			</div>
+			<div class="input">
+				<label>Contrase&ntilde;a</label>
+				<input [(ngModel)]="user.password" name="password" type="password">
+			</div>
+			<div class="input">
+				<label>Confirmar Contrase&ntilde;a</label>
+				<input [(ngModel)]="user.passwordVerify" name="passwordVerify" type="password">
+			</div>
+			<div class="input">
+				<button type="submit" class="btn btn-primary">Ingresar</button>
+			</div>
+		</div>
+	</form>
+</div>

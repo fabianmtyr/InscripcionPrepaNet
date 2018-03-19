@@ -5,12 +5,12 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UserService {
-
+  private backend = "https://ipn-backend.herokuapp.com";
 	private isUserLoggedIn;
 	private username;
 
   constructor(private http: HttpClient) { 
-  	this.isUserLoggedIn = false;
+  	this.isUserLoggedIn = true;
   }
 
   setUserLoggedIn() {
@@ -21,8 +21,12 @@ export class UserService {
   	return this.isUserLoggedIn;
   }
 
-  login(user:User): Observable<any> {
-    return this.http.post('liga de backend de user', user, {withCredentials: true});
+  login(user:User) {
+    return this.http.post('liga de backend de user', user);
+  }
+
+  registerUser(user: User) {
+    return this.http.post(this.backend + '/user/register', user);
   }
 
 }

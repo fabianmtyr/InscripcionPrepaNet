@@ -29,7 +29,9 @@ candidatoModel = new Candidato;
   
   
     ngOnInit() {
-  
-
+        //this.registroForm = new FormGroup({
+        
+        
+    
     }   
 }

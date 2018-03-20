@@ -6,8 +6,11 @@ import { ErrorHandler } from '@angular/core';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    //'Content-Type':  'application/json',
-    //'Accept': '*/*'
+    //'Access-Control-Request-Method':'POST',
+    //'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Type': 'application/json',
+    'Accept': '*/*'
+    
 })};
 
 
@@ -31,7 +34,16 @@ export class RegistroService {
 
   register(candidato:Candidato): Observable<any> {
       console.log(JSON.stringify(candidato))
-      return this.http.post('http://ipn-backend.herokuapp.com/api/tutors', JSON.stringify(candidato), httpOptions);
+      let tstJson = {name: {
+          first: candidato.name,
+          last: candidato.lastnames
+    },
+          matricula: candidato.matricula, 
+          email: candidato.correo}
+          
+      //return this.http.post('http://localhost:8080/tutors/new', tstJson, httpOptions);
+      //return this.http.post('http://localhost:8080/tutors/new', JSON.stringify(candidato), httpOptions);
+      return this.http.post('https://ipn-backend.herokuapp.com/tutors/new', tstJson, httpOptions);
   }
 
 }

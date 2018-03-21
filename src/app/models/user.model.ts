@@ -1,5 +1,8 @@
 export class User {
 	public id: number;
-	public username: string;
+	public fname: string;
+	public lname: string;
+	public email: string;
 	public password: string;
+	public passwordVerify: string;
 }

@@ -1,3 +1,52 @@
-<h1>
-	Registro Interesados
-</h1>
+<div class="login-container" >
+	<form (ngSubmit)="addUser()" #adminForm="ngForm">
+		<div class="input">
+			<label>Nombre</label>
+			<input [(ngModel)]="user.fname" name="fname" type="text" required #fname="ngModel">
+			<div *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="alert alert-danger">
+				<div *ngIf="fname.errors.required">
+					Se necesita un nombre.
+				</div>
+				
+			</div>
+		</div>
+		<div class="input">
+			<label>Apellido</label>
+			<input [(ngModel)]="user.lname" name="lname" type="text" required #lname="ngModel"> 
+			<div *ngIf="lname.invalid && (lname.dirty || lname.touched)" class="alert alert-danger">
+				<div *ngIf="lname.errors.required">
+					Se necesita un apellido.
+				</div>
+			</div>
+		</div>
+		<div class="input">
+			<label>Correo</label>
+			<input [(ngModel)]="user.email" name="email" type="text">
+		</div>
+		<div class="input">
+			<label>Contrase&ntilde;a</label>
+			<input [(ngModel)]="user.password" name="password" type="password" required #password="ngModel" minlength="6" validateEqual="passwordVerify" reverse="true">
+			<div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+				<div *ngIf="password.errors.required">
+					Se necesita una contrase&ntilde;a.
+				</div>
+				<div *ngIf="password.errors.minlength">
+					La contrase&ntilde;a tiene que tener al menos 6 caracteres.
+				</div>
+			</div>
+		</div>
+		<div class="input">
+			<label>Confirmar Contrase&ntilde;a</label>
+			<input [(ngModel)]="user.passwordVerify" name="passwordVerify" type="password" required #passwordVerify="ngModel" minlength="6" validateEqual="password" reverse="false">
+			<div *ngIf="passwordVerify.invalid && (passwordVerify.dirty || passwordVerify.touched)" class="alert alert-danger">
+				<div *ngIf="passwordVerify.errors.required">
+					Se necesita verificar la contrase&ntilde;a
+				</div>
+				
+			</div>
+		</div>
+		<div class="input">
+			<button type="submit" class="btn btn-primary" [disabled]="!adminForm.form.valid">Ingresar</button>
+		</div>
+	</form>
+</div>

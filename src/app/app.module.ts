@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
+import { RegistroAdminsComponent } from './dashboard/registro-admins/registro-admins.component';
 
 import { RegistroComponent } from './registro/registro.component';
 
@@ -26,6 +27,9 @@ import { RegistroService } from './services/registro.service';
 
 //Guardias
 import { AuthguardGuard } from './guards/authguard.guard';
+
+// Directivos
+import { EqualValidator } from './dashboard/registro-admins/passwordMatch.directive';
 
 
 
@@ -71,6 +75,7 @@ const appRoutes:Routes = [
     DashboardComponent,
     HomeComponent,
     RegistroAdminsComponent,
+    EqualValidator
     DescargaInteresadosComponent
   ],
   imports: [

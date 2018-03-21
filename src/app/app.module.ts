@@ -15,14 +15,23 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { RegistroAdminsComponent } from './dashboard/registro-admins/registro-admins.component';
 
+import { RegistroComponent } from './registro/registro.component';
+
+import { RegistroAdminsComponent } from './dashboard/registro-admins/registro-admins.component';
+import { DescargaInteresadosComponent } from './dashboard/descarga-interesados/descarga-interesados.component';
+
+
 // Servicios
 import { UserService } from './services/user.service';
+import { RegistroService } from './services/registro.service';
 
 //Guardias
 import { AuthguardGuard } from './guards/authguard.guard';
 
 // Directivos
 import { EqualValidator } from './dashboard/registro-admins/passwordMatch.directive';
+
+
 
 
 // Rutas
@@ -35,6 +44,10 @@ const appRoutes:Routes = [
     path: 'login',
     component: LoginComponent
   },
+    {
+    path: 'registro',
+    component: RegistroComponent
+  },
   {
     path: 'dashboard',
     canActivate: [AuthguardGuard],
@@ -44,6 +57,11 @@ const appRoutes:Routes = [
     path: 'dashboard/registro-admins',
     canActivate: [AuthguardGuard],
     component: RegistroAdminsComponent
+  },
+  {
+    path: 'dashboard/descarga-interesados',
+    canActivate: [AuthguardGuard],
+    component: DescargaInteresadosComponent
   }
 ]
 
@@ -51,12 +69,14 @@ const appRoutes:Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
+    RegistroComponent,
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
     HomeComponent,
     RegistroAdminsComponent,
     EqualValidator
+    DescargaInteresadosComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +85,7 @@ const appRoutes:Routes = [
     HttpModule,
     HttpClientModule,
   ],
-  providers: [UserService, AuthguardGuard],
+  providers: [RegistroService,UserService, AuthguardGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

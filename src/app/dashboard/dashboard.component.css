@@ -1,0 +1,29 @@
+h4{
+	font-family: 'Open Sans', sans-serif;
+}
+
+h5{
+	font-family: 'Open Sans', sans-serif;
+}
+
+.title{
+	font-family: 'Arial', sans-serif;
+
+}
+
+body{
+
+	margin: 50px;
+}
+
+.row{
+
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #0738A7;
+    border-color: #0738A7;
+}

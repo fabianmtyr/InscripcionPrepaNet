@@ -77,6 +77,4 @@ export class RegistroAdminsComponent implements OnInit {
       console.log("hola");
     }
   }
-
-
 }

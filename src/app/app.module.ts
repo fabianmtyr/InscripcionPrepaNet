@@ -14,10 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { RegistroAdminsComponent } from './dashboard/registro-admins/registro-admins.component';
-
 import { RegistroComponent } from './registro/registro.component';
-
-import { RegistroAdminsComponent } from './dashboard/registro-admins/registro-admins.component';
 import { DescargaInteresadosComponent } from './dashboard/descarga-interesados/descarga-interesados.component';
 
 
@@ -75,7 +72,7 @@ const appRoutes:Routes = [
     DashboardComponent,
     HomeComponent,
     RegistroAdminsComponent,
-    EqualValidator
+    EqualValidator,
     DescargaInteresadosComponent
   ],
   imports: [

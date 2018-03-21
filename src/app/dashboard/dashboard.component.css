@@ -7,7 +7,7 @@ h5{
 }
 
 .title{
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Arial', sans-serif;
 
 }
 
@@ -20,4 +20,10 @@ body{
 
 	margin-top: 25px;
 	margin-bottom: 25px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #0738A7;
+    border-color: #0738A7;
 }

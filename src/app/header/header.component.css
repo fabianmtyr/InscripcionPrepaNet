@@ -8,3 +8,16 @@ header {
 	color: white;
 	font-style: 600i;
 }
+
+.navbar-default {
+    background-color: #0738A7;
+    border-color: #fff;
+    height: 80px;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+}
+
+.navbar-nav li a {
+ line-height: 50px;
+}

@@ -13,11 +13,16 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
+
+import { RegistroComponent } from './registro/registro.component';
+
 import { RegistroAdminsComponent } from './dashboard/registro-admins/registro-admins.component';
 import { DescargaInteresadosComponent } from './dashboard/descarga-interesados/descarga-interesados.component';
 
+
 // Servicios
 import { UserService } from './services/user.service';
+import { RegistroService } from './services/registro.service';
 
 //Guardias
 import { AuthguardGuard } from './guards/authguard.guard';
@@ -34,6 +39,10 @@ const appRoutes:Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+    {
+    path: 'registro',
+    component: RegistroComponent
   },
   {
     path: 'dashboard',
@@ -56,6 +65,7 @@ const appRoutes:Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
+    RegistroComponent,
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
@@ -70,7 +80,7 @@ const appRoutes:Routes = [
     HttpModule,
     HttpClientModule,
   ],
-  providers: [UserService, AuthguardGuard],
+  providers: [RegistroService,UserService, AuthguardGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

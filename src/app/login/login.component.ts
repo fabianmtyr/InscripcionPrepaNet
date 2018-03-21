@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
-  	if(this.userModel.username == 'admin' && this.userModel.password == 'admin') {
+  	if(this.userModel.email == 'admin' && this.userModel.password == 'admin') {
   		this.user.setUserLoggedIn();
   		this.router.navigate(['dashboard']);
   	}

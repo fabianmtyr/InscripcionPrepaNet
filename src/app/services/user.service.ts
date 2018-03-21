@@ -10,7 +10,7 @@ export class UserService {
 	private username;
 
   constructor(private http: HttpClient) { 
-  	this.isUserLoggedIn = true;
+  	this.isUserLoggedIn = false;
   }
 
   setUserLoggedIn() {

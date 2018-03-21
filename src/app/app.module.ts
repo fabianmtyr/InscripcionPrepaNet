@@ -21,6 +21,9 @@ import { UserService } from './services/user.service';
 //Guardias
 import { AuthguardGuard } from './guards/authguard.guard';
 
+// Directivos
+import { EqualValidator } from './dashboard/registro-admins/passwordMatch.directive';
+
 
 // Rutas
 const appRoutes:Routes = [
@@ -52,7 +55,8 @@ const appRoutes:Routes = [
     FooterComponent,
     DashboardComponent,
     HomeComponent,
-    RegistroAdminsComponent
+    RegistroAdminsComponent,
+    EqualValidator
   ],
   imports: [
     BrowserModule,

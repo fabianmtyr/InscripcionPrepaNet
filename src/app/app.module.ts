@@ -14,8 +14,14 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
+
+//Opcion 1
 import { RegistroComponent } from './registro/registro.component';
 import { ViewTutorsComponent } from './view-tutors/view-tutors.component';
+
+//Opcion2
+import { RegistroAdminsComponent } from './dashboard/registro-admins/registro-admins.component';
+import { DescargaInteresadosComponent } from './dashboard/descarga-interesados/descarga-interesados.component';
 
 // Servicios
 import { UserService } from './services/user.service';
@@ -24,6 +30,8 @@ import { ExcelServiceService } from './services/excel-service.service';
 
 //Guardias
 import { AuthguardGuard } from './guards/authguard.guard';
+
+
 
 
 // Rutas
@@ -46,11 +54,19 @@ const appRoutes:Routes = [
     component: DashboardComponent
   },
   {
-    path: 'tutors',
+    path: 'tutors', //opcion 1
     component:ViewTutorsComponent
-
+  },
+  {
+    path: 'dashboard/registro-admins', //opcion 2
+    canActivate: [AuthguardGuard],
+    component: RegistroAdminsComponent
+  },
+  {
+    path: 'dashboard/descarga-interesados', //opcion 2
+    canActivate: [AuthguardGuard],
+    component: DescargaInteresadosComponent
   }
-  
   
 ]
 
@@ -63,7 +79,9 @@ const appRoutes:Routes = [
     FooterComponent,
     DashboardComponent,
     HomeComponent,
-    ViewTutorsComponent
+    ViewTutorsComponent, //opcion 1
+    RegistroAdminsComponent, //opcion 2
+    DescargaInteresadosComponent //opcion 2
   ],
   imports: [
     BrowserModule,

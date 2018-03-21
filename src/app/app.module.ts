@@ -13,7 +13,11 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
+
 import { RegistroComponent } from './registro/registro.component';
+
+import { RegistroAdminsComponent } from './dashboard/registro-admins/registro-admins.component';
+import { DescargaInteresadosComponent } from './dashboard/descarga-interesados/descarga-interesados.component';
 
 
 // Servicios
@@ -22,6 +26,8 @@ import { RegistroService } from './services/registro.service';
 
 //Guardias
 import { AuthguardGuard } from './guards/authguard.guard';
+
+
 
 
 // Rutas
@@ -42,6 +48,16 @@ const appRoutes:Routes = [
     path: 'dashboard',
     canActivate: [AuthguardGuard],
     component: DashboardComponent
+  },
+  {
+    path: 'dashboard/registro-admins',
+    canActivate: [AuthguardGuard],
+    component: RegistroAdminsComponent
+  },
+  {
+    path: 'dashboard/descarga-interesados',
+    canActivate: [AuthguardGuard],
+    component: DescargaInteresadosComponent
   }
 ]
 
@@ -53,7 +69,9 @@ const appRoutes:Routes = [
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
-    HomeComponent
+    HomeComponent,
+    RegistroAdminsComponent,
+    DescargaInteresadosComponent
   ],
   imports: [
     BrowserModule,

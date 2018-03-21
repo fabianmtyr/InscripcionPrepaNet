@@ -21,9 +21,10 @@ export class UserService {
   	return this.isUserLoggedIn;
   }
 
-  login(user:User) {
-    return this.http.post('liga de backend de user', user);
+   login(user: User) {
+    return this.http.post(this.backend + '/user/login', user);
   }
+
 
   registerUser(user: User) {
     return this.http.post(this.backend + '/user/register', user);

@@ -11,6 +11,7 @@ import { Candidato } from '../models/candidato.model';
 export class RegistroComponent implements OnInit {
 
 candidatoModel = new Candidato;
+saveSuccess: boolean = false;
 
   constructor(private router:Router, private registro:RegistroService) { }
 
@@ -22,8 +23,12 @@ candidatoModel = new Candidato;
     var mat = this.candidatoModel.matricula;
 
   	if(true) {
-  		this.registro.register(this.candidatoModel).subscribe();
-  		this.router.navigate(['dashboard']);
+  		this.registro.register(this.candidatoModel).subscribe(data => {
+                    if(data){this.saveSuccess = true}
+                    else{this.saveSuccess = false}
+                    
+                });
+  		//this.router.navigate(['dashboard']);
   	}
   }
   

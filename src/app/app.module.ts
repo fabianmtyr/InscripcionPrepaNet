@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { Ng2TableModule } from 'ng2-table/ng2-table';
+//import{PaginationModule} from 'ngx-bootstrap/pagination'
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -16,11 +18,12 @@ import { HomeComponent } from './home/home.component';
 import { RegistroAdminsComponent } from './dashboard/registro-admins/registro-admins.component';
 import { RegistroComponent } from './registro/registro.component';
 import { DescargaInteresadosComponent } from './dashboard/descarga-interesados/descarga-interesados.component';
-
+import { ViewTutorsComponent } from './view-tutors/view-tutors.component';
 
 // Servicios
 import { UserService } from './services/user.service';
 import { RegistroService } from './services/registro.service';
+import { ExcelServiceService } from './services/excel-service.service';
 
 //Guardias
 import { AuthguardGuard } from './guards/authguard.guard';
@@ -59,7 +62,14 @@ const appRoutes:Routes = [
     path: 'dashboard/descarga-interesados',
     canActivate: [AuthguardGuard],
     component: DescargaInteresadosComponent
+  },
+  {
+    path: 'tutors',
+    component:ViewTutorsComponent
+
   }
+  
+  
 ]
 
 @NgModule({
@@ -73,7 +83,8 @@ const appRoutes:Routes = [
     HomeComponent,
     RegistroAdminsComponent,
     EqualValidator,
-    DescargaInteresadosComponent
+    DescargaInteresadosComponent,
+    ViewTutorsComponent
   ],
   imports: [
     BrowserModule,
@@ -81,8 +92,10 @@ const appRoutes:Routes = [
     FormsModule,
     HttpModule,
     HttpClientModule,
+    Ng2TableModule
+    //PaginationModule.forRoot()
   ],
-  providers: [RegistroService,UserService, AuthguardGuard],
+  providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
+    console.log(this.userModel)
     this.userService.login(this.userModel).subscribe(
       (response) => {
         console.log(response);

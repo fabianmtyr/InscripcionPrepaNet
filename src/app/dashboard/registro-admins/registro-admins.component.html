@@ -1,3 +1,4 @@
+
 <div class="login-container" style="
     margin-left: 40px;">
     <h2> Ingresa el nuevo administrador:</h2>
@@ -61,4 +62,81 @@
 			<button type="submit" class="btn btn-primary" [disabled]="!adminForm.form.valid">Ingresar</button>
 		</div>
 	</form>
+
+{{diagnostic}}
+<div class="login-container">
+  <form (ngSubmit)="addUser()" [formGroup]="registerAdminForm">
+    <div class="form-group input" [ngClass]="{ 
+      'has-danger': fname.invalid && (fname.dirty || fname.touched), 
+      'has-success': fname.valid && (fname.dirty || fname.touched)}">
+      <label>Nombre</label>
+      <input class="form-control" formControlName="fname" type="text" required>
+      <div *ngIf="fname.errors && (fname.dirty || fname.touched)" class="alert alert-danger">
+        <p *ngIf="fname.errors.required">
+          Se necesita un nombre.
+        </p>
+      </div>
+    </div>
+    <div class="form-group input" [ngClass]="{ 
+      'has-danger': lname.invalid && (lname.dirty || lname.touched), 
+      'has-success': lname.valid && (lname.dirty || lname.touched)}">
+      <label>Apellido</label>
+      <input class="form-control" id="lname" type="text" required [ngModel]="user.lname" name="lname" formControlName="lname">
+      <div *ngIf="lname.errors && (lname.dirty || lname.touched)" class="alert alert-danger">
+        <p *ngIf="lname.errors.required">
+          Se necesita un apellido.
+        </p>
+      </div>
+    </div>
+    <div class="form-group input" [ngClass]="{ 
+      'has-danger': email.invalid && (email.dirty || email.touched), 
+      'has-success': email.valid && (email.dirty || email.touched)}">
+      <label>Correo</label>
+      <input class="form-control" formControlName="email" type="email" required>
+      <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
+        <p *ngIf="email.errors.required">
+          Se necesita un correo.
+        </p>
+        <p *ngIf="email.errors.email">
+          Formato de correo incorrecto
+        </p>
+      </div>
+    </div>
+    <div class="form-group input" [ngClass]="{ 
+      'has-danger': password.invalid && (password.dirty || password.touched), 
+      'has-success': password.valid && (password.dirty || password.touched)}">
+      <label>Contrase&ntilde;a</label>
+      <input class="form-control" formControlName="password" type="password" validateEqual="passwordVerify" reverse="true" required>
+      <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
+        <p *ngIf="password.errors.required">
+          Se necesita una contrase&ntilde;a.
+        </p>
+        <p *ngIf="password.errors.minlength">
+          Se necesita usar al menos 6 caracteres
+        </p>
+      </div>
+    </div>
+    <div class="form-group input" [ngClass]="{ 
+      'has-danger': passwordVerify.invalid && (passwordVerify.dirty || passwordVerify.touched), 
+      'has-success': passwordVerify.valid && (passwordVerify.dirty || passwordVerify.touched)}">
+      <label>Confirmar Contrase&ntilde;a</label>
+      <input class="form-control" formControlName="passwordVerify" type="password" validateEqual="password" reverse="false" required>
+      <div *ngIf="passwordVerify.errors && (passwordVerify.dirty || passwordVerify.touched)" class="alert alert-danger">
+        <p *ngIf="passwordVerify.errors.required">
+          Se necesita confirmar la contrase&ntilde;a.
+        </p>
+        <p *ngIf="passwordVerify.errors.minlength">
+          Se necesita usar al menos 6 caracteres
+        </p>
+        <p *ngIf="passwordVerify.value != password.value">
+        	Las constrase&ntilde;as no son iguales.
+        </p>
+      </div>
+    </div>
+    <div class="input">
+      <button type="submit" class="btn btn-primary" [disabled]="!registerAdminForm.valid" mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" (confirm)="confirmClicked = true" placement="right">Ingresar</button>
+    </div>
+  </form>
+
 </div>
+

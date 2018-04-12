@@ -1,12 +1,16 @@
 // Modulos
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { MatDialogModule } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 //import{PaginationModule} from 'ngx-bootstrap/pagination'
+
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -16,9 +20,10 @@ import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { RegistroAdminsComponent } from './dashboard/registro-admins/registro-admins.component';
-import { RegistroComponent } from './registro/registro.component';
+import { RegistroComponent } from './dashboard/registro/registro.component';
 import { DescargaInteresadosComponent } from './dashboard/descarga-interesados/descarga-interesados.component';
-import { ViewTutorsComponent } from './view-tutors/view-tutors.component';
+import { ViewTutorsComponent } from './dashboard/view-tutors/view-tutors.component';
+import { EditTutorComponent } from './dashboard/view-tutors/edit-tutor/edit-tutor.component';
 
 // Servicios
 import { UserService } from './services/user.service';
@@ -30,7 +35,11 @@ import { AuthguardGuard } from './guards/authguard.guard';
 
 // Directivos
 import { EqualValidator } from './dashboard/registro-admins/passwordMatch.directive';
+
 import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.component';
+import { TablegitComponent } from './dashboard/view-tutors/tablegit/tablegit.component';
+
+
 
 
 
@@ -65,14 +74,14 @@ const appRoutes:Routes = [
     component: DescargaInteresadosComponent
   },
   {
+
     path: 'dashboard/fijar-plazas',
     canActivate: [AuthguardGuard],
     component: FijarPlazasComponent
   },
   {
-    path: 'tutors',
+    path: 'dashboard/tutors',
     component:ViewTutorsComponent
-
   }
   
   
@@ -91,18 +100,29 @@ const appRoutes:Routes = [
     EqualValidator,
     DescargaInteresadosComponent,
     ViewTutorsComponent,
-    FijarPlazasComponent
+    FijarPlazasComponent,
+    EditTutorComponent,
+    TablegitComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
-    Ng2TableModule
+    ConfirmationPopoverModule.forRoot({
+      hideCancelButton: true,
+      confirmText: 'Confirmar'
+    }),
+    Ng2TableModule,
+    MatDialogModule,
+    BrowserAnimationsModule
     //PaginationModule.forRoot()
   ],
   providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [EditTutorComponent]
+
 })
 export class AppModule { }

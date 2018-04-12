@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { ExcelServiceService } from '../services/excel-service.service';
+import { ExcelServiceService } from '../../services/excel-service.service';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { EditTutorComponent } from './edit-tutor/edit-tutor.component';
 
 @Component({
   selector: 'app-view-tutors',
@@ -14,10 +16,13 @@ import { ExcelServiceService } from '../services/excel-service.service';
 export class ViewTutorsComponent implements OnInit {
   
     public columns:Array<any> = [
+    {title: 'Matricula/Nomina', name: 'matricula', filtering: {filterString: '', placeholder: 'Filtra por matricula'}},
     {title: 'Nombre', name: 'name.first', filtering: {filterString: '', placeholder: 'Filtra por nombre'}},
     {title: 'Apellido', name: 'name.last', filtering: {filterString: '', placeholder: 'Filtra por Apellido'}},
-    {title: 'Matricula', name: 'matricula', filtering: {filterString: '', placeholder: 'Filtra por matricula'}},
-    {title: 'Checked', name:'checked'}
+    {title: 'Checked', name:'checked'},
+    {title: 'numeroId', name: '_id', filtering: {
+      filterString: '', placeholder: 'Filtrar por id'
+    }}
     /*{
       title: 'Position',
       name: 'position',
@@ -51,9 +56,11 @@ export class ViewTutorsComponent implements OnInit {
   };
   
   constructor(private http: HttpClient,
-      public svs: ExcelServiceService
+      public svs: ExcelServiceService,
+      public dialog: MatDialog
       ) {
-      this.tutors = this.http.get('https://ipn-backend.herokuapp.com/tutors/list')
+      let data = this.http.get('https://ipn-backend.herokuapp.com/tutors/list')
+      this.tutors = data
       console.log(this.tutors)
       this.tutors.subscribe(tList => {
       console.log(tList)
@@ -82,9 +89,18 @@ export class ViewTutorsComponent implements OnInit {
     //this.length = sortedData.length;
   }
   
-  public onCellClick(data: any): any {
-    console.log(data);
+  public onCellClick(d: any): void {
+    console.log(d.row);
+    if (d.column == "matricula"){
+      let dialogRef = this.dialog.open(EditTutorComponent, {
+        width: '800px',
+        data: {
+          datos: d.row
+        }
+      });
+    }
   }
+
   
   public downloadExcel(){
     //this.svs.exportAsExcelFile(this.rows,"tutores")

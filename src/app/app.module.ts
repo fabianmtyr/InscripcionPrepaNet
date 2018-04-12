@@ -30,6 +30,7 @@ import { AuthguardGuard } from './guards/authguard.guard';
 
 // Directivos
 import { EqualValidator } from './dashboard/registro-admins/passwordMatch.directive';
+import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.component';
 
 
 
@@ -64,6 +65,11 @@ const appRoutes:Routes = [
     component: DescargaInteresadosComponent
   },
   {
+    path: 'dashboard/fijar-plazas',
+    canActivate: [AuthguardGuard],
+    component: FijarPlazasComponent
+  },
+  {
     path: 'tutors',
     component:ViewTutorsComponent
 
@@ -84,7 +90,8 @@ const appRoutes:Routes = [
     RegistroAdminsComponent,
     EqualValidator,
     DescargaInteresadosComponent,
-    ViewTutorsComponent
+    ViewTutorsComponent,
+    FijarPlazasComponent
   ],
   imports: [
     BrowserModule,

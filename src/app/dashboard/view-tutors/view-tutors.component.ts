@@ -90,7 +90,7 @@ export class ViewTutorsComponent implements OnInit {
   }
   
   public onCellClick(d: any): void {
-    console.log(d.row);
+    console.log(d);
     if (d.column == "matricula"){
       let dialogRef = this.dialog.open(EditTutorComponent, {
         width: '800px',

@@ -4,7 +4,7 @@
     <form (ngSubmit)="addUser()" #adminForm="ngForm">
       <div class="form-group">
         <label for="fname">Nombre</label>
-        <input type="test" class="form-control" id="fname" required [(ngModel)]="model.fname" name="fname" #fname="ngModel">
+        <input type="text" class="form-control" id="fname" required [(ngModel)]="model.fname" name="fname" #fname="ngModel">
         <div *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="alert alert-danger">
         	<div *ngIf="fname.errors.required">
         		Se requiere un nombre.

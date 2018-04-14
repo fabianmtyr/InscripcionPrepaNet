@@ -20,8 +20,11 @@ export class ViewTutorsComponent implements OnInit {
     {title: 'Nombre', name: 'name.first', filtering: {filterString: '', placeholder: 'Filtra por nombre'}},
     {title: 'Apellido', name: 'name.last', filtering: {filterString: '', placeholder: 'Filtra por Apellido'}},
     {title: 'Checked', name:'checked'},
-    {title: 'numeroId', name: '_id', filtering: {
-      filterString: '', placeholder: 'Filtrar por id'
+    {title: 'Correo', name: 'correo', filtering: {
+      filterString: '', placeholder: 'Filtrar por correo'
+    }},
+    {title: 'Correo Alterno', name: 'email', filtering: {
+      filterString: '', placeholder: 'Filtrar por correo alterno'
     }}
     /*{
       title: 'Position',
@@ -61,13 +64,7 @@ export class ViewTutorsComponent implements OnInit {
       ) {
       let data = this.http.get('https://ipn-backend.herokuapp.com/tutors/list')
       this.tutors = data
-      console.log("this.tutors")
-      console.log(this.tutors)
       this.tutors.subscribe(tList => {
-        console.log("Aqui EsTA")
-        console.log(tList[15].first)
-        tList[15] = tList[14]
-      console.log("tlist")
       console.log(tList)
       this.rows = tList
       this.length = this.rows.length
@@ -95,7 +92,6 @@ export class ViewTutorsComponent implements OnInit {
   }
   
   public onCellClick(d: any): void {
-    console.log(d);
     if (d.column == "matricula"){
       let dialogRef = this.dialog.open(EditTutorComponent, {
         width: '800px',

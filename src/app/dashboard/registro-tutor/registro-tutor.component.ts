@@ -55,7 +55,8 @@ export class RegistroTutorComponent implements OnInit {
   			first: ['', Validators.required],
   			last: ['', Validators.required]
   		}),
-  		email: ['', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]],
+      correo: ['', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]],
+  		email: ['',  Validators.pattern("[^ @]*@[^ @]*")],
   		grades: '',
   		course: '',
   		campus: ['', Validators.required]
@@ -69,24 +70,20 @@ export class RegistroTutorComponent implements OnInit {
   }
 
   addTutor() {
-
   	let tutor = new Tutor();
   	tutor = this.tutorForm.value;
-  	console.log(tutor);
-  	this.tutorForm.reset();
-  	tutor = new Tutor();
-  	/*
+  	
   	this.tutorService.registerTutor(tutor).subscribe(
   		(response) => {
   			console.log(response);
   			console.log("Se agrego tutor exitosamente");
-  			this.tutorForm.rebuildForm();
+  			this.tutorForm.reset();
   		},
   		(error) => {
   			console.log(error);
   			console.log("No se pudo enviar forma.");
   		});
-  		*/
+  		
   }
 
 

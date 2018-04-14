@@ -64,6 +64,9 @@ export class ViewTutorsComponent implements OnInit {
       console.log("this.tutors")
       console.log(this.tutors)
       this.tutors.subscribe(tList => {
+        console.log("Aqui EsTA")
+        console.log(tList[15].first)
+        tList[15] = tList[14]
       console.log("tlist")
       console.log(tList)
       this.rows = tList

@@ -24,6 +24,8 @@ import { RegistroComponent } from './dashboard/registro/registro.component';
 import { DescargaInteresadosComponent } from './dashboard/descarga-interesados/descarga-interesados.component';
 import { ViewTutorsComponent } from './dashboard/view-tutors/view-tutors.component';
 import { EditTutorComponent } from './dashboard/view-tutors/edit-tutor/edit-tutor.component';
+import { RegistroTutorComponent } from './dashboard/registro-tutor/registro-tutor.component';
+import { DesplegarTutoresComponent } from './dashboard/desplegar-tutores/desplegar-tutores.component';
 
 // Servicios
 import { UserService } from './services/user.service';
@@ -39,7 +41,6 @@ import { EqualValidator } from './dashboard/registro-admins/passwordMatch.direct
 
 import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.component';
 import { TablegitComponent } from './dashboard/view-tutors/tablegit/tablegit.component';
-import { RegistroTutorComponent } from './dashboard/registro-tutor/registro-tutor.component';
 
 
 
@@ -89,6 +90,11 @@ const appRoutes:Routes = [
     path: 'dashboard/registro-tutor',
     canActivate: [AuthguardGuard],
     component: RegistroTutorComponent
+  },
+  {
+    path: 'dashboard/lista-tutores',
+    canActivate: [AuthguardGuard],
+    component: DesplegarTutoresComponent
   }
 
   
@@ -111,7 +117,8 @@ const appRoutes:Routes = [
     FijarPlazasComponent,
     EditTutorComponent,
     TablegitComponent,
-    RegistroTutorComponent
+    RegistroTutorComponent,
+    DesplegarTutoresComponent
   ],
   imports: [
     BrowserModule,

@@ -61,8 +61,10 @@ export class ViewTutorsComponent implements OnInit {
       ) {
       let data = this.http.get('https://ipn-backend.herokuapp.com/tutors/list')
       this.tutors = data
+      console.log("this.tutors")
       console.log(this.tutors)
       this.tutors.subscribe(tList => {
+      console.log("tlist")
       console.log(tList)
       this.rows = tList
       this.length = this.rows.length

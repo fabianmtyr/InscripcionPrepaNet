@@ -1,3 +1,4 @@
+
 export class Candidato {
     public id: number;
     public name: string;

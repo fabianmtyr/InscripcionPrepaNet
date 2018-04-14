@@ -28,6 +28,7 @@ import { EditTutorComponent } from './dashboard/view-tutors/edit-tutor/edit-tuto
 // Servicios
 import { UserService } from './services/user.service';
 import { RegistroService } from './services/registro.service';
+import { TutorService } from './services/tutor.service';
 import { ExcelServiceService } from './services/excel-service.service';
 
 //Guardias
@@ -38,6 +39,7 @@ import { EqualValidator } from './dashboard/registro-admins/passwordMatch.direct
 
 import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.component';
 import { TablegitComponent } from './dashboard/view-tutors/tablegit/tablegit.component';
+import { RegistroTutorComponent } from './dashboard/registro-tutor/registro-tutor.component';
 
 
 
@@ -82,7 +84,13 @@ const appRoutes:Routes = [
   {
     path: 'dashboard/tutors',
     component:ViewTutorsComponent
+  },
+  {
+    path: 'dashboard/registro-tutor',
+    canActivate: [AuthguardGuard],
+    component: RegistroTutorComponent
   }
+
   
   
 ]
@@ -102,7 +110,8 @@ const appRoutes:Routes = [
     ViewTutorsComponent,
     FijarPlazasComponent,
     EditTutorComponent,
-    TablegitComponent
+    TablegitComponent,
+    RegistroTutorComponent
   ],
   imports: [
     BrowserModule,
@@ -120,7 +129,7 @@ const appRoutes:Routes = [
     BrowserAnimationsModule
     //PaginationModule.forRoot()
   ],
-  providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService],
+  providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService, TutorService],
   bootstrap: [AppComponent],
   entryComponents: [EditTutorComponent]
 

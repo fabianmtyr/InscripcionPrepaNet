@@ -17,7 +17,7 @@ export class ViewTutorsComponent implements OnInit {
     {title: 'Nombre', name: 'name.first', filtering: {filterString: '', placeholder: 'Filtra por nombre'}},
     {title: 'Apellido', name: 'name.last', filtering: {filterString: '', placeholder: 'Filtra por Apellido'}},
     {title: 'Matricula', name: 'matricula', filtering: {filterString: '', placeholder: 'Filtra por matricula'}},
-    {title: 'Checked', name:'checked'}
+    {title: 'Correo', name:'email', filtering: {filterString: '', placeholder: 'Filtra por correo'}}
     /*{
       title: 'Position',
       name: 'position',
@@ -42,6 +42,7 @@ export class ViewTutorsComponent implements OnInit {
   public numPages:number = 1;//checar
   
   public length:number = 0;
+  public numPlazas:number=5;
   
     public config:any = {
     paging: true,
@@ -58,6 +59,7 @@ export class ViewTutorsComponent implements OnInit {
       this.tutors.subscribe(tList => {
       console.log(tList)
       this.rows = tList
+      //this.nzd_rows = json_normalize(tList)
       this.length = this.rows.length
       });
       
@@ -87,6 +89,91 @@ export class ViewTutorsComponent implements OnInit {
   }
   
   public downloadExcel(){
+      
+      
     //this.svs.exportAsExcelFile(this.rows,"tutores")
+      console.log(this.rows)
+      let flat = {};
+      var pth=''
+      let x =this.rows.map((dt) => {
+          delete dt['_id']
+    return this.flatten(dt);
+    
+    });
+      console.log(x)
+      this.svs.specialExport(x,"tutores")
+      
   }
+  
+  flatten (data) {
+   var result = {};
+    function recurse (cur, prop) {
+        if (Object(cur) !== cur) {
+            result[prop] = cur;
+        } else if (Array.isArray(cur)) {
+             for(var i=0, l=cur.length; i<l; i++)
+                 recurse(cur[i], prop + "[" + i + "]");
+            if (l == 0)
+                result[prop] = [];
+        } else {
+            var isEmpty = true;
+            for (var p in cur) {
+                isEmpty = false;
+                recurse(cur[p], prop ? prop+"."+p : p);
+            }
+            if (isEmpty && prop)
+                result[prop] = {};
+        }
+    }
+    recurse(data, "");
+    return result;
+    };
+    
+  rename(new_key,old_key,oj){
+      
+  if (old_key !== new_key) {
+    Object.defineProperty(oj, new_key,
+        Object.getOwnPropertyDescriptor(oj, old_key));
+    delete oj[old_key];
+  }
+}
+
+filterOnGrade (){
+    
+}
+
+assignTutors (){
+    console.log(this.rows)
+    this.rows.sort(this.compareTutors)
+    //this.rows.forEach
+    
+    let accepted= this.rows.slice(0,this.numPlazas)
+    let rejected = this.rows.slice(this.numPlazas,this.rows.length)
+    
+    this.rows.map((tut, indx) => {
+        tut['checked'] = indx < this.numPlazas
+        return tut;
+    });
+    
+    
+    console.log(this.rows)
+    
+}
+
+assignTutorsFinal(){
+    
+    
+}
+
+compareTutors(a,b) {
+  //cambiar a grades
+  if (a.name.last < b.name.last)
+    return -1;
+  if (a.name.last > b.name.last)
+    return 1;
+  return 0;
+}
+
+
+    
 }

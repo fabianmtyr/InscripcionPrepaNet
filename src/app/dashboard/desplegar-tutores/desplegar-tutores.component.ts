@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-desplegar-tutores',

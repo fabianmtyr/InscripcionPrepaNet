@@ -72,7 +72,8 @@ export class RegistroTutorComponent implements OnInit {
   addTutor() {
   	let tutor = new Tutor();
   	tutor = this.tutorForm.value;
-  	
+    console.log(tutor)
+  	/*
   	this.tutorService.registerTutor(tutor).subscribe(
   		(response) => {
   			console.log(response);
@@ -83,7 +84,7 @@ export class RegistroTutorComponent implements OnInit {
   			console.log(error);
   			console.log("No se pudo enviar forma.");
   		});
-  		
+  		*/
   }
 
 

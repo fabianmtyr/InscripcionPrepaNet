@@ -49,4 +49,8 @@ export class RegistroService {
   getTutors() {
     return this.http.get(this.backend + '/tutors/list');
   }
+
+  editTutor(tutor: Candidato) {
+    return this.http.post(this.backend + '/tutors/new', tutor);
+  }
 }

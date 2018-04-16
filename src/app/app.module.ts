@@ -24,10 +24,13 @@ import { RegistroComponent } from './dashboard/registro/registro.component';
 import { DescargaInteresadosComponent } from './dashboard/descarga-interesados/descarga-interesados.component';
 import { ViewTutorsComponent } from './dashboard/view-tutors/view-tutors.component';
 import { EditTutorComponent } from './dashboard/view-tutors/edit-tutor/edit-tutor.component';
+import { RegistroTutorComponent } from './dashboard/registro-tutor/registro-tutor.component';
+import { DesplegarTutoresComponent } from './dashboard/desplegar-tutores/desplegar-tutores.component';
 
 // Servicios
 import { UserService } from './services/user.service';
 import { RegistroService } from './services/registro.service';
+import { TutorService } from './services/tutor.service';
 import { ExcelServiceService } from './services/excel-service.service';
 
 //Guardias
@@ -82,7 +85,18 @@ const appRoutes:Routes = [
   {
     path: 'dashboard/tutors',
     component:ViewTutorsComponent
+  },
+  {
+    path: 'dashboard/registro-tutor',
+    canActivate: [AuthguardGuard],
+    component: RegistroTutorComponent
+  },
+  {
+    path: 'dashboard/lista-tutores',
+    canActivate: [AuthguardGuard],
+    component: DesplegarTutoresComponent
   }
+
   
   
 ]
@@ -102,7 +116,9 @@ const appRoutes:Routes = [
     ViewTutorsComponent,
     FijarPlazasComponent,
     EditTutorComponent,
-    TablegitComponent
+    TablegitComponent,
+    RegistroTutorComponent,
+    DesplegarTutoresComponent
   ],
   imports: [
     BrowserModule,
@@ -120,7 +136,7 @@ const appRoutes:Routes = [
     BrowserAnimationsModule
     //PaginationModule.forRoot()
   ],
-  providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService],
+  providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService, TutorService],
   bootstrap: [AppComponent],
   entryComponents: [EditTutorComponent]
 

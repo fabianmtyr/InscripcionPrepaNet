@@ -1,142 +1,75 @@
-
-<div class="login-container" style="
-    margin-left: 40px;">
-    <h2> Ingresa el nuevo administrador:</h2>
-	<form (ngSubmit)="addUser()" #adminForm="ngForm">
-		<div class="form-group row">
-			<div class="col-xs-4">
-				<label>Nombre</label>
-				<input class="form-control" [(ngModel)]="user.fname" name="fname" type="text" required #fname="ngModel">
-				<div *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="alert alert-danger">
-					<div *ngIf="fname.errors.required">
-						Se necesita un nombre.
-					</div>
-					
-				</div>
-			</div>
-		</div>
-		<div class="form-group row">
-			<div class="col-xs-4">
-				<label>Apellido</label>
-				<input  class="form-control" [(ngModel)]="user.lname" name="lname" type="text" required #lname="ngModel"> 
-				<div *ngIf="lname.invalid && (lname.dirty || lname.touched)" class="alert alert-danger">
-					<div *ngIf="lname.errors.required">
-						Se necesita un apellido.
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="form-group row">
-			<div class="col-xs-4">
-				<label>Correo</label>
-				<input class="form-control" [(ngModel)]="user.email" name="email" type="text">
-			</div>
-		</div>
-		<div class="form-group row">
-			<div class="col-xs-4">
-				<label>Contrase&ntilde;a</label>
-				<input class="form-control" [(ngModel)]="user.password" name="password" type="password" required #password="ngModel" minlength="6" validateEqual="passwordVerify" reverse="true">
-				<div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
-					<div *ngIf="password.errors.required">
-						Se necesita una contrase&ntilde;a.
-					</div>
-					<div *ngIf="password.errors.minlength">
-						La contrase&ntilde;a tiene que tener al menos 6 caracteres.
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="form-group row">
-			<div class="col-xs-4">
-				<label>Confirmar Contrase&ntilde;a</label>
-				<input class="form-control" [(ngModel)]="user.passwordVerify" name="passwordVerify" type="password" required #passwordVerify="ngModel" minlength="6" validateEqual="password" reverse="false">
-				<div *ngIf="passwordVerify.invalid && (passwordVerify.dirty || passwordVerify.touched)" class="alert alert-danger">
-					<div *ngIf="passwordVerify.errors.required">
-						Se necesita verificar la contrase&ntilde;a
-					</div>
-					
-				</div>
-			</div>
-		</div>
-		<div class="input">
-			<button type="submit" class="btn btn-primary" [disabled]="!adminForm.form.valid">Ingresar</button>
-		</div>
-	</form>
-
-{{diagnostic}}
-<div class="login-container">
-  <form (ngSubmit)="addUser()" [formGroup]="registerAdminForm">
-    <div class="form-group input" [ngClass]="{ 
-      'has-danger': fname.invalid && (fname.dirty || fname.touched), 
-      'has-success': fname.valid && (fname.dirty || fname.touched)}">
-      <label>Nombre</label>
-      <input class="form-control" formControlName="fname" type="text" required>
-      <div *ngIf="fname.errors && (fname.dirty || fname.touched)" class="alert alert-danger">
-        <p *ngIf="fname.errors.required">
-          Se necesita un nombre.
-        </p>
+<div class="container">
+  <div [hidden]="submitted">
+    <h1>Registro de Administradores</h1>
+    <form (ngSubmit)="addUser()" #adminForm="ngForm">
+      <div class="form-group">
+        <label for="fname">Nombre</label>
+        <input type="text" class="form-control" id="fname" required [(ngModel)]="model.fname" name="fname" #fname="ngModel">
+        <div *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="alert alert-danger">
+          <div *ngIf="fname.errors.required">
+            Se requiere un nombre.
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="form-group input" [ngClass]="{ 
-      'has-danger': lname.invalid && (lname.dirty || lname.touched), 
-      'has-success': lname.valid && (lname.dirty || lname.touched)}">
-      <label>Apellido</label>
-      <input class="form-control" id="lname" type="text" required [ngModel]="user.lname" name="lname" formControlName="lname">
-      <div *ngIf="lname.errors && (lname.dirty || lname.touched)" class="alert alert-danger">
-        <p *ngIf="lname.errors.required">
-          Se necesita un apellido.
-        </p>
+      <div class="form-group">
+        <label for="lname">Apellido</label>
+        <input type="text" class="form-control" id="lname" required [(ngModel)]="model.lname" name="lname" #lname="ngModel">
+        <div *ngIf="lname.invalid && (lname.dirty || lname.touched)" class="alert alert-danger">
+          <div *ngIf="lname.errors.required">
+            Se requiere un apellido.
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="form-group input" [ngClass]="{ 
-      'has-danger': email.invalid && (email.dirty || email.touched), 
-      'has-success': email.valid && (email.dirty || email.touched)}">
-      <label>Correo</label>
-      <input class="form-control" formControlName="email" type="email" required>
-      <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
-        <p *ngIf="email.errors.required">
-          Se necesita un correo.
-        </p>
-        <p *ngIf="email.errors.email">
-          Formato de correo incorrecto
-        </p>
+      <div class="form-group">
+        <label for="email">Correo</label>
+        <input type="email" class="form-control" id="email" required [(ngModel)]="model.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel">
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+          <div *ngIf="email.errors.required">
+            Se necesita un correo
+          </div>
+          <div *ngIf="email.errors.pattern">
+            El correo tiene que tener este formato: 'usuario@algo.com'
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="form-group input" [ngClass]="{ 
-      'has-danger': password.invalid && (password.dirty || password.touched), 
-      'has-success': password.valid && (password.dirty || password.touched)}">
-      <label>Contrase&ntilde;a</label>
-      <input class="form-control" formControlName="password" type="password" validateEqual="passwordVerify" reverse="true" required>
-      <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
-        <p *ngIf="password.errors.required">
-          Se necesita una contrase&ntilde;a.
-        </p>
-        <p *ngIf="password.errors.minlength">
-          Se necesita usar al menos 6 caracteres
-        </p>
+      <div class="form-group">
+        <label for="password">Contrase&ntilde;a</label>
+        <input type="password" class="form-control" id="password" required minlength="6" [(ngModel)]="model.password" name="password" #password="ngModel">
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+          <div *ngIf="password.errors.required">
+            Se necesita una contrase&ntilde;a.
+          </div>
+          <div *ngIf="password.errors.minlength">
+            La contrase&ntilde;a tiene que tener minimo seis caracteres.
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="form-group input" [ngClass]="{ 
-      'has-danger': passwordVerify.invalid && (passwordVerify.dirty || passwordVerify.touched), 
-      'has-success': passwordVerify.valid && (passwordVerify.dirty || passwordVerify.touched)}">
-      <label>Confirmar Contrase&ntilde;a</label>
-      <input class="form-control" formControlName="passwordVerify" type="password" validateEqual="password" reverse="false" required>
-      <div *ngIf="passwordVerify.errors && (passwordVerify.dirty || passwordVerify.touched)" class="alert alert-danger">
-        <p *ngIf="passwordVerify.errors.required">
-          Se necesita confirmar la contrase&ntilde;a.
-        </p>
-        <p *ngIf="passwordVerify.errors.minlength">
-          Se necesita usar al menos 6 caracteres
-        </p>
-        <p *ngIf="passwordVerify.value != password.value">
-        	Las constrase&ntilde;as no son iguales.
-        </p>
+      <div class="form-group">
+        <label for="passwordVerify">Confirmar Contrase&ntilde;a</label>
+        <input type="password" class="form-control" id="passwordVerify" required minlength="6" validateEqual="password" [(ngModel)]="passwordVerify" name="passwordVerify" #passwordVerify1="ngModel">
+        <div *ngIf="passwordVerify1.invalid && (passwordVerify1.dirty || passwordVerify1.touched)" class="alert alert-danger">
+          Las contrase&ntilde;as no coinciden.
+        </div>
       </div>
+      <button type="submit" class="btn btn-success" [disabled]="!adminForm.form.valid">Ingresar</button>
+      <button type="button" class="btn btn-success" (click)="nuevoUsuario(); adminForm.reset()">Nuevo Usuario</button>
+    </form>
+  </div>
+  <div class="container" [hidden]="!submitted">
+    <h2>Se ingreso los siguientes datos:</h2>
+    <div class="row">
+      <div class="col-xs-3">Nombre</div>
+      <div class="col-xs-9 pull-left">{{model.fname}}</div>
     </div>
-    <div class="input">
-      <button type="submit" class="btn btn-primary" [disabled]="!registerAdminForm.valid" mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" (confirm)="confirmClicked = true" placement="right">Ingresar</button>
+    <div class="row">
+      <div class="col-xs-3">Apellido</div>
+      <div class="col-xs-9 pull-left">{{model.lname}}</div>
     </div>
-  </form>
-
+    <div class="row">
+      <div class="col-xs-3">Correo</div>
+      <div class="col-xs-9 pull-left">{{model.email}}</div>
+    </div>
+    <br>
+    <button class="btn btn-primary" (click)="submitted=false">Confirmar</button>
+  </div>
 </div>
-

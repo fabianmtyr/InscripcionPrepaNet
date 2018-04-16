@@ -9,7 +9,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 @Component({
   selector: 'app-registro-admins',
-  templateUrl: './registro-admins.component.test.html',
+  templateUrl: './registro-admins.component.html',
   styleUrls: ['./registro-admins.component.css']
 })
 export class RegistroAdminsComponent implements OnInit {

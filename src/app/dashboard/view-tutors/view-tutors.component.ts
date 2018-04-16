@@ -17,11 +17,15 @@ export class ViewTutorsComponent implements OnInit {
   
     public columns:Array<any> = [
     {title: 'Matricula/Nomina', name: 'matricula', filtering: {filterString: '', placeholder: 'Filtra por matricula'}},
+    {title: 'Campus', name: 'campus', filtering: {filterString: '', placeholder: 'Filtra por campus'}},
     {title: 'Nombre', name: 'name.first', filtering: {filterString: '', placeholder: 'Filtra por nombre'}},
     {title: 'Apellido', name: 'name.last', filtering: {filterString: '', placeholder: 'Filtra por Apellido'}},
     {title: 'Checked', name:'checked'},
-    {title: 'numeroId', name: '_id', filtering: {
-      filterString: '', placeholder: 'Filtrar por id'
+    {title: 'Correo', name: 'correo', filtering: {
+      filterString: '', placeholder: 'Filtrar por correo'
+    }},
+    {title: 'Correo Alterno', name: 'email', filtering: {
+      filterString: '', placeholder: 'Filtrar por correo alterno'
     }}
     /*{
       title: 'Position',
@@ -59,8 +63,7 @@ export class ViewTutorsComponent implements OnInit {
       public svs: ExcelServiceService,
       public dialog: MatDialog
       ) {
-      let data = this.http.get('https://ipn-backend.herokuapp.com/tutors/list')
-      this.tutors = data
+      this.tutors = this.http.get('https://ipn-backend.herokuapp.com/tutors/list')
       console.log(this.tutors)
       this.tutors.subscribe(tList => {
       console.log(tList)
@@ -70,9 +73,12 @@ export class ViewTutorsComponent implements OnInit {
       
   }
 
+
   ngOnInit() {
       //this.onChangeTable(this.config);
   }
+
+
   
     public onChangeTable(config:any, page:any = {page: this.page, itemsPerPage: this.itemsPerPage}):any {
     /*if (config.filtering) {
@@ -90,7 +96,6 @@ export class ViewTutorsComponent implements OnInit {
   }
   
   public onCellClick(d: any): void {
-    console.log(d.row);
     if (d.column == "matricula"){
       let dialogRef = this.dialog.open(EditTutorComponent, {
         width: '800px',

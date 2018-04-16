@@ -19,6 +19,14 @@ export class TutorService {
     return this.http.get(this.backend + '/tutors/list');
   }
 
+  getAllTutors():Observable<any> {
+    return this.http.get(this.backend + '/tutors/list');
+  }
+
+  getAllTutors2():Observable<any> {
+    return this.http.get(this.backend + '/tutors/list').map((res: Response) => res.json());
+  }
+
   editTutor(tutor: Tutor) {
     return this.http.post(this.backend + '/tutors/edit', tutor);
   }

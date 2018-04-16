@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatTableModule } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -118,7 +118,7 @@ const appRoutes:Routes = [
     EditTutorComponent,
     TablegitComponent,
     RegistroTutorComponent,
-    DesplegarTutoresComponent
+    DesplegarTutoresComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,7 +133,8 @@ const appRoutes:Routes = [
     }),
     Ng2TableModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule
     //PaginationModule.forRoot()
   ],
   providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService, TutorService],

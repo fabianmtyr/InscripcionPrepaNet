@@ -1,5 +1,5 @@
 <div>
-	<mat-table [dataSource]="dataSource">
+	<mat-table #table [dataSource]="dataSource">
 		<ng-container matColumnDef="matricula">
 			<mat-header-cell *matHeaderCellDef>Matricula/Nomina</mat-header-cell>
 			<mat-cell *matCellDef="let tutor">{{tutor.matricula}}</mat-cell>
@@ -24,7 +24,16 @@
 			<mat-header-cell *matHeaderCellDef>Correo Alterno</mat-header-cell>
 			<mat-cell *matCellDef="let tutor">{{tutor.email}}</mat-cell>
 		</ng-container>
+		<ng-container matColumnDef="grades">
+			<mat-header-cell *matHeaderCellDef>Calificacion</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.grades}}</mat-cell>
+		</ng-container>
 		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 		<mat-row *matRowDef="let row, columns: displayedColumns;"></mat-row>
 	</mat-table>
+	  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
 </div>

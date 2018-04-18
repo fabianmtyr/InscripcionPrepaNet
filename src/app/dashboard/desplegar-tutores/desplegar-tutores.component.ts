@@ -58,29 +58,31 @@ export class DesplegarTutoresComponent implements OnInit {
   }
 
   toggleElegibilidad(tutor) {
+  	tutor.isElegible = !tutor.isElegible;
     this.tutorService.editTutor(tutor).subscribe(
       (response) => {
-      	tutor.isElegible = !tutor.isElegible;
         console.log(response);
         console.log("Se edito tutor exitosamente!");
       },
       (error) => {
         console.log(error);
         console.log("No se pudo enviar forma.");
+        tutor.isElegible = !tutor.isElegible;
       });
 
   }
 
   toggleTutor(tutor) {
+  	tutor.isTutor = !tutor.isTutor;
     this.tutorService.editTutor(tutor).subscribe(
       (response) => {
-      	tutor.isTutor = !tutor.isTutor;
         console.log(response);
         console.log("Se edito tutor exitosamente!");
       },
       (error) => {
         console.log(error);
         console.log("No se pudo enviar forma.");
+        tutor.isTutor = !tutor.isTutor;
       });
 
   }

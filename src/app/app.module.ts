@@ -41,6 +41,7 @@ import { EqualValidator } from './dashboard/registro-admins/passwordMatch.direct
 
 import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.component';
 import { TablegitComponent } from './dashboard/view-tutors/tablegit/tablegit.component';
+import { EditarTutoresComponent } from './dashboard/desplegar-tutores/editar-tutores/editar-tutores.component';
 
 
 
@@ -119,6 +120,7 @@ const appRoutes:Routes = [
     TablegitComponent,
     RegistroTutorComponent,
     DesplegarTutoresComponent,
+    EditarTutoresComponent,
   ],
   imports: [
     BrowserModule,
@@ -140,7 +142,7 @@ const appRoutes:Routes = [
   ],
   providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService, TutorService],
   bootstrap: [AppComponent],
-  entryComponents: [EditTutorComponent]
+  entryComponents: [EditTutorComponent, EditarTutoresComponent]
 
 })
 export class AppModule { }

@@ -7,8 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FijarPlazasComponent implements OnInit {
 
-  model = new Plaza();
-
   constructor() { }
 
   ngOnInit() {

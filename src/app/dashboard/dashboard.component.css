@@ -6,6 +6,11 @@ h5{
 	font-family: 'Open Sans', sans-serif;
 }
 
+ h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
 .title{
 	font-family: 'Arial', sans-serif;
 
@@ -14,6 +19,7 @@ h5{
 body{
 
 	margin: 50px;
+	background-color: #ececec;
 }
 
 .row{
@@ -26,4 +32,17 @@ body{
     color: #fff;
     background-color: #0738A7;
     border-color: #0738A7;
+}
+
+.mat-raised-button{
+	background-color: #0738A7;
+}
+
+.card-title{
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.mat-card-header-text {
+    margin: none !important;
 }

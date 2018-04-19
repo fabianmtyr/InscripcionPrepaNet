@@ -1,7 +1,7 @@
 
 <body>
 	<h1 class="title">
-	  Selecciona una de las siguientes opciones:
+	  Bienvenid@
 	</h1>
 
 <!-- 
@@ -14,64 +14,84 @@
 		En este módulo puedes ingresar para <a routerLink="/dashboard/descarga-interesados">descargar interesados.</a>
 	</h5> -->
 
-  
+
 <div class="row">
   <div class="col-sm-4">
-    <div class="card text-white bg-dark mb-3">
-      <div class="card-body">
-        <h5 class="card-title">Registrar Administradores</h5>
-        <p class="card-text">Ingresar para registrar adminsitradores</p>
-        <a routerLink="/dashboard/registro-admins" class="btn btn-primary">Ingresar</a>
-      </div>
-    </div>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title class="card-title">Registrar Administradores</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Ingresar para registrar adminsitradores
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button  mat-raised-button color="primary" routerLink="/dashboard/registro-admins">Ingresar</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
   <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Descargar Interesados</h5>
-        <p class="card-text">Ingresar aquí para descargar un .csv con ls interesados</p>
-        <a routerLink="/tutors" class="btn btn-primary">Ingresar</a>
-      </div>
-    </div>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title class="card-title">Descargar Interesados</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Ingresar aquí para descargar un .csv con ls interesados
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/tutors">Ingresar</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
   <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Ver Tutores</h5>
-        <p class="card-text">Ingresar aquí para ver la lista de candidatos a tutores.</p>
-        <a routerLink="/dashboard/lista-tutores" class="btn btn-primary">Ingresar</a>
-      </div>
-    </div>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title class="card-title">Ver Tutores</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Ingresar aquí para ver la lista de candidatos a tutores.
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/dashboard/lista-tutores">Ingresar</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </div>
 
 <div class="row">
   <div class="col-sm-4">
-    <div class="card" style = "margin-top: 70px;">
-      <div class="card-body">
-        <h5 class="card-title">Fijar Plazas</h5>
-        <p class="card-text">Aquí se pueden fijar la cantidad de plazas</p>
-        <a routerLink="/dashboard/fijar-plazas" class="btn btn-primary">Ingresar</a>
-      </div>
-    </div>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title class="card-title">Fijar Plazas</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Aquí se pueden fijar la cantidad de plazas
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/dashboard/fijar-plazas">Ingresar</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
   <div class="col-sm-4" >
-    <div class="card" style = "margin-top: 70px;">
-      <div class="card-body">
-        <h5 class="card-title">Registrar Tutor</h5>
-        <p class="card-text">Ingresar aqui para registrar tutores</p>
-        <a routerLink="/dashboard/registro-tutor" class="btn btn-primary">Ingresar</a>
-      </div>
-    </div>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title class="card-title">Registrar Tutor</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Ingresar aqui para registrar tutores
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/dashboard/registro-tutor">Ingresar</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
   <div class="col-sm-4">
-    <div class="card" style = "margin-top: 70px;">
-      <div class="card-body">
-        <h5 class="card-title">Placeholder</h5>
-        <p class="card-text"></p>
-        <a routerLink="/dashboard/descarga-interesados" class="btn btn-primary">Ingresar</a>
-      </div>
-    </div>
   </div>
 </div>
 

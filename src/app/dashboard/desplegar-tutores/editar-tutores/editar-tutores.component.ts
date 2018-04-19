@@ -46,6 +46,21 @@ export class EditarTutoresComponent implements OnInit {
 
   }
 
+  eliminarTutor() {
+    this.tutorService.removeTutor(this.nTutor.matricula).subscribe(
+      (response) => {
+        console.log(response);
+        console.log("Se elimino tutor");
+        
+      },
+      (error) => {
+        console.log(this.nTutor)
+        console.log(error);
+        console.log("No se pudo enviar forma");
+        this.dialogRef.close();
+      });
+  }
+
   closeDialog(): void {
   	this.dialogRef.close();
   }

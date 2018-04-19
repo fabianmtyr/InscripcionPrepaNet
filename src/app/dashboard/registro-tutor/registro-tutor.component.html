@@ -34,6 +34,58 @@
       </div>
     </fieldset>
     <div class="form-group">
+      <label class="center-block">Correo alterno a el oficial:
+        <input class="form-control" formControlName="email">
+      </label>
+      <div class="alert alert-danger" *ngIf="tutorForm.controls['email'].errors && (tutorForm.controls['email'].dirty || tutorForm.controls['email'].touched)">
+        <div *ngIf="tutorForm.controls['email'].errors?.pattern">
+          Formato incorrecto.
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!tutorForm.valid">Ingresar</button>
+    <p>Form value: {{ tutorForm.value | json }}</p>
+    <p>Form value: {{ tutorForm.status | json }}</p>
+  </form>
+</div>
+
+<!--
+  <div class="container">
+  <h1>Registro de Tutores</h1>
+  <form [formGroup]="tutorForm" (ngSubmit)="addTutor()">
+    <div class="form-group">
+      <label class="center-block">Matricula:
+        <input class="form-control" formControlName="matricula">
+      </label>
+      <div class="alert alert-danger" *ngIf="tutorForm.controls['matricula'].errors && (tutorForm.controls['matricula'].dirty || tutorForm.controls['matricula'].touched)">
+        <div *ngIf="tutorForm.controls['matricula'].errors?.required">
+          Se necesita una matricula.
+        </div>
+      </div>
+    </div>
+    <fieldset formGroupName="name">
+      <div class="form-group">
+        <label class="center-block">Nombre:
+          <input class="form-control" formControlName="first">
+        </label>
+        <div class="alert alert-danger" *ngIf="tutorForm.controls['name'].controls['first'].errors && (tutorForm.controls['name'].controls['first'].dirty || tutorForm.controls['name'].controls['first'].touched)">
+          <div *ngIf="tutorForm.controls['name'].controls['first'].errors?.required">
+            Se necesita una nombre.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="center-block">Apellido:
+          <input class="form-control" formControlName="last">
+        </label>
+        <div class="alert alert-danger" *ngIf="tutorForm.controls['name'].controls['last'].errors && (tutorForm.controls['name'].controls['last'].dirty || tutorForm.controls['name'].controls['last'].touched)">
+          <div *ngIf="tutorForm.controls['name'].controls['last'].errors?.required">
+            Se necesita una apellido.
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <div class="form-group">
       <label class="center-block">Correo:
         <input class="form-control" formControlName="correo">
       </label>
@@ -85,3 +137,4 @@
     <p>Form value: {{ tutorForm.status | json }}</p>
   </form>
 </div>
+-->

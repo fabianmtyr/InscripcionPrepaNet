@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MatDialogModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatDialogModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -31,7 +31,9 @@ import { DesplegarTutoresComponent } from './dashboard/desplegar-tutores/despleg
 import { UserService } from './services/user.service';
 import { RegistroService } from './services/registro.service';
 import { TutorService } from './services/tutor.service';
+import { PlazaService } from './services/plaza.service';
 import { ExcelServiceService } from './services/excel-service.service';
+
 
 //Guardias
 import { AuthguardGuard } from './guards/authguard.guard';
@@ -139,10 +141,11 @@ const appRoutes:Routes = [
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCardModule
     //PaginationModule.forRoot()
   ],
-  providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService, TutorService],
+  providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService, TutorService, PlazaService],
   bootstrap: [AppComponent],
   entryComponents: [EditTutorComponent, EditarTutoresComponent]
 

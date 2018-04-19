@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { MatSort } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
+import { MatFormField} from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
@@ -86,8 +87,13 @@ export class DesplegarTutoresComponent implements OnInit {
       });
 
   }
-
-
+  
+    applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+  
 
 }
 

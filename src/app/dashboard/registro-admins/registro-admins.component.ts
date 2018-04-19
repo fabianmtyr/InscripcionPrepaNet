@@ -1,8 +1,10 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { FormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { User } from 'app/models/user.model';
 import { UserService } from 'app/services/user.service';
 import { Observable } from 'rxjs';
+import { BrowserModule } from '@angular/platform-browser';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 
 @Component({
@@ -12,6 +14,41 @@ import { Observable } from 'rxjs';
 })
 export class RegistroAdminsComponent implements OnInit {
 
+  model = new User();
+  public passwordVerify: string;
+  submitted = false;
+
+  constructor(private userService: UserService) { }
+
+  ngOnInit() {
+  }
+
+  get diagnostic() { return JSON.stringify(this.model);}
+
+  onSubmit() {
+    this.submitted = true;
+  }
+  
+    addUser() {
+      this.submitted = true;
+    //console.log(this.user);
+
+    this.userService.registerUser(this.model).subscribe(
+      (response) => {
+        console.log(response);
+        console.log("Se agrego usuario");
+        alert("Usuario creado exitosamente.");
+        this.model = new User();
+      },
+      (error) => {
+        console.log(error);
+        console.log("No se pudo enviar forma.");
+      });
+  }
+  
+/*
+  user: User;
+
 	registerAdminForm: FormGroup;
 	fname: FormControl;
 	lname: FormControl;
@@ -19,20 +56,25 @@ export class RegistroAdminsComponent implements OnInit {
 	password: FormControl;
 	passwordVerify: FormControl;
 
-	user: User;
+  public popoverTitle: string = 'Usuario Agregado Exitosamente';
+  public confirmClicked: boolean = false;
+
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.user = new User();
   	this.createFormControls();
   	this.createForm();
-  	this.user = new User();
   }
 
   createFormControls() {
   	this.fname = new FormControl('', Validators.required);
   	this.lname = new FormControl('', Validators.required);
-  	this.email = new FormControl('', Validators.required);
+  	this.email = new FormControl('', [
+      Validators.required,
+      Validators.email
+    ]);
   	this.password = new FormControl('', [Validators.required, Validators.minLength(6)]);
   	this.passwordVerify = new FormControl('', [Validators.required, Validators.minLength(6)]);
   }
@@ -43,38 +85,25 @@ export class RegistroAdminsComponent implements OnInit {
   		lname: this.lname,
   		email: this.email,
   		password: this.password,
-  		passwordVerify: this.passwordVerify,
+  		passwordVerify: this.passwordVerify
   	});
   }
 
   addUser() {
-    if (this.registerAdminForm.valid) {
-      this.userService.registerUser(this.user).subscribe(
-        (response) => {
-          console.log(response);
-          if (response)
-          {
-            console.log("Se agrego usuario");
-            alert("Usuario creado exitosamente.");
-            this.user.password = "";
-            this.user.passwordVerify = "";
-            this.password.markAsPristine();
-            this.password.markAsUntouched();
-            this.password.markAsPending();
-            this.passwordVerify.markAsPristine();
-            this.passwordVerify.markAsUntouched();
-            this.passwordVerify.markAsPending();
-          }
-          else
-          {
-            console.log("Error con el servidor");
-          }
-        },
-        (error) => console.log(error)
-        );
-    }
-    else{
-      console.log("hola");
-    }
+    console.log(this.user);
+
+    this.userService.registerUser(this.user).subscribe(
+      (response) => {
+        console.log(response);
+        console.log("Se agrego usuario");
+        alert("Usuario creado exitosamente.");
+        this.user = new User();
+        this.registerAdminForm.reset();
+      },
+      (error) => {
+        console.log(error);
+        console.log("No se pudo enviar forma.");
+      });
   }
+  */
 }

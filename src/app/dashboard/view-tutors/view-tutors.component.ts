@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { ExcelServiceService } from '../services/excel-service.service';
+import { ExcelServiceService } from '../../services/excel-service.service';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { EditTutorComponent } from './edit-tutor/edit-tutor.component';
 
 @Component({
   selector: 'app-view-tutors',
@@ -14,10 +16,18 @@ import { ExcelServiceService } from '../services/excel-service.service';
 export class ViewTutorsComponent implements OnInit {
   
     public columns:Array<any> = [
+    {title: 'Matricula/Nomina', name: 'matricula', filtering: {filterString: '', placeholder: 'Filtra por matricula'}},
+    {title: 'Campus', name: 'campus', filtering: {filterString: '', placeholder: 'Filtra por campus'}},
     {title: 'Nombre', name: 'name.first', filtering: {filterString: '', placeholder: 'Filtra por nombre'}},
     {title: 'Apellido', name: 'name.last', filtering: {filterString: '', placeholder: 'Filtra por Apellido'}},
-    {title: 'Matricula', name: 'matricula', filtering: {filterString: '', placeholder: 'Filtra por matricula'}},
-    {title: 'Correo', name:'email', filtering: {filterString: '', placeholder: 'Filtra por correo'}}
+    {title: 'Checked', name:'checked'},
+    {title: 'Correo', name: 'correo', filtering: {
+      filterString: '', placeholder: 'Filtrar por correo'
+    }},
+    {title: 'Correo Alterno', name: 'email', filtering: {
+      filterString: '', placeholder: 'Filtrar por correo alterno'
+    }}
+    
     /*{
       title: 'Position',
       name: 'position',
@@ -52,7 +62,8 @@ export class ViewTutorsComponent implements OnInit {
   };
   
   constructor(private http: HttpClient,
-      public svs: ExcelServiceService
+      public svs: ExcelServiceService,
+      public dialog: MatDialog
       ) {
       this.tutors = this.http.get('https://ipn-backend.herokuapp.com/tutors/list')
       console.log(this.tutors)
@@ -65,9 +76,12 @@ export class ViewTutorsComponent implements OnInit {
       
   }
 
+
   ngOnInit() {
       //this.onChangeTable(this.config);
   }
+
+
   
     public onChangeTable(config:any, page:any = {page: this.page, itemsPerPage: this.itemsPerPage}):any {
     /*if (config.filtering) {
@@ -84,9 +98,17 @@ export class ViewTutorsComponent implements OnInit {
     //this.length = sortedData.length;
   }
   
-  public onCellClick(data: any): any {
-    console.log(data);
+  public onCellClick(d: any): void {
+    if (d.column == "matricula"){
+      let dialogRef = this.dialog.open(EditTutorComponent, {
+        width: '800px',
+        data: {
+          datos: d.row
+        }
+      });
+    }
   }
+
   
   public downloadExcel(){
       

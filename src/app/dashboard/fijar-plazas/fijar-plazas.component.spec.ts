@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewTutorsComponent } from './view-tutors.component';
+import { FijarPlazasComponent } from './fijar-plazas.component';
 
-describe('ViewTutorsComponent', () => {
-  let component: ViewTutorsComponent;
-  let fixture: ComponentFixture<ViewTutorsComponent>;
+describe('FijarPlazasComponent', () => {
+  let component: FijarPlazasComponent;
+  let fixture: ComponentFixture<FijarPlazasComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewTutorsComponent ]
+      declarations: [ FijarPlazasComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewTutorsComponent);
+    fixture = TestBed.createComponent(FijarPlazasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

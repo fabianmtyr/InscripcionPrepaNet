@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegistroAdminsComponent } from './registro-admins.component';
+import { TablegitComponent } from './tablegit.component';
 
-describe('RegistroAdminsComponent', () => {
-  let component: RegistroAdminsComponent;
-  let fixture: ComponentFixture<RegistroAdminsComponent>;
+describe('TablegitComponent', () => {
+  let component: TablegitComponent;
+  let fixture: ComponentFixture<TablegitComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegistroAdminsComponent ]
+      declarations: [ TablegitComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegistroAdminsComponent);
+    fixture = TestBed.createComponent(TablegitComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

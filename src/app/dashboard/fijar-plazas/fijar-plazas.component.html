@@ -8,7 +8,7 @@
     <h5>Tutores</h5>
     <p>Cupo Actual:</p>
     <h5>Actualizar Cupo</h5>
-    <input type="number" />
+    <input type="number" id="fname" required [(ngModel)]="model.tutors" name="tutors" #tutors="ngModel"/>
     <a routerLink="/" class="btn btn-primary">Actualizar Cupo</a>
   </div>
    <div class="col-sm-4">

@@ -31,7 +31,9 @@ import { DesplegarTutoresComponent } from './dashboard/desplegar-tutores/despleg
 import { UserService } from './services/user.service';
 import { RegistroService } from './services/registro.service';
 import { TutorService } from './services/tutor.service';
+import { PlazaService } from './services/plaza.service';
 import { ExcelServiceService } from './services/excel-service.service';
+
 
 //Guardias
 import { AuthguardGuard } from './guards/authguard.guard';
@@ -136,7 +138,7 @@ const appRoutes:Routes = [
     BrowserAnimationsModule
     //PaginationModule.forRoot()
   ],
-  providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService, TutorService],
+  providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService, TutorService, PlazaService],
   bootstrap: [AppComponent],
   entryComponents: [EditTutorComponent]
 

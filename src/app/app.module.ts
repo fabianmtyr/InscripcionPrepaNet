@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MatDialogModule, MatTableModule, MatPaginatorModule } from '@angular/material';
+import { MatDialogModule, MatTableModule, MatPaginatorModule, MatCardModule } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -139,7 +139,8 @@ const appRoutes:Routes = [
     MatDialogModule,
     BrowserAnimationsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCardModule
     //PaginationModule.forRoot()
   ],
   providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService, TutorService, PlazaService],

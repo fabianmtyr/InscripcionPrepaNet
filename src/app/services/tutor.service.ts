@@ -31,4 +31,10 @@ export class TutorService {
     return this.http.post(this.backend + '/tutors/edit', tutor);
   }
 
+  removeTutor(matricula: string){
+    let matricula1 = {'matricula': matricula }
+    return this.http.post(this.backend + '/tutors/remove', matricula1)
+
+  }
+
 }

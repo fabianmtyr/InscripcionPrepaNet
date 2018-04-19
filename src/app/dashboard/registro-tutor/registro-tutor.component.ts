@@ -12,32 +12,6 @@ import { BrowserModule } from '@angular/platform-browser';
 })
 export class RegistroTutorComponent implements OnInit {
 
-	campus:string[] = [
-		'AGS',
-		'CCM',
-		'CCV',
-		'CDJ',
-		'CEM',
-		'CHI',
-		'CHS',
-		'CSF',
-		'CVA',
-		'MTY',
-		'GDA',
-		'HGO',
-		'IRA',
-		'LAG',
-		'LEO',
-		'MRL',
-		'PUE',
-		'QRO',
-		'SAL',
-		'SIN',
-		'SLP',
-		'TAM',
-		'TOL',
-		'ZAC',
-	];
 
 	tutorForm: FormGroup;
 	//tutor: Tutor;
@@ -55,11 +29,7 @@ export class RegistroTutorComponent implements OnInit {
   			first: ['', Validators.required],
   			last: ['', Validators.required]
   		}),
-      correo: ['', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]],
   		email: ['',  Validators.pattern("[^ @]*@[^ @]*")],
-  		grades: '',
-  		course: '',
-  		campus: ['', Validators.required]
   	});
   }
 
@@ -70,10 +40,12 @@ export class RegistroTutorComponent implements OnInit {
   }
 
   addTutor() {
+    
   	let tutor = new Tutor();
   	tutor = this.tutorForm.value;
     console.log(tutor)
-  	/*
+    
+  	
   	this.tutorService.registerTutor(tutor).subscribe(
   		(response) => {
   			console.log(response);
@@ -84,7 +56,6 @@ export class RegistroTutorComponent implements OnInit {
   			console.log(error);
   			console.log("No se pudo enviar forma.");
   		});
-  		*/
   }
 
 

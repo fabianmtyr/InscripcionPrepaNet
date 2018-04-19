@@ -1,0 +1,46 @@
+<div class="container">
+  <h1>Editar Tutor</h1>
+  <form (ngSubmit)="editarTutor()" #editTutorForm="ngForm">
+    <div class="form-group">
+      <label for="matricula">Matricula</label>
+      <input type="text" class="form-control" id="matricula" disabled required [(ngModel)]="nTutor.matricula" name="matricula" #matricula="ngModel">
+    </div>
+    <div class="form-group">
+      <label for="name">Nombre</label>
+      <input type="text" class="form-control" id="first" required [(ngModel)]="nTutor.name.first" name="first" #first="ngModel">
+    </div>
+    <div class="form-group">
+      <label for="last">Apellidos</label>
+      <input type="text" class="form-control" id="last" required [(ngModel)]="nTutor.name.last" name="last" #last="ngModel">
+    </div>
+    <div class="form-group">
+      <label for="email">Correo Alterno</label>
+      <input type="text" class="form-control" id="email" [(ngModel)]="nTutor.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel">
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+        <div *ngIf="email.errors.pattern">
+          El correo tiene que tener este formato: 'usuario@algo.com'
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="campus">Campus</label>
+      <select class="form-control" id="campus" required [(ngModel)]="nTutor.campus" name="campus" #campus="ngModel">
+        <option *ngFor="let c of campuss" [value]="c">
+          {{c}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="average">Promedio Escolar</label>
+      <input type="number" class="form-control" id="average" required [(ngModel)]="nTutor.average" name="average" pattern="/^[0-100]+$/"#average="ngModel">
+      <div *ngIf="average.invalid && (average.dirty || average.touched)" class="alert alert-danger">
+        <div *ngIf="average.errors.pattern">
+          El promedio debe estar entre 0 y 100.
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-danger" (click)="closeDialog()">Cancelar</button>
+    <button type="submit" class="btn btn-success" [disabled]="!editTutorForm.form.dirty && editTutorForm.form.valid">Aceptar Cambios</button>
+    <button type="button" class="btn btn-danger" (click)="eliminarTutor()">EliminarTutor</button>
+  </form>
+</div>

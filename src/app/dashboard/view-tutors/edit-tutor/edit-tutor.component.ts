@@ -44,7 +44,6 @@ export class EditTutorComponent implements OnInit {
   ngOnInit() {
 	this.nTutor.matricula = this.data.datos.matricula;
 	this.nTutor.name = {first: this.data.datos.name.first, last: this.data.datos.name.last}
-	this.nTutor.correo = this.data.datos.correo;
   this.nTutor.email = this.data.datos.email;
   this.nTutor.campus = this.data.datos.campus;
   console.log(this.nTutor);

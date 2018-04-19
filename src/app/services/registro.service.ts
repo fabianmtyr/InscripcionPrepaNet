@@ -16,7 +16,7 @@ const httpOptions = {
 
 @Injectable()
 export class RegistroService {
-
+  private backend = "https://ipn-backend.herokuapp.com";
 	private isRegistered;
 	private username;
 
@@ -46,4 +46,11 @@ export class RegistroService {
       return this.http.post('https://ipn-backend.herokuapp.com/tutors/new', tstJson, httpOptions);
   }
 
+  getTutors() {
+    return this.http.get(this.backend + '/tutors/list');
+  }
+
+  editTutor(tutor: Candidato) {
+    return this.http.post(this.backend + '/tutors/new', tutor);
+  }
 }

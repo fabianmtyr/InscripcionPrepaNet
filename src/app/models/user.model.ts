@@ -7,3 +7,8 @@ export class User {
 		public password: string;
 
 }
+
+export interface UserResponse {
+	email: boolean;
+	password: boolean;
+}

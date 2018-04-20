@@ -36,7 +36,7 @@ import { ExcelServiceService } from './services/excel-service.service';
 
 
 //Guardias
-import { AuthguardGuard } from './guards/authguard.guard';
+import { AuthguardGuard, LoginGuard } from './guards/authguard.guard';
 
 // Directivos
 import { EqualValidator } from './dashboard/registro-admins/passwordMatch.directive';
@@ -58,6 +58,7 @@ const appRoutes:Routes = [
   },
   {
     path: 'login',
+    canActivate: [LoginGuard],
     component: LoginComponent
   },
     {
@@ -145,7 +146,7 @@ const appRoutes:Routes = [
     MatCardModule
     //PaginationModule.forRoot()
   ],
-  providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService, TutorService, PlazaService],
+  providers: [RegistroService,UserService, AuthguardGuard, LoginGuard, ExcelServiceService, TutorService, PlazaService],
   bootstrap: [AppComponent],
   entryComponents: [EditTutorComponent, EditarTutoresComponent]
 

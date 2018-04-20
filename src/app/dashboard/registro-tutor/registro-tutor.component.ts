@@ -43,7 +43,7 @@ export class RegistroTutorComponent implements OnInit {
     
   	let tutor = new Tutor();
   	tutor = this.tutorForm.value;
-    console.log(tutor)
+    //console.log(tutor)
     
   	
   	this.tutorService.registerTutor(tutor).subscribe(

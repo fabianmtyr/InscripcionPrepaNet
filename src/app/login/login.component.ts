@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, NgModule } from '@angular/core';
+import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { User } from 'app/models/user.model';
 import { Observable } from 'rxjs';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -13,50 +14,45 @@ import { Observable } from 'rxjs';
 export class LoginComponent implements OnInit {
 
   userModel: User;
-
   loginForm: FormGroup;
-  email: FormControl;
-  password: FormControl;
+  eml = true;
+  pass = true;
 
-
-  constructor(private router:Router, private userService:UserService) { }
-
-  ngOnInit() {
-    this.createFormControls();
+  constructor(private router:Router, private userService:UserService, private fb: FormBuilder) {
     this.createForm();
-    this.userModel = new User();
   }
 
-  createFormControls() {
-    this.email = new FormControl('', Validators.required);
-    this.password = new FormControl('', Validators.required);
+  ngOnInit() {
   }
 
   createForm() {
-    this.loginForm = new FormGroup({
-      email: this.email,
-      password: this.password
+    this.loginForm = this.fb.group({
+      email: [''],
+      password: ['']
     });
+
   }
 
   loginUser() {
-    console.log(this.userModel)
+    //console.log(this.userModel)
+    this.userModel = this.loginForm.value;
+    console.log(this.userModel);
+
     this.userService.login(this.userModel).subscribe(
       (response) => {
+        this.eml = response.email;
+        this.pass = response.password;
         console.log(response);
-        if (response){
-        this.userService.setUserLoggedIn();
-        this.router.navigate(['dashboard']);
-      }else{ console.log("No se encontro el usuario");}
+        if(response.email && response.password){
+          //this.userService.setUserLoggedIn(this.userModel);
+          this.userService.setUserLoggedIn(this.userModel.email)
+        }
+        else {
+          console.log("Algo malo ocurrio!")
+        }
       },
       (error) => console.log(error)
       );
-    /*
-    if(this.userModel.username == 'admin' && this.userModel.password == 'admin') {
-      this.user.setUserLoggedIn();
-      this.router.navigate(['dashboard']);
-    }*/
-
   }
 
 }

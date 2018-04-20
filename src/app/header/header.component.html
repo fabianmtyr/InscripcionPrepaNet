@@ -5,8 +5,9 @@
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
 <!--       <a class="nav-item nav-link active"routerLink="/login">Regresar <span class="sr-only">(current)</span></a> -->
-		<!-- <li><a href="#">Link</a></li> -->
-		<li><a class="navbar-link" routerLink="/login">Logout</a></li>
+		<li></li>
+		<li><a *ngIf="isLoggedIn$ | async">Hola {{this.userEmail}}</a></li>
+		<li><a *ngIf="isLoggedIn$ | async" class="navbar-link" (click)="logoutUser()">Logout</a></li>
     </ul>
   </div>
 </nav>

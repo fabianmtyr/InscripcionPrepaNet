@@ -5,6 +5,10 @@
 	background-color: #ececec;
 }
 
+.mat-card-header-text {
+    margin: 0 0px;
+}
+
 body{
 	background-color: #ececec;
 }

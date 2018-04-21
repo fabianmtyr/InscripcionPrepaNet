@@ -34,22 +34,23 @@
       </div>
     </fieldset>
     <div class="form-group">
-      <label class="center-block">Correo alterno a el oficial:
+      <label class="center-block">Correo:
         <input class="form-control" formControlName="email">
       </label>
       <div class="alert alert-danger" *ngIf="tutorForm.controls['email'].errors && (tutorForm.controls['email'].dirty || tutorForm.controls['email'].touched)">
+        <div *ngIf="tutorForm.controls['email'].errors?.required">
+          Se necesita un correo.
+        </div>
         <div *ngIf="tutorForm.controls['email'].errors?.pattern">
           Formato incorrecto.
         </div>
       </div>
     </div>
     <button type="submit" class="btn btn-success" [disabled]="!tutorForm.valid">Ingresar</button>
-    <p>Form value: {{ tutorForm.value | json }}</p>
-    <p>Form value: {{ tutorForm.status | json }}</p>
   </form>
 </div>
 
-<!--
+<!-- Codigo de forma de registro con todos los componentes
   <div class="container">
   <h1>Registro de Tutores</h1>
   <form [formGroup]="tutorForm" (ngSubmit)="addTutor()">

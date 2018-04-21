@@ -8,6 +8,8 @@ export class Tutor {
     public courseGrade: number;
     public isElegible: boolean;
     public isTutor: boolean;
+    public semester: string;
+    public major: string;
 }
 
 export class Names {

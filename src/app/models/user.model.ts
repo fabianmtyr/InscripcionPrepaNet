@@ -5,6 +5,7 @@ export class User {
 		public lname: string;
 		public email: string;
 		public password: string;
+		public campus: string;
 
 }
 

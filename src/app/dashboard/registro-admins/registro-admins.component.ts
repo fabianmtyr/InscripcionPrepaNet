@@ -14,6 +14,34 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 })
 export class RegistroAdminsComponent implements OnInit {
 
+      campuss:string[] = [
+    'AGS',
+    'CCM',
+    'CCV',
+    'CDJ',
+    'CEM',
+    'CHI',
+    'CHS',
+    'CSF',
+    'CVA',
+    'MTY',
+    'GDA',
+    'HGO',
+    'IRA',
+    'LAG',
+    'LEO',
+    'MRL',
+    'PRN',
+    'PUE',
+    'QRO',
+    'SAL',
+    'SIN',
+    'SLP',
+    'TAM',
+    'TOL',
+    'ZAC',
+  ];
+
   model = new User();
   public passwordVerify: string;
   submitted = false;

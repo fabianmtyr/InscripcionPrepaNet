@@ -25,21 +25,23 @@ export class UserService {
     return !!localStorage.getItem('token');
   }
 
-  tokenEmail() {
+  tokenInfo() {
     return localStorage.getItem('token');
   }
 
-  setUserLoggedIn(email) {
+  setUserLoggedIn(email, campus, name) {
   	//this.isUserLoggedIn = true;
-    localStorage.setItem('token', email);
+
+    let userIdentifier = {'name': name, 'email':email, 'campus': campus}
+    localStorage.setItem('token', JSON.stringify(userIdentifier));
     this.loggedIn.next(true);
-    console.log(email);
     this.currentUser = email;
     this.router.navigate(['/dashboard']);
   }
 
   setUserLoggedOut() {
     localStorage.removeItem('token');
+    localStorage.clear()
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }

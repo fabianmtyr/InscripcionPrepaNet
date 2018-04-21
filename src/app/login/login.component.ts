@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   eml = true;
   pass = true;
+  nom = ""
+  cam = ""
 
   constructor(private router:Router, private userService:UserService, private fb: FormBuilder) {
     this.createForm();
@@ -39,13 +41,16 @@ export class LoginComponent implements OnInit {
     console.log(this.userModel);
 
     this.userService.login(this.userModel).subscribe(
-      (response) => {
+      (response: any) => {
         this.eml = response.email;
         this.pass = response.password;
+        this.nom = response.name;
+        this.cam = response.campus;
+
         console.log(response);
         if(response.email && response.password){
           //this.userService.setUserLoggedIn(this.userModel);
-          this.userService.setUserLoggedIn(this.userModel.email)
+          this.userService.setUserLoggedIn(this.userModel.email, this.cam, this.nom)
         }
         else {
           console.log("Algo malo ocurrio!")

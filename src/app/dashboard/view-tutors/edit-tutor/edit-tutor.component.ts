@@ -26,6 +26,7 @@ export class EditTutorComponent implements OnInit {
     'LAG',
     'LEO',
     'MRL',
+    'PRN',
     'PUE',
     'QRO',
     'SAL',

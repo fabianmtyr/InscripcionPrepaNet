@@ -24,12 +24,12 @@ export class RegistroTutorComponent implements OnInit {
 
   createForm() {
   	this.tutorForm = this.fb.group({
-  		matricula: ['', Validators.required],
+  		matricula: ['', [Validators.required, Validators.pattern("^[A|a][0-9]{8}")]],
   		name: this.fb.group({
   			first: ['', Validators.required],
   			last: ['', Validators.required]
   		}),
-  		email: ['',  Validators.pattern("[^ @]*@[^ @]*")],
+  		email: ['', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]],
   	});
   }
 
@@ -53,7 +53,7 @@ export class RegistroTutorComponent implements OnInit {
   			this.tutorForm.reset();
   		},
   		(error) => {
-  			console.log(error);
+  			console.log(error.text);
   			console.log("No se pudo enviar forma.");
   		});
   }

@@ -40,7 +40,6 @@
       </div>
     </div>
     <button type="button" class="btn btn-danger" (click)="closeDialog()">Cancelar</button>
-    <button type="submit" class="btn btn-success" [disabled]="!editTutorForm.form.dirty && editTutorForm.form.valid">Aceptar Cambios</button>
-    <button type="button" class="btn btn-danger" (click)="eliminarTutor()">EliminarTutor</button>
+    <button type="submit" class="btn btn-success" [disabled]="!editTutorForm.form.dirty && !editTutorForm.form.valid">Aceptar Cambios</button>
   </form>
 </div>

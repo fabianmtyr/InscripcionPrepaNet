@@ -1,5 +1,6 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule, Inject } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Tutor } from 'app/models/tutor.model';
 import { TutorService } from 'app/services/tutor.service';
 import { Observable } from 'rxjs';
@@ -18,7 +19,7 @@ export class RegistroTutorComponent implements OnInit {
 
 	//tutor = new Tutor();
 
-  constructor(private tutorService: TutorService, private fb: FormBuilder) {
+  constructor(private tutorService: TutorService, private fb: FormBuilder, public dialog: MatDialog) {
   	this.createForm();
   }
 
@@ -29,7 +30,7 @@ export class RegistroTutorComponent implements OnInit {
   			first: ['', Validators.required],
   			last: ['', Validators.required]
   		}),
-  		email: ['', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]],
+  		email: ['', [Validators.required, Validators.pattern("[^ @\n,;]+@[^ @\n,;]+[\.][^ @\n,;]+")]],
   	});
   }
 
@@ -39,24 +40,60 @@ export class RegistroTutorComponent implements OnInit {
   	
   }
 
+  openSuccess(message, title){
+    let dialogRef = this.dialog.open(SuccessComponent, {
+      data: {m: message, t: title},
+      disableClose: true,
+    });
+  }
+
   addTutor() {
     
   	let tutor = new Tutor();
   	tutor = this.tutorForm.value;
     //console.log(tutor)
     
-  	
   	this.tutorService.registerTutor(tutor).subscribe(
   		(response) => {
   			console.log(response);
   			console.log("Se agrego tutor exitosamente");
+        this.openSuccess("Se agrego tutor exitosamente!",'Exito!');
   			this.tutorForm.reset();
   		},
   		(error) => {
-  			console.log(error.text);
+  			console.log(error.error.text);
+        this.openSuccess(error.error.text, 'Error')
   			console.log("No se pudo enviar forma.");
   		});
   }
+}
 
+@Component({
+  selector: 'display-candidate-dialog',
+  template: `
+
+  <div>
+    <p><strong>{{this.data.t}}</strong></p>
+    <p>
+      <strong>{{this.data.m}}</strong>
+    </p>
+    <button (click)="closeDialog()">Ok</button>
+  </div>
+  `,
+  providers: []
+})
+export class SuccessComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<SuccessComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
+  }
 
 }

@@ -24,7 +24,7 @@ import { RegistroComponent } from './dashboard/registro/registro.component';
 import { DescargaInteresadosComponent } from './dashboard/descarga-interesados/descarga-interesados.component';
 import { ViewTutorsComponent } from './dashboard/view-tutors/view-tutors.component';
 import { EditTutorComponent } from './dashboard/view-tutors/edit-tutor/edit-tutor.component';
-import { RegistroTutorComponent } from './dashboard/registro-tutor/registro-tutor.component';
+import { RegistroTutorComponent, SuccessComponent } from './dashboard/registro-tutor/registro-tutor.component';
 import { DesplegarTutoresComponent } from './dashboard/desplegar-tutores/desplegar-tutores.component';
 
 // Servicios
@@ -122,6 +122,7 @@ const appRoutes:Routes = [
     EditTutorComponent,
     TablegitComponent,
     RegistroTutorComponent,
+    SuccessComponent,
     DesplegarTutoresComponent,
     EditarTutoresComponent,
   ],
@@ -149,7 +150,7 @@ const appRoutes:Routes = [
   ],
   providers: [RegistroService,UserService, AuthguardGuard, LoginGuard, ExcelServiceService, TutorService, PlazaService],
   bootstrap: [AppComponent],
-  entryComponents: [EditTutorComponent, EditarTutoresComponent]
+  entryComponents: [EditTutorComponent, EditarTutoresComponent, SuccessComponent]
 
 })
 export class AppModule { }

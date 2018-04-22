@@ -1,25 +1,26 @@
 <div class="container">
-  <div [hidden]="submitted">
     <h1>Registro de Administradores</h1>
     <form (ngSubmit)="addUser()" #adminForm="ngForm">
-      <div class="form-group">
-        <label for="fname">Nombre</label>
-        <input type="text" class="form-control" id="fname" required [(ngModel)]="model.fname" name="fname" #fname="ngModel">
-        <div *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="alert alert-danger">
-          <div *ngIf="fname.errors.required">
-            Se requiere un nombre.
+      <fieldset ngModelGroup="name">
+        <div class="form-group">
+          <label for="first">Nombre</label>
+          <input type="text" class="form-control" id="first" required [(ngModel)]="this.fname" name="first" #first="ngModel">
+          <div *ngIf="first.invalid && (first.dirty || first.touched)" class="alert alert-danger">
+            <div *ngIf="first.errors.required">
+              Se requiere un nombre.
+            </div>
           </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="lname">Apellido</label>
-        <input type="text" class="form-control" id="lname" required [(ngModel)]="model.lname" name="lname" #lname="ngModel">
-        <div *ngIf="lname.invalid && (lname.dirty || lname.touched)" class="alert alert-danger">
-          <div *ngIf="lname.errors.required">
-            Se requiere un apellido.
+        <div class="form-group">
+          <label for="last">Apellido</label>
+          <input type="text" class="form-control" id="last" required [(ngModel)]="this.lname" name="last" #last="ngModel">
+          <div *ngIf="last.invalid && (last.dirty || last.touched)" class="alert alert-danger">
+            <div *ngIf="last.errors.required">
+              Se requiere un apellido.
+            </div>
           </div>
         </div>
-      </div>
+      </fieldset>
       <div class="form-group">
         <label for="campus">Campus</label>
         <select class="form-control" id="campus" required [(ngModel)]=model.campus name="campus" #campus=ngModel>
@@ -65,22 +66,4 @@
       <button type="submit" class="btn btn-success" [disabled]="!adminForm.form.valid">Ingresar</button>
       <button type="button" class="btn btn-success" (click)="nuevoUsuario(); adminForm.reset()">Nuevo Usuario</button>
     </form>
-  </div>
-  <div class="container" [hidden]="!submitted">
-    <h2>Se ingreso los siguientes datos:</h2>
-    <div class="row">
-      <div class="col-xs-3">Nombre</div>
-      <div class="col-xs-9 pull-left">{{model.fname}}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3">Apellido</div>
-      <div class="col-xs-9 pull-left">{{model.lname}}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3">Correo</div>
-      <div class="col-xs-9 pull-left">{{model.email}}</div>
-    </div>
-    <br>
-    <button class="btn btn-primary" (click)="submitted=false">Confirmar</button>
-  </div>
 </div>

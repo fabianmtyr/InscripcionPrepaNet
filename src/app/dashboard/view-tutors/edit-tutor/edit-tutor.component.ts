@@ -9,33 +9,7 @@ import { TutorService } from '../../../services/tutor.service';
 })
 export class EditTutorComponent implements OnInit {
 
-    campuss:string[] = [
-    'AGS',
-    'CCM',
-    'CCV',
-    'CDJ',
-    'CEM',
-    'CHI',
-    'CHS',
-    'CSF',
-    'CVA',
-    'MTY',
-    'GDA',
-    'HGO',
-    'IRA',
-    'LAG',
-    'LEO',
-    'MRL',
-    'PRN',
-    'PUE',
-    'QRO',
-    'SAL',
-    'SIN',
-    'SLP',
-    'TAM',
-    'TOL',
-    'ZAC',
-  ];
+    campuss:string[] = ['AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL','PRN','PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
 
 
   constructor(public dialogRef: MatDialogRef<EditTutorComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private tutorService: TutorService) {}

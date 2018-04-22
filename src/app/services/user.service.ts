@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 export class UserService {
   private backend = "https://ipn-backend.herokuapp.com";
 	//private isUserLoggedIn;
-	public currentUser;
   //private loggedIn = new BehaviorSubject<boolean>(false);
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
 
@@ -22,26 +21,37 @@ export class UserService {
   }
 
   private hasToken(): boolean {
-    return !!localStorage.getItem('token');
+    return !!sessionStorage.getItem('token');
   }
 
   tokenInfo() {
-    return localStorage.getItem('token');
+    return sessionStorage.getItem('token');
   }
+
+  getLocalStorageName(){
+    return JSON.parse(this.tokenInfo()).name;
+  }
+
+  getLocalStorageEmail(){
+    return JSON.parse(this.tokenInfo()).email;
+  }
+
+  getLocalStorageCampus(){
+    return JSON.parse(this.tokenInfo()).campus;
+  }
+
 
   setUserLoggedIn(email, campus, name) {
   	//this.isUserLoggedIn = true;
-
     let userIdentifier = {'name': name, 'email':email, 'campus': campus}
-    localStorage.setItem('token', JSON.stringify(userIdentifier));
+    sessionStorage.setItem('token', JSON.stringify(userIdentifier));
     this.loggedIn.next(true);
-    this.currentUser = email;
     this.router.navigate(['/dashboard']);
   }
 
   setUserLoggedOut() {
-    localStorage.removeItem('token');
-    localStorage.clear()
+    sessionStorage.removeItem('token');
+    //localStorage.clear();
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }

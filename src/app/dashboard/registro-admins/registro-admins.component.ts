@@ -15,36 +15,13 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 export class RegistroAdminsComponent implements OnInit {
 
       campuss:string[] = [
-    'AGS',
-    'CCM',
-    'CCV',
-    'CDJ',
-    'CEM',
-    'CHI',
-    'CHS',
-    'CSF',
-    'CVA',
-    'MTY',
-    'GDA',
-    'HGO',
-    'IRA',
-    'LAG',
-    'LEO',
-    'MRL',
-    'PRN',
-    'PUE',
-    'QRO',
-    'SAL',
-    'SIN',
-    'SLP',
-    'TAM',
-    'TOL',
-    'ZAC',
-  ];
+    'AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL','PRN','PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
 
   model = new User();
   public passwordVerify: string;
   submitted = false;
+  fname: string;
+  lname: string;
 
   constructor(private userService: UserService) { }
 
@@ -60,6 +37,8 @@ export class RegistroAdminsComponent implements OnInit {
     addUser() {
       this.submitted = true;
     //console.log(this.user);
+    console.log(this.model);
+    this.model.name = this.fname + " " + this.lname;
 
     this.userService.registerUser(this.model).subscribe(
       (response) => {

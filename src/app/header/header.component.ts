@@ -11,13 +11,17 @@ import { Observable } from 'rxjs/Observable';
 export class HeaderComponent implements OnInit {
 
 	isLoggedIn$: Observable<boolean>;
+  info = {'name': '', 'email': '', 'campus':''}
 	userEmail: string;
+  userName: string;
+  userCampus: string;
+
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-  	this.isLoggedIn$ = this.userService.isLoggedIn;
-  	this.userEmail = this.userService.tokenEmail();
+    this.isLoggedIn$ = this.userService.isLoggedIn;
+
   }
 
   logoutUser() {

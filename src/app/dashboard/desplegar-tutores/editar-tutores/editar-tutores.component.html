@@ -1,46 +1,68 @@
-<div class="container">
-  <h1>Editar Tutor</h1>
-  <form (ngSubmit)="editarTutor()" #editTutorForm="ngForm">
-    <div class="form-group">
-      <label for="matricula">Matricula</label>
-      <input type="text" class="form-control" id="matricula" disabled required [(ngModel)]="nTutor.matricula" name="matricula" #matricula="ngModel">
-    </div>
-    <div class="form-group">
-      <label for="name">Nombre</label>
-      <input type="text" class="form-control" id="first" required [(ngModel)]="nTutor.name.first" name="first" #first="ngModel">
-    </div>
-    <div class="form-group">
-      <label for="last">Apellidos</label>
-      <input type="text" class="form-control" id="last" required [(ngModel)]="nTutor.name.last" name="last" #last="ngModel">
-    </div>
-    <div class="form-group">
-      <label for="email">Correo Alterno</label>
-      <input type="text" class="form-control" id="email" [(ngModel)]="nTutor.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel">
-      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-        <div *ngIf="email.errors.pattern">
-          El correo tiene que tener este formato: 'usuario@algo.com'
+<div class="fixActionRow">
+  <h1 mat-dialog-title>Editar Tutor</h1>
+  <div mat-dialog-content>
+    <form (ngSubmit)="editarTutor()" #editTutorForm="ngForm">
+      <div class="form-group">
+        <label for="matricula">Matricula</label>
+        <input type="text" class="form-control" id="matricula" disabled required [(ngModel)]="nTutor.matricula" name="matricula" #matricula="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input type="text" class="form-control" id="first" required [(ngModel)]="nTutor.name.first" name="first" #first="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="last">Apellidos</label>
+        <input type="text" class="form-control" id="last" required [(ngModel)]="nTutor.name.last" name="last" #last="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="email">Correo Alterno</label>
+        <input type="text" class="form-control" id="email" [(ngModel)]="nTutor.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel">
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+          <div *ngIf="email.errors.pattern">
+            El correo tiene que tener este formato: 'usuario@algo.com'
+          </div>
         </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label for="campus">Campus</label>
-      <select class="form-control" id="campus" required [(ngModel)]="nTutor.campus" name="campus" #campus="ngModel">
-        <option *ngFor="let c of campuss" [value]="c">
-          {{c}}
-        </option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="average">Promedio Escolar</label>
-      <input type="number" class="form-control" id="average" required [(ngModel)]="nTutor.average" name="average" pattern="/^[0-100]+$/"#average="ngModel">
-      <div *ngIf="average.invalid && (average.dirty || average.touched)" class="alert alert-danger">
-        <div *ngIf="average.errors.pattern">
-          El promedio debe estar entre 0 y 100.
+      <div class="form-group">
+        <label for="campus">Campus</label>
+        <select class="form-control" id="campus" required [(ngModel)]="nTutor.campus" name="campus" #campus="ngModel">
+          <option *ngFor="let c of campuss" [value]="c">
+            {{c}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="semester">Semestre</label>
+        <select class="form-control" id="semester" required [(ngModel)]="nTutor.semester" name="semester" #semester="ngModel">
+          <option *ngFor="let s of semesterss" [value]="s">
+            {{s}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="major">Carrera</label>
+        <input type="text" class="form-control" id="major" name="major" required [(ngModel)]="nTutor.major" pattern="^[A-Za-z]{3,4}" #major="ngModel">
+        <div *ngIf="major.invalid && major.touched" class="alert alert-danger">
+          <div *ngIf="major.errors.pattern">
+            Ingresa las iniciales de tu carrera.
+          </div>
         </div>
       </div>
-    </div>
-    <button type="button" class="btn btn-danger" (click)="closeDialog()">Cancelar</button>
-    <button type="submit" class="btn btn-success" [disabled]="!editTutorForm.form.dirty && editTutorForm.form.valid">Aceptar Cambios</button>
-    <button type="button" class="btn btn-danger" (click)="eliminarTutor()">EliminarTutor</button>
-  </form>
+      <div class="form-group">
+        <label for="average">Promedio Escolar</label>
+        <input type="number" class="form-control" id="average" required [(ngModel)]="nTutor.average" name="average" pattern="^(?:[1-9]\d?|100)$" #average="ngModel">
+        <div *ngIf="average.invalid &&  average.touched" class="alert alert-danger">
+          <div *ngIf="average.errors.pattern">
+            El promedio debe estar entre 0 y 100.
+          </div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <mat-dialog-actions>
+        <button type="button" class="btn btn-danger" (click)="closeDialog()">Cancelar</button>
+        <button type="submit" class="btn btn-success" [disabled]="(editTutorForm.form.dirty || editTutorForm.form.touched) && !editTutorForm.form.valid">Aceptar Cambios</button>
+        <button type="button" class="btn btn-danger" (click)="openWarning()">Borrar Tutor</button>
+      </mat-dialog-actions>
+    </form>
+  </div>
 </div>

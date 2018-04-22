@@ -6,7 +6,7 @@
     <ul class="nav navbar-nav navbar-right">
 <!--       <a class="nav-item nav-link active"routerLink="/login">Regresar <span class="sr-only">(current)</span></a> -->
 		<li></li>
-		<li><a *ngIf="isLoggedIn$ | async">Hola {{this.userEmail}}</a></li>
+		<li><a *ngIf="isLoggedIn$ | async">Hola  {{this.userService.getLocalStorageName()}}</a></li>
 		<li><a *ngIf="isLoggedIn$ | async" class="navbar-link" (click)="logoutUser()">Logout</a></li>
     </ul>
   </div>

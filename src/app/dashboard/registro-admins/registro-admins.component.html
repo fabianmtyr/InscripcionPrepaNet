@@ -1,75 +1,68 @@
 <div class="container">
-  <div [hidden]="submitted">
-    <h1>Registro de Administradores</h1>
-    <form (ngSubmit)="addUser()" #adminForm="ngForm">
+  <h1>Registro de Administradores</h1>
+  <form (ngSubmit)="addUser()" #adminForm="ngForm">
+    <fieldset ngModelGroup="name">
       <div class="form-group">
-        <label for="fname">Nombre</label>
-        <input type="text" class="form-control" id="fname" required [(ngModel)]="model.fname" name="fname" #fname="ngModel">
-        <div *ngIf="fname.invalid && (fname.dirty || fname.touched)" class="alert alert-danger">
-          <div *ngIf="fname.errors.required">
+        <label for="first">Nombre</label>
+        <input type="text" class="form-control" id="first" required [(ngModel)]="this.fname" name="first" #first="ngModel">
+        <div *ngIf="first.invalid &&  first.touched" class="alert alert-danger">
+          <div *ngIf="first.errors.required">
             Se requiere un nombre.
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="lname">Apellido</label>
-        <input type="text" class="form-control" id="lname" required [(ngModel)]="model.lname" name="lname" #lname="ngModel">
-        <div *ngIf="lname.invalid && (lname.dirty || lname.touched)" class="alert alert-danger">
-          <div *ngIf="lname.errors.required">
+        <label for="last">Apellido</label>
+        <input type="text" class="form-control" id="last" required [(ngModel)]="this.lname" name="last" #last="ngModel">
+        <div *ngIf="last.invalid &&  last.touched" class="alert alert-danger">
+          <div *ngIf="last.errors.required">
             Se requiere un apellido.
           </div>
         </div>
       </div>
-      <div class="form-group">
-        <label for="email">Correo</label>
-        <input type="email" class="form-control" id="email" required [(ngModel)]="model.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel">
-        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-          <div *ngIf="email.errors.required">
-            Se necesita un correo
-          </div>
-          <div *ngIf="email.errors.pattern">
-            El correo tiene que tener este formato: 'usuario@algo.com'
-          </div>
+    </fieldset>
+    <div class="form-group">
+      <label for="campus">Campus</label>
+      <select class="form-control" id="campus" required [(ngModel)]=model.campus name="campus" #campus=ngModel>
+        <option *ngFor="let c of campuss" [value]="c">{{c}}</option>
+      </select>
+      <div *ngIf="campus.invalid && (campus.dirty || email.touched)" class="alert alert-danger">
+        <div *ngIf="campus.errors.required">
+          Se necesita un escojer un campus.
         </div>
       </div>
-      <div class="form-group">
-        <label for="password">Contrase&ntilde;a</label>
-        <input type="password" class="form-control" id="password" required minlength="6" [(ngModel)]="model.password" name="password" #password="ngModel">
-        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
-          <div *ngIf="password.errors.required">
-            Se necesita una contrase&ntilde;a.
-          </div>
-          <div *ngIf="password.errors.minlength">
-            La contrase&ntilde;a tiene que tener minimo seis caracteres.
-          </div>
+    </div>
+    <div class="form-group">
+      <label for="campus">Correo</label>
+      <input type="select" class="form-control" id="email" required [(ngModel)]="model.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel">
+      <div *ngIf="email.invalid &&  email.touched" class="alert alert-danger">
+        <div *ngIf="email.errors.required">
+          Se necesita un correo
+        </div>
+        <div *ngIf="email.errors.pattern">
+          El correo tiene que tener este formato: 'usuario@algo.com'
         </div>
       </div>
-      <div class="form-group">
-        <label for="passwordVerify">Confirmar Contrase&ntilde;a</label>
-        <input type="password" class="form-control" id="passwordVerify" required minlength="6" validateEqual="password" [(ngModel)]="passwordVerify" name="passwordVerify" #passwordVerify1="ngModel">
-        <div *ngIf="passwordVerify1.invalid && (passwordVerify1.dirty || passwordVerify1.touched)" class="alert alert-danger">
-          Las contrase&ntilde;as no coinciden.
+    </div>
+    <div class="form-group">
+      <label for="password">Contrase&ntilde;a</label>
+      <input type="password" class="form-control" id="password" required minlength="6" [(ngModel)]="model.password" name="password" #password="ngModel">
+      <div *ngIf="password.invalid &&  password.touched" class="alert alert-danger">
+        <div *ngIf="password.errors.required">
+          Se necesita una contrase&ntilde;a.
+        </div>
+        <div *ngIf="password.errors.minlength">
+          La contrase&ntilde;a tiene que tener minimo seis caracteres.
         </div>
       </div>
-      <button type="submit" class="btn btn-success" [disabled]="!adminForm.form.valid">Ingresar</button>
-      <button type="button" class="btn btn-success" (click)="nuevoUsuario(); adminForm.reset()">Nuevo Usuario</button>
-    </form>
-  </div>
-  <div class="container" [hidden]="!submitted">
-    <h2>Se ingreso los siguientes datos:</h2>
-    <div class="row">
-      <div class="col-xs-3">Nombre</div>
-      <div class="col-xs-9 pull-left">{{model.fname}}</div>
     </div>
-    <div class="row">
-      <div class="col-xs-3">Apellido</div>
-      <div class="col-xs-9 pull-left">{{model.lname}}</div>
+    <div class="form-group">
+      <label for="passwordVerify">Confirmar Contrase&ntilde;a</label>
+      <input type="password" class="form-control" id="passwordVerify" required minlength="6" validateEqual="password" [(ngModel)]="passwordVerify" name="passwordVerify" #passwordVerify1="ngModel">
+      <div *ngIf="passwordVerify1.invalid &&  passwordVerify1.touched" class="alert alert-danger">
+        Las contrase&ntilde;as no coinciden.
+      </div>
     </div>
-    <div class="row">
-      <div class="col-xs-3">Correo</div>
-      <div class="col-xs-9 pull-left">{{model.email}}</div>
-    </div>
-    <br>
-    <button class="btn btn-primary" (click)="submitted=false">Confirmar</button>
-  </div>
+    <button type="submit" class="btn btn-success" [disabled]="!adminForm.form.valid">Ingresar</button>
+  </form>
 </div>

@@ -69,7 +69,7 @@ export class RegistroTutorComponent implements OnInit {
 }
 
 @Component({
-  selector: 'display-candidate-dialog',
+  selector: 'success-dialog',
   template: `
 
   <div>

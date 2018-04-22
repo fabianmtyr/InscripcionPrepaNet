@@ -22,7 +22,7 @@ export class DesplegarTutoresComponent implements OnInit {
 
 	tutors:Observable<any> = this.http.get('https://ipn-backend.herokuapp.com/tutors/new');
 	dataSource = new MatTableDataSource([]);
-	displayedColumns = ['matricula', 'campus', 'name', 'lastname', 'email', 'average', 'isElegible', 'courseGrade', 'isTutor' ];
+	displayedColumns = ['matricula', 'campus', 'major', 'semester', 'name', 'lastname', 'email', 'average', 'isElegible', 'courseGrade', 'isTutor' ];
 	constructor(private tutorService: TutorService, private http: HttpClient, public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) { 
 	}
 
@@ -43,8 +43,9 @@ export class DesplegarTutoresComponent implements OnInit {
 
   onEdit(tutor): void{
   	let dialogRef = this.dialog.open(EditarTutoresComponent, {
-  		width: '800px',
   		data: tutor,
+      height: 'auto',
+      width: 'auto',
   		disableClose: true,
   	}).afterClosed().subscribe(result => {
   		this.refresh();

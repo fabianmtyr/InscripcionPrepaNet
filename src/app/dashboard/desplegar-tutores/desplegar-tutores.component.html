@@ -13,7 +13,15 @@
 		<ng-container matColumnDef="campus">
 			<mat-header-cell *matHeaderCellDef>Campus</mat-header-cell>
 			<mat-cell *matCellDef="let tutor">{{tutor.campus}}</mat-cell>
-		</ng-container>				
+		</ng-container>
+		<ng-container matColumnDef="major">
+			<mat-header-cell *matHeaderCellDef>Carrera</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.major}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="semester">
+			<mat-header-cell *matHeaderCellDef>Semestre</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.semester}}</mat-cell>
+		</ng-container>	
 		<ng-container matColumnDef="name">
 			<mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
 			<mat-cell *matCellDef="let tutor">{{tutor.name.first}}</mat-cell>
@@ -27,7 +35,7 @@
 			<mat-cell *matCellDef="let tutor">{{tutor.email}}</mat-cell>
 		</ng-container>
 		<ng-container matColumnDef="average">
-			<mat-header-cell *matHeaderCellDef>Calificacion</mat-header-cell>
+			<mat-header-cell *matHeaderCellDef>Promedio Escolar</mat-header-cell>
 			<mat-cell *matCellDef="let tutor">{{tutor.average}}</mat-cell>
 		</ng-container>
 		<ng-container matColumnDef="isElegible">

@@ -1,69 +1,68 @@
 <div class="container">
-    <h1>Registro de Administradores</h1>
-    <form (ngSubmit)="addUser()" #adminForm="ngForm">
-      <fieldset ngModelGroup="name">
-        <div class="form-group">
-          <label for="first">Nombre</label>
-          <input type="text" class="form-control" id="first" required [(ngModel)]="this.fname" name="first" #first="ngModel">
-          <div *ngIf="first.invalid && (first.dirty || first.touched)" class="alert alert-danger">
-            <div *ngIf="first.errors.required">
-              Se requiere un nombre.
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="last">Apellido</label>
-          <input type="text" class="form-control" id="last" required [(ngModel)]="this.lname" name="last" #last="ngModel">
-          <div *ngIf="last.invalid && (last.dirty || last.touched)" class="alert alert-danger">
-            <div *ngIf="last.errors.required">
-              Se requiere un apellido.
-            </div>
-          </div>
-        </div>
-      </fieldset>
+  <h1>Registro de Administradores</h1>
+  <form (ngSubmit)="addUser()" #adminForm="ngForm">
+    <fieldset ngModelGroup="name">
       <div class="form-group">
-        <label for="campus">Campus</label>
-        <select class="form-control" id="campus" required [(ngModel)]=model.campus name="campus" #campus=ngModel>
-          <option *ngFor="let c of campuss" [value]="c">{{c}}</option>
-        </select>
-        <div *ngIf="campus.invalid && (campus.dirty || email.touched)" class="alert alert-danger">
-          <div *ngIf="campus.errors.required">
-            Se necesita un escojer un campus.
+        <label for="first">Nombre</label>
+        <input type="text" class="form-control" id="first" required [(ngModel)]="this.fname" name="first" #first="ngModel">
+        <div *ngIf="first.invalid &&  first.touched" class="alert alert-danger">
+          <div *ngIf="first.errors.required">
+            Se requiere un nombre.
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="campus">Correo</label>
-        <input type="select" class="form-control" id="email" required [(ngModel)]="model.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel">
-        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-          <div *ngIf="email.errors.required">
-            Se necesita un correo
-          </div>
-          <div *ngIf="email.errors.pattern">
-            El correo tiene que tener este formato: 'usuario@algo.com'
+        <label for="last">Apellido</label>
+        <input type="text" class="form-control" id="last" required [(ngModel)]="this.lname" name="last" #last="ngModel">
+        <div *ngIf="last.invalid &&  last.touched" class="alert alert-danger">
+          <div *ngIf="last.errors.required">
+            Se requiere un apellido.
           </div>
         </div>
       </div>
-      <div class="form-group">
-        <label for="password">Contrase&ntilde;a</label>
-        <input type="password" class="form-control" id="password" required minlength="6" [(ngModel)]="model.password" name="password" #password="ngModel">
-        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
-          <div *ngIf="password.errors.required">
-            Se necesita una contrase&ntilde;a.
-          </div>
-          <div *ngIf="password.errors.minlength">
-            La contrase&ntilde;a tiene que tener minimo seis caracteres.
-          </div>
+    </fieldset>
+    <div class="form-group">
+      <label for="campus">Campus</label>
+      <select class="form-control" id="campus" required [(ngModel)]=model.campus name="campus" #campus=ngModel>
+        <option *ngFor="let c of campuss" [value]="c">{{c}}</option>
+      </select>
+      <div *ngIf="campus.invalid && (campus.dirty || email.touched)" class="alert alert-danger">
+        <div *ngIf="campus.errors.required">
+          Se necesita un escojer un campus.
         </div>
       </div>
-      <div class="form-group">
-        <label for="passwordVerify">Confirmar Contrase&ntilde;a</label>
-        <input type="password" class="form-control" id="passwordVerify" required minlength="6" validateEqual="password" [(ngModel)]="passwordVerify" name="passwordVerify" #passwordVerify1="ngModel">
-        <div *ngIf="passwordVerify1.invalid && (passwordVerify1.dirty || passwordVerify1.touched)" class="alert alert-danger">
-          Las contrase&ntilde;as no coinciden.
+    </div>
+    <div class="form-group">
+      <label for="campus">Correo</label>
+      <input type="select" class="form-control" id="email" required [(ngModel)]="model.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel">
+      <div *ngIf="email.invalid &&  email.touched" class="alert alert-danger">
+        <div *ngIf="email.errors.required">
+          Se necesita un correo
+        </div>
+        <div *ngIf="email.errors.pattern">
+          El correo tiene que tener este formato: 'usuario@algo.com'
         </div>
       </div>
-      <button type="submit" class="btn btn-success" [disabled]="!adminForm.form.valid">Ingresar</button>
-      <button type="button" class="btn btn-success" (click)="nuevoUsuario(); adminForm.reset()">Nuevo Usuario</button>
-    </form>
+    </div>
+    <div class="form-group">
+      <label for="password">Contrase&ntilde;a</label>
+      <input type="password" class="form-control" id="password" required minlength="6" [(ngModel)]="model.password" name="password" #password="ngModel">
+      <div *ngIf="password.invalid &&  password.touched" class="alert alert-danger">
+        <div *ngIf="password.errors.required">
+          Se necesita una contrase&ntilde;a.
+        </div>
+        <div *ngIf="password.errors.minlength">
+          La contrase&ntilde;a tiene que tener minimo seis caracteres.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="passwordVerify">Confirmar Contrase&ntilde;a</label>
+      <input type="password" class="form-control" id="passwordVerify" required minlength="6" validateEqual="password" [(ngModel)]="passwordVerify" name="passwordVerify" #passwordVerify1="ngModel">
+      <div *ngIf="passwordVerify1.invalid &&  passwordVerify1.touched" class="alert alert-danger">
+        Las contrase&ntilde;as no coinciden.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!adminForm.form.valid">Ingresar</button>
+  </form>
 </div>

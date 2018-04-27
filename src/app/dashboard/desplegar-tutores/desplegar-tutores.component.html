@@ -4,7 +4,7 @@
     </mat-form-field>
   </div>
 
-<div>
+<div class="example-container mat-elevation-z8"  [class.align-table]="alignMe">
 	<mat-table #table [dataSource]="dataSource">
 		<ng-container matColumnDef="matricula">
 			<mat-header-cell *matHeaderCellDef>Matricula/Nomina</mat-header-cell>
@@ -31,12 +31,12 @@
 			<mat-cell *matCellDef="let tutor">{{tutor.nombre.apellido}}</mat-cell>
 		</ng-container>
 		<ng-container matColumnDef="correo">
-			<mat-header-cell *matHeaderCellDef>Correo Alterno</mat-header-cell>
-			<mat-cell *matCellDef="let tutor">{{tutor.correo}}</mat-cell>
+			<mat-header-cell *matHeaderCellDef style="text-align: center">Correo Alterno</mat-header-cell>
+			<mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.correo}}</mat-cell>
 		</ng-container>
 		<ng-container matColumnDef="promedio">
-			<mat-header-cell *matHeaderCellDef>Promedio Escolar</mat-header-cell>
-			<mat-cell *matCellDef="let tutor">{{tutor.promedio}}</mat-cell>
+			<mat-header-cell *matHeaderCellDef style="text-align: center">Promedio Escolar</mat-header-cell>
+			<mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.promedio}}</mat-cell>
 		</ng-container>
 		<ng-container matColumnDef="cumplePromedio">
 			<mat-header-cell *matHeaderCellDef>Elegible al Curso</mat-header-cell>
@@ -46,7 +46,7 @@
 		</ng-container>
 		<ng-container matColumnDef="calificacionCurso">
 			<mat-header-cell *matHeaderCellDef>Calificacion Del Curso</mat-header-cell>
-			<mat-cell *matCellDef="let tutor">{{tutor.calificacionCurso}}</mat-cell>
+			<mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.calificacionCurso}}</mat-cell>
 		</ng-container>
 		<ng-container matColumnDef="pasoCurso">
 			<mat-header-cell *matHeaderCellDef>Elegible a ser Tutor</mat-header-cell>

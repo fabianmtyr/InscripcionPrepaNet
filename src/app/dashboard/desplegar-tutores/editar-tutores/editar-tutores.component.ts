@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogTitle, MatDialogActions} from '@angular/material';
 import { Tutor } from '../../../models/tutor.model';
 import { TutorService } from '../../../services/tutor.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-editar-tutores',
@@ -13,29 +14,31 @@ export class EditarTutoresComponent implements OnInit {
     campuss:string[] = [
     'AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL', 'PRN', 'PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
 
-    semesterss: string[] = ['1er','2do', '3ro','4to', '5to', '6to', '7mo', '8vo', '9no', '10mo'];
+    semesterss: number[] = [1,2,3,4,5,6,7,8,9,10];
 
 
-  constructor(public dialogRef: MatDialogRef<EditarTutoresComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private tutorService: TutorService, public dialog: MatDialog) { }
+  constructor(public dialogRef: MatDialogRef<EditarTutoresComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private tutorService: TutorService, public dialog: MatDialog, private userService: UserService) { }
 
   nTutor = new Tutor();
+  Usercampus = this.userService.getLocalStorageCampus();
   @ViewChild('editTutorForm') form:  any;
 
   ngOnInit() {
  	this.nTutor.matricula = this.data.matricula;
-	this.nTutor.name = {first: this.data.name.first, last: this.data.name.last}
-  	this.nTutor.email = this.data.email;
+	this.nTutor.nombre = {nombre: this.data.nombre.nombre, apellido: this.data.nombre.apellido}
+  	this.nTutor.correo = this.data.correo;
   	this.nTutor.campus = this.data.campus;
-  	this.nTutor.average = this.data.average;
-  	this.nTutor.courseGrade = this.data.courseGrade;
-  	this.nTutor.isElegible = this.data.isElegible;
-  	this.nTutor.isTutor = this.data.isTutor;
-    this.nTutor.semester = this.data.semester;
-    this.nTutor.major = this.data.major;
+  	this.nTutor.promedio = this.data.promedio;
+  	this.nTutor.calificacionCurso = this.data.calificacionCurso;
+  	this.nTutor.cumplePromedio = this.data.cumplePromedio;
+  	this.nTutor.pasoCurso = this.data.pasoCurso;
+    this.nTutor.semestre = this.data.semestre;
+    this.nTutor.carrera = this.data.carrera;
   	console.log(this.nTutor);
   }
 
     editarTutor() {
+
     
     this.tutorService.editTutor(this.nTutor).subscribe(
       (response) => {
@@ -96,7 +99,7 @@ export class EditarTutoresComponent implements OnInit {
       <strong>Estas a punto de borrar a el siguiente candidato a tutor:</strong></p>
       <ul>
         <li>{{data.matricula}}</li>
-        <li>{{data.name.first}} {{data.name.last}}</li>
+        <li>{{data.nombre.nombre}} {{data.nombre.apellido}}</li>
       </ul>
     
     <p>

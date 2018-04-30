@@ -4,11 +4,11 @@
     </mat-form-field>
   </div>
 
-<div class="example-container mat-elevation-z8"  [class.align-table]="alignMe">
+<div >
 	<mat-table #table [dataSource]="dataSource">
 		<ng-container matColumnDef="matricula">
-			<mat-header-cell *matHeaderCellDef>Matricula/Nomina</mat-header-cell>
-			<mat-cell *matCellDef="let tutor" (click)="onEdit(tutor)"><a>{{tutor.matricula}}</a></mat-cell>
+			<mat-header-cell *matHeaderCellDef style="text-align: center">Matricula/Nomina</mat-header-cell>
+			<mat-cell *matCellDef="let tutor" (click)="onEdit(tutor)" style="text-align: center"><a>{{tutor.matricula}}</a></mat-cell>
 		</ng-container>
 		<ng-container matColumnDef="campus">
 			<mat-header-cell *matHeaderCellDef>Campus</mat-header-cell>

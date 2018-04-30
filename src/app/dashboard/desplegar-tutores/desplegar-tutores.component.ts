@@ -8,6 +8,7 @@ import { MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Tutor } from '../../models/tutor.model';
 import { TutorService } from '../../services/tutor.service';
+import { UserService } from '../../services/user.service';
 import { DataSource } from '@angular/cdk/collections';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -21,11 +22,16 @@ import { EditarTutoresComponent } from './editar-tutores/editar-tutores.componen
 export class DesplegarTutoresComponent implements OnInit {
 
 	tutors:Observable<any> = this.http.get('https://ipn-backend.herokuapp.com/tutors/new');
+
 	dataSource = new MatTableDataSource([]);
-	displayedColumns = ['matricula', 'campus', 'major', 'semester', 'name', 'lastname', 'email', 'average', 'isElegible', 'courseGrade', 'isTutor' ];
-	constructor(private tutorService: TutorService, private http: HttpClient, public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) { 
+
+
+	displayedColumns = ['matricula', 'campus', 'carrera', 'semestre', 'nombre', 'apellido', 'correo', 'promedio', 'cumplePromedio', 'calificacionCurso', 'pasoCurso' ];
+
+	constructor(private tutorService: TutorService, private http: HttpClient, public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef, private userService: UserService) { 
 	}
 
+  Usercampus = this.userService.getLocalStorageCampus()
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	ngAfterViewInit() {
@@ -33,10 +39,29 @@ export class DesplegarTutoresComponent implements OnInit {
 	}
 
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
   ngOnInit() {
   	//console.log(this.dataSource)
+
   	this.tutors = this.http.get('https://ipn-backend.herokuapp.com/tutors/list');
-  	this.tutorService.getAllTutors().subscribe((response) => {this.dataSource.data = response;
+  	this.tutorService.getAllTutors().map((list: any) => {
+      if(this.Usercampus !== 'PRN'){
+        return list.filter(value => {
+          if(value["campus"] == undefined) return true;
+          if(value["campus"] !== this.Usercampus) return false;
+          return true;
+        });
+      }
+      else return list;
+    }).subscribe((response) => {
+      this.dataSource.data = response;
+
+
   		console.log(this.dataSource.data);
   	});
   }
@@ -53,14 +78,23 @@ export class DesplegarTutoresComponent implements OnInit {
   }
 
   refresh() {
-  	this.tutorService.getAllTutors().subscribe((response) => {
+  	this.tutorService.getAllTutors().map((list: any) => {
+      if(this.Usercampus !== 'PRN'){
+        return list.filter(value => {
+          if(value["campus"] == undefined) return true;
+          if(value["campus"] !== this.Usercampus) return false;
+          return true;
+        });
+      }
+      else return list;
+    }).subscribe((response) => {
   		this.dataSource.data = response;
   		this.changeDetectorRefs.detectChanges();
   	})
   }
 
   toggleElegibilidad(tutor) {
-  	tutor.isElegible = !tutor.isElegible;
+  	tutor.cumplePromedio = !tutor.cumplePromedio;
     this.tutorService.editTutor(tutor).subscribe(
       (response) => {
         console.log(response);
@@ -69,13 +103,13 @@ export class DesplegarTutoresComponent implements OnInit {
       (error) => {
         console.log(error);
         console.log("No se pudo enviar forma.");
-        tutor.isElegible = !tutor.isElegible;
+        tutor.cumplePromedio = !tutor.cumplePromedio;
       });
 
   }
 
   toggleTutor(tutor) {
-  	tutor.isTutor = !tutor.isTutor;
+  	tutor.pasoCurso = !tutor.pasoCurso;
     this.tutorService.editTutor(tutor).subscribe(
       (response) => {
         console.log(response);
@@ -84,18 +118,27 @@ export class DesplegarTutoresComponent implements OnInit {
       (error) => {
         console.log(error);
         console.log("No se pudo enviar forma.");
-        tutor.isTutor = !tutor.isTutor;
+        tutor.pasoCurso = !tutor.pasoCurso;
       });
 
   }
-  
-    applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+
+  enviarCorreo(tipo) {
+    this.tutorService.sendMail({"type": tipo}).subscribe(
+      (response) => {
+        console.log(response);
+        console.log("Se envio el correo correctamente!");
+      },
+      (error) => {
+        console.log(error);
+        console.log("No se pudo comunicar con el servidor!");
+      })
   }
+
+
   
 
+  
 }
 
 export class TutorDataSource extends DataSource<any> {

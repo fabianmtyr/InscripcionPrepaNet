@@ -7,18 +7,18 @@
         <input type="text" class="form-control" id="matricula" disabled required [(ngModel)]="nTutor.matricula" name="matricula" #matricula="ngModel">
       </div>
       <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input type="text" class="form-control" id="nombre" required [(ngModel)]="nTutor.nombre.nombre" name="nombre" #nombre="ngModel">
+        <label for="name">Nombre</label>
+        <input type="text" class="form-control" id="first" required [(ngModel)]="nTutor.name.first" name="first" #first="ngModel">
       </div>
       <div class="form-group">
-        <label for="apellido">Apellidos</label>
-        <input type="text" class="form-control" id="apellido" required [(ngModel)]="nTutor.nombre.apellido" name="apellido" #apellido="ngModel">
+        <label for="last">Apellidos</label>
+        <input type="text" class="form-control" id="last" required [(ngModel)]="nTutor.name.last" name="last" #last="ngModel">
       </div>
       <div class="form-group">
-        <label for="correo">Correo</label>
-        <input type="text" class="form-control" id="correo" [(ngModel)]="nTutor.correo" name="correo" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #correo="ngModel">
-        <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="alert alert-danger">
-          <div *ngIf="correo.errors.pattern">
+        <label for="email">Correo Alterno</label>
+        <input type="text" class="form-control" id="email" [(ngModel)]="nTutor.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel">
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+          <div *ngIf="email.errors.pattern">
             El correo tiene que tener este formato: 'usuario@algo.com'
           </div>
         </div>
@@ -30,32 +30,29 @@
             {{c}}
           </option>
         </select>
-        <div *ngIf="(campus.touched && Usercampus != 'PRN' && this.Usercampus != campus.value)" class="alert alert-danger">
-          Tus permisos solo te dejan ver a los alumnos que esten registrados en el campus {{Usercampus}}, si cambias el campus de este alumno, no podras verlo en la tabla de tutores.
-        </div>
       </div>
       <div class="form-group">
-        <label for="semestre">Semestre</label>
-        <select class="form-control" id="semestre" required [(ngModel)]="nTutor.semestre" name="semestre" #semestre="ngModel">
+        <label for="semester">Semestre</label>
+        <select class="form-control" id="semester" required [(ngModel)]="nTutor.semester" name="semester" #semester="ngModel">
           <option *ngFor="let s of semesterss" [value]="s">
             {{s}}
           </option>
         </select>
       </div>
       <div class="form-group">
-        <label for="carrera">Carrera</label>
-        <input type="text" class="form-control" id="carrera" name="carrera" required [(ngModel)]="nTutor.carrera" pattern="^[A-Za-z]{3,4}" #carrera="ngModel">
-        <div *ngIf="carrera.invalid && carrera.touched" class="alert alert-danger">
-          <div *ngIf="carrera.errors.pattern">
+        <label for="major">Carrera</label>
+        <input type="text" class="form-control" id="major" name="major" required [(ngModel)]="nTutor.major" pattern="^[A-Za-z]{3,4}" #major="ngModel">
+        <div *ngIf="major.invalid && major.touched" class="alert alert-danger">
+          <div *ngIf="major.errors.pattern">
             Ingresa las iniciales de tu carrera.
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="promedio">Promedio Escolar</label>
-        <input type="number" class="form-control" id="promedio" required [(ngModel)]="nTutor.promedio" name="promedio" pattern="^(?:[1-9]\d?|100)$" #promedio="ngModel">
-        <div *ngIf="promedio.invalid &&  promedio.touched" class="alert alert-danger">
-          <div *ngIf="promedio.errors.pattern">
+        <label for="average">Promedio Escolar</label>
+        <input type="number" class="form-control" id="average" required [(ngModel)]="nTutor.average" name="average" pattern="^(?:[1-9]\d?|100)$" #average="ngModel">
+        <div *ngIf="average.invalid &&  average.touched" class="alert alert-danger">
+          <div *ngIf="average.errors.pattern">
             El promedio debe estar entre 0 y 100.
           </div>
         </div>

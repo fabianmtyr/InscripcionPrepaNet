@@ -14,23 +14,23 @@
         </div>
       </div>
     </div>
-    <fieldset formGroupName="nombre">
+    <fieldset formGroupName="name">
       <div class="form-group">
         <label class="center-block">Nombre:
-          <input class="form-control" formControlName="nombre">
+          <input class="form-control" formControlName="first">
         </label>
-        <div class="alert alert-danger" *ngIf="tutorForm.controls['nombre'].controls['nombre'].errors && tutorForm.controls['nombre'].controls['nombre'].touched">
-          <div *ngIf="tutorForm.controls['nombre'].controls['nombre'].errors?.required">
+        <div class="alert alert-danger" *ngIf="tutorForm.controls['name'].controls['first'].errors && tutorForm.controls['name'].controls['first'].touched">
+          <div *ngIf="tutorForm.controls['name'].controls['first'].errors?.required">
             Se necesita una nombre.
           </div>
         </div>
       </div>
       <div class="form-group">
         <label class="center-block">Apellido:
-          <input class="form-control" formControlName="apellido">
+          <input class="form-control" formControlName="last">
         </label>
-        <div class="alert alert-danger" *ngIf="tutorForm.controls['nombre'].controls['apellido'].errors && tutorForm.controls['nombre'].controls['apellido'].touched">
-          <div *ngIf="tutorForm.controls['nombre'].controls['apellido'].errors?.required">
+        <div class="alert alert-danger" *ngIf="tutorForm.controls['name'].controls['last'].errors && tutorForm.controls['name'].controls['last'].touched">
+          <div *ngIf="tutorForm.controls['name'].controls['last'].errors?.required">
             Se necesita una apellido.
           </div>
         </div>
@@ -38,13 +38,13 @@
     </fieldset>
     <div class="form-group">
       <label class="center-block">Correo:
-        <input class="form-control" formControlName="correo">
+        <input class="form-control" formControlName="email">
       </label>
-      <div class="alert alert-danger" *ngIf="tutorForm.controls['correo'].errors && tutorForm.controls['correo'].touched">
-        <div *ngIf="tutorForm.controls['correo'].errors?.required">
+      <div class="alert alert-danger" *ngIf="tutorForm.controls['email'].errors && tutorForm.controls['email'].touched">
+        <div *ngIf="tutorForm.controls['email'].errors?.required">
           Se necesita un correo.
         </div>
-        <div *ngIf="tutorForm.controls['correo'].errors?.pattern">
+        <div *ngIf="tutorForm.controls['email'].errors?.pattern">
           Formato incorrecto.
         </div>
       </div>

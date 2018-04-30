@@ -1,21 +1,20 @@
 export class Tutor {
     public id: number;
-    public nombre: Names;
+    public name: Names;
     public matricula: string;
-    public correo: string;
+    public email: string;
     public campus: string;
-    public promedio: number;
-    public calificacionCurso: number;
-    public cumplePromedio: boolean;
-    public pasoCurso: boolean;
-    public semestre: number;
-    public carrera: string;
-    //materias?
+    public average: number;
+    public courseGrade: number;
+    public isElegible: boolean;
+    public isTutor: boolean;
+    public semester: number;
+    public major: string;
 }
 
 export class Names {
-	public nombre: string;
-	public apellido: string;
+	public first: string;
+	public last: string;
 }
 
 /*

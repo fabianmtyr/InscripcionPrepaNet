@@ -5,9 +5,11 @@ import { Tutor } from 'app/models/tutor.model';
 import { TutorService } from 'app/services/tutor.service';
 import { Observable } from 'rxjs';
 import { BrowserModule } from '@angular/platform-browser';
+import { FiltroMaterias } from './filtroMaterias.pipe';
 
 @Component({
   selector: 'app-registro-tutor',
+  pipes: [FiltroMaterias],
   templateUrl: './registro-tutor.component.html',
   styleUrls: ['./registro-tutor.component.css']
 })
@@ -15,9 +17,13 @@ export class RegistroTutorComponent implements OnInit {
 
 
 	tutorForm: FormGroup;
-	//tutor: Tutor;
+  campuss:string[] = [
+    'AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL', 'PRN', 'PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
 
-	//tutor = new Tutor();
+  materiass:string[] = [' ', 'Matematicas', 'Fisica', 'Ingles', 'Historia', 'Biologia', 'Español', 'Algebra', 'Calculo', 'Programacion', 'Aleman', 'Frances']
+  private mat1: string = '';
+  private mat2: string = '';
+  private mat3: string = '';
 
   constructor(private tutorService: TutorService, private fb: FormBuilder, public dialog: MatDialog) {
   	this.createForm();
@@ -31,10 +37,16 @@ export class RegistroTutorComponent implements OnInit {
   			apellido: ['', Validators.required]
   		}),
   		correo: ['', [Validators.required, Validators.pattern("[^ @\n,;]+@[^ @\n,;]+[\.][^ @\n,;]+")]],
+      campus: ['', Validators.required],
+      materias: this.fb.group({
+        materia1: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+        materia2: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+        materia3: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+      }),
   	});
   }
 
-  //get diagnostic() { return JSON.stringify(this.tutor);}
+  get diagnostic() { return JSON.stringify(this.tutor);}
 
   ngOnInit() {
   	

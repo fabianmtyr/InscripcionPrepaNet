@@ -49,10 +49,76 @@
         </div>
       </div>
     </div>
+    <div class="form-group">
+      <label class="center-block">Campus:
+        <select class="form-control" formControlName="campus">
+          <option *ngFor="let c of campuss" [value]="c">
+            {{c}}
+          </option>
+        </select>
+      </label>
+      <div class="alert alert-danger" *ngIf="tutorForm.controls['campus'].errors && tutorForm.controls['campus'].touched">
+        <div *ngIf="tutorForm.controls['campus'].errors?.required">
+          Se necesita un campus.
+        </div>
+      </div>
+    </div>
+    <fieldset formGroupName="materias">
+      <div class="form-group">
+        <label class="center-block">Materia 1:
+          <select class="form-control" formControlName="materia1" [(ngModel)]="mat1">
+            <option *ngFor="let m of materiass | filtroMaterias: mat2 | filtroMaterias: mat3" [value]="m">
+              {{m}}
+            </option>
+          </select>
+        </label>
+        <div class="alert alert-danger" *ngIf="tutorForm.controls['materias'].controls['materia1'].errors && tutorForm.controls['materias'].controls['materia1'].touched">
+          <div *ngIf="tutorForm.controls['materias'].controls['materia1'].errors?.required">
+            Escoje una materia!
+          </div>
+          <div *ngIf="tutorForm.controls['materias'].controls['materia1'].errors?.pattern">
+            Escoje una materia!
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="center-block">Materia 2:
+          <select class="form-control" formControlName="materia2" [(ngModel)]="mat2">
+            <option *ngFor="let m of materiass | filtroMaterias: mat1 | filtroMaterias: mat3" [value]="m">
+              {{m}}
+            </option>
+          </select>
+        </label>
+        <div class="alert alert-danger" *ngIf="tutorForm.controls['materias'].controls['materia2'].errors && tutorForm.controls['materias'].controls['materia2'].touched">
+          <div *ngIf="tutorForm.controls['materias'].controls['materia2'].errors?.required">
+            Escoje una materia!
+          </div>
+          <div *ngIf="tutorForm.controls['materias'].controls['materia2'].errors?.pattern">
+            Escoje una materia!
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="center-block">Materia 3:
+          <select class="form-control" formControlName="materia3" [(ngModel)]="mat3">
+            <option *ngFor="let m of materiass | filtroMaterias: mat1 | filtroMaterias: mat2" [value]="m">
+              {{m}}
+            </option>
+          </select>
+        </label>
+        <div class="alert alert-danger" *ngIf="tutorForm.controls['materias'].controls['materia3'].errors && tutorForm.controls['materias'].controls['materia3'].touched">
+          <div *ngIf="tutorForm.controls['materias'].controls['materia3'].errors?.required">
+            Escoje una materia!
+          </div>
+          <div *ngIf="tutorForm.controls['materias'].controls['materia3'].errors?.pattern">
+            Escoje una materia!
+          </div>
+        </div>
+      </div>
+    </fieldset>
     <button type="submit" class="btn btn-success" [disabled]="!tutorForm.valid">Ingresar</button>
   </form>
 </div>
-
 <!-- Codigo de forma de registro con todos los componentes
   <div class="container">
   <h1>Registro de Tutores</h1>

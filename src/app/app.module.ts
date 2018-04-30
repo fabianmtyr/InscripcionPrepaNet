@@ -45,7 +45,8 @@ import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.comp
 import { TablegitComponent } from './dashboard/view-tutors/tablegit/tablegit.component';
 import { EditarTutoresComponent, WarningComponent } from './dashboard/desplegar-tutores/editar-tutores/editar-tutores.component';
 
-
+// Pipes
+import { FiltroMaterias } from './dashboard/registro-tutor/filtroMaterias.pipe';
 
 
 
@@ -126,6 +127,7 @@ const appRoutes:Routes = [
     WarningComponent,
     DesplegarTutoresComponent,
     EditarTutoresComponent,
+    FiltroMaterias
   ],
   imports: [
     BrowserModule,

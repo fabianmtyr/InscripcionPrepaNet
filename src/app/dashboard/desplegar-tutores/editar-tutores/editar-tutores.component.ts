@@ -20,7 +20,7 @@ export class EditarTutoresComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<EditarTutoresComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private tutorService: TutorService, public dialog: MatDialog, private userService: UserService) { }
 
   nTutor = new Tutor();
-  Usercampus = this.userService.getLocalStorageCampus();
+  Usercampus = this.userService.getLocalStorageCampus()
   @ViewChild('editTutorForm') form:  any;
 
   ngOnInit() {

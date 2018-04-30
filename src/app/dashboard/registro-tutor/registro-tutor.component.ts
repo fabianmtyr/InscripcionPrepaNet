@@ -20,13 +20,14 @@ export class RegistroTutorComponent implements OnInit {
   campuss:string[] = [
     'AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL', 'PRN', 'PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
 
-  materiass:string[] = [' ', 'Matematicas', 'Fisica', 'Ingles', 'Historia', 'Biologia', 'Español', 'Algebra', 'Calculo', 'Programacion', 'Aleman', 'Frances']
+  materiass:Observable<string> = [' ']
+  listaMaterias:Observable<any>;
   private mat1: string = '';
   private mat2: string = '';
   private mat3: string = '';
 
   constructor(private tutorService: TutorService, private fb: FormBuilder, public dialog: MatDialog) {
-  	this.createForm();
+  	//this.createForm();
   }
 
   createForm() {
@@ -49,7 +50,15 @@ export class RegistroTutorComponent implements OnInit {
   get diagnostic() { return JSON.stringify(this.tutor);}
 
   ngOnInit() {
-  	
+  	this.tutorService.getAllMaterias().subscribe((response) =>{
+      //this.listaMaterias = response;
+      //this.listaMaterias.forEach((item) => this.materiass.push(item.nombre))
+      response.forEach((item) => this.materiass.push(item.nombre));
+      console.log("materiass", this.materiass)
+      //console.log(this.listaMaterias)
+      this.createForm()
+    });
+    this.createForm()
   }
 
   openSuccess(message, title){

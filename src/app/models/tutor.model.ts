@@ -10,12 +10,18 @@ export class Tutor {
     public pasoCurso: boolean;
     public semestre: number;
     public carrera: string;
-    //materias?
+    public materias: Materias;
 }
 
 export class Names {
 	public nombre: string;
 	public apellido: string;
+}
+
+export class Materias {
+    public materia1: string;
+    public materia2: string;
+    public materia3: string;
 }
 
 /*

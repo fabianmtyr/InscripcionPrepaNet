@@ -70,7 +70,7 @@ export class DesplegarTutoresComponent implements OnInit {
   	let dialogRef = this.dialog.open(EditarTutoresComponent, {
   		data: tutor,
       height: 'auto',
-      width: 'auto',
+      width: '400px',
   		disableClose: true,
   	}).afterClosed().subscribe(result => {
   		this.refresh();
@@ -124,7 +124,7 @@ export class DesplegarTutoresComponent implements OnInit {
   }
 
   enviarCorreo(tipo) {
-    this.tutorService.sendMail({"type": tipo}).subscribe(
+    this.tutorService.sendMail({"type": tipo, "campus": this.Usercampus}).subscribe(
       (response) => {
         console.log(response);
         console.log("Se envio el correo correctamente!");

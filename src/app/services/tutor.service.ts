@@ -41,4 +41,8 @@ export class TutorService {
     return this.http.post(this.backend + '/tutors/sendMail', tipo)
   }
 
+  getAllMaterias():Observable<any> {
+    return this.http.get(this.backend + '/materias/list');
+  }
+
 }

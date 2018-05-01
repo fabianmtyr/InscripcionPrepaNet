@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MatDialogModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
+import { MatDialogModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCardModule, MatTabsModule } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -45,6 +45,7 @@ import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.comp
 import { TablegitComponent } from './dashboard/view-tutors/tablegit/tablegit.component';
 import { EditarTutoresComponent } from './dashboard/desplegar-tutores/editar-tutores/editar-tutores.component';
 import { AgregarMateriaComponent } from './dashboard/agregar-materia/agregar-materia.component';
+import { VerReportesComponent } from './dashboard/ver-reportes/ver-reportes.component';
 
 
 
@@ -102,6 +103,11 @@ const appRoutes:Routes = [
     component: RegistroTutorComponent
   },
   {
+    path: 'dashboard/reportes',
+    canActivate: [AuthguardGuard],
+    component: VerReportesComponent
+  },
+  {
     path: 'dashboard/lista-tutores',
     canActivate: [AuthguardGuard],
     component: DesplegarTutoresComponent
@@ -131,6 +137,7 @@ const appRoutes:Routes = [
     DesplegarTutoresComponent,
     EditarTutoresComponent,
     AgregarMateriaComponent,
+    VerReportesComponent,
   ],
   imports: [
     BrowserModule,
@@ -150,6 +157,7 @@ const appRoutes:Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
+    MatTabsModule,
     MatCardModule
     //PaginationModule.forRoot()
   ],

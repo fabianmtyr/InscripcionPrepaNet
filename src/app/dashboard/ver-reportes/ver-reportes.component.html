@@ -1,0 +1,70 @@
+<h2>Reportes<h2>
+<mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
+  <mat-tab label="Curso"></mat-tab>
+  <mat-tab label="Materias"></mat-tab>
+  <mat-tab label="Promedios"></mat-tab>
+</mat-tab-group>
+
+<!--
+		1. Reporte de quien paso curso: matricula, calificacionCurso (sorteada mayor a menor)
+		2. Reporte de materias: matricula, materias seleccionadas (solo de la gente que si paso el curso > 80)
+		3. Reporte de promedios: matricula, promedio (sorteados)
+-->    
+
+<div>
+	<mat-table #table [dataSource]="dataSource">
+		<ng-container matColumnDef="matricula">
+			<mat-header-cell *matHeaderCellDef>Matricula/Nomina</mat-header-cell>
+			<mat-cell *matCellDef="let tutor" (click)="onEdit(tutor)"><a>{{tutor.matricula}}</a></mat-cell>
+		</ng-container>
+		<!--ng-container matColumnDef="campus">
+			<mat-header-cell *matHeaderCellDef>Campus</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.campus}}</mat-cell>
+		</ng-container>				
+		<ng-container matColumnDef="name">
+			<mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.name.first}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="lastname">
+			<mat-header-cell *matHeaderCellDef>Apellido</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.name.last}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="email">
+			<mat-header-cell *matHeaderCellDef>Correo Alterno</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.email}}</mat-cell>
+		</ng-container-->
+		<ng-container matColumnDef="promedio">
+			<mat-header-cell *matHeaderCellDef>Calificacion</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.promedio}}</mat-cell>
+		</ng-container>
+		<!--ng-container matColumnDef="isElegible">
+			<mat-header-cell *matHeaderCellDef>Elegible al Curso</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">
+				<button class="btn" [ngClass]="{'btn-success': tutor.isElegible, 'btn-danger': !tutor.isElegible }" (click)="toggleElegibilidad(tutor)">{{tutor.isElegible == true ? 'Si' : (tutor.isElegible == false ? 'No' : '')}}</button>
+			</mat-cell>
+		</ng-container-->
+		<ng-container matColumnDef="courseGrade">
+			<mat-header-cell *matHeaderCellDef>Calificacion Del Curso</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.calificacionCurso | number:'1.2-2'}}</mat-cell>
+		</ng-container>
+                <ng-container matColumnDef="materias">
+			<mat-header-cell *matHeaderCellDef>Materias</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.materias}}</mat-cell>
+		</ng-container>
+                
+                
+		<!--ng-container matColumnDef="isTutor">
+			<mat-header-cell *matHeaderCellDef>Elegible a ser Tutor</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">
+				<button class="btn" [ngClass]="{'btn-success': tutor.isTutor, 'btn-danger': !tutor.isTutor }" (click)="toggleTutor(tutor)">{{tutor.isTutor == true ? 'Si' : (tutor.isTutor == false ? 'No' : '')}}</button>
+			</mat-cell>
+		</ng-container-->
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row, columns: displayedColumns;"></mat-row>
+	</mat-table>
+	  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 15, 20, 25, 50, 75, 100]"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>

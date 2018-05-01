@@ -102,12 +102,11 @@ const appRoutes:Routes = [
   },
   {
     path: 'dashboard/registro-tutor',
-    canActivate: [AuthguardGuard],
+    canActivate: []AuthguardGuard,
     component: RegistroTutorComponent
   },
   {
     path: 'dashboard/reportes',
-    canActivate: [AuthguardGuard],
     component: VerReportesComponent
   },
   {

@@ -90,7 +90,6 @@ const appRoutes:Routes = [
   },
   {
     path: 'dashboard/registro-tutor',
-    canActivate: []AuthguardGuard,
     component: RegistroTutorComponent
   },
   {

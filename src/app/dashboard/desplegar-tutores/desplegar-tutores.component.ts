@@ -8,6 +8,7 @@ import { MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Tutor } from '../../models/tutor.model';
 import { TutorService } from '../../services/tutor.service';
+import { ExcelServiceService } from '../../services/excel-service.service';
 import { DataSource } from '@angular/cdk/collections';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -19,11 +20,16 @@ import { EditarTutoresComponent } from './editar-tutores/editar-tutores.componen
   styleUrls: ['./desplegar-tutores.component.css']
 })
 export class DesplegarTutoresComponent implements OnInit {
+    
+      private rows: Array<any> = []
+      public length:number = 0;
+    
 
 	tutors:Observable<any> = this.http.get('https://ipn-backend.herokuapp.com/tutors/new');
 	dataSource = new MatTableDataSource([]);
 	displayedColumns = ['matricula', 'campus', 'name', 'lastname', 'email', 'average', 'isElegible', 'courseGrade', 'isTutor' ];
-	constructor(private tutorService: TutorService, private http: HttpClient, public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) { 
+	constructor(private tutorService: TutorService, private http: HttpClient, public dialog: MatDialog, 
+            private changeDetectorRefs: ChangeDetectorRef, public svs: ExcelServiceService,) { 
 	}
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
@@ -36,8 +42,11 @@ export class DesplegarTutoresComponent implements OnInit {
   ngOnInit() {
   	//console.log(this.dataSource)
   	this.tutors = this.http.get('https://ipn-backend.herokuapp.com/tutors/list');
-  	this.tutorService.getAllTutors().subscribe((response) => {this.dataSource.data = response;
+  	this.tutorService.getAllTutors().subscribe((response) => {
+                this.dataSource.data = response;
   		console.log(this.dataSource.data);
+                this.rows = response
+                this.length = this.rows.length
   	});
   }
 
@@ -93,6 +102,45 @@ export class DesplegarTutoresComponent implements OnInit {
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
+  
+    public downloadExcel(){
+    //this.svs.exportAsExcelFile(this.rows,"tutores")
+      console.log(this.rows)
+      let flat = {};
+      var pth=''
+      let x = this.dataSource.data.map((dt) => {
+      //let x =this.rows.map((dt) => {
+          delete dt['_id']
+    return this.flatten(dt);
+    
+    });
+      console.log(x)
+      this.svs.specialExport(x,"tutores")      
+  }
+  
+   flatten (data) {
+   var result = {};
+    function recurse (cur, prop) {
+        if (Object(cur) !== cur) {
+            result[prop] = cur;
+        } else if (Array.isArray(cur)) {
+             for(var i=0, l=cur.length; i<l; i++)
+                 recurse(cur[i], prop + "[" + i + "]");
+            if (l == 0)
+                result[prop] = [];
+        } else {
+            var isEmpty = true;
+            for (var p in cur) {
+                isEmpty = false;
+                recurse(cur[p], prop ? prop+"."+p : p);
+            }
+            if (isEmpty && prop)
+                result[prop] = {};
+        }
+    }
+    recurse(data, "");
+    return result;
+    };
   
 
 }

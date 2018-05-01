@@ -44,6 +44,7 @@ import { EqualValidator } from './dashboard/registro-admins/passwordMatch.direct
 import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.component';
 import { TablegitComponent } from './dashboard/view-tutors/tablegit/tablegit.component';
 import { EditarTutoresComponent } from './dashboard/desplegar-tutores/editar-tutores/editar-tutores.component';
+import { AgregarMateriaComponent } from './dashboard/agregar-materia/agregar-materia.component';
 
 
 
@@ -86,6 +87,12 @@ const appRoutes:Routes = [
     component: FijarPlazasComponent
   },
   {
+
+    path: 'dashboard/materias',
+    canActivate: [AuthguardGuard],
+    component: AgregarMateriaComponent
+  },
+  {
     path: 'dashboard/tutors',
     component:ViewTutorsComponent
   },
@@ -123,6 +130,7 @@ const appRoutes:Routes = [
     RegistroTutorComponent,
     DesplegarTutoresComponent,
     EditarTutoresComponent,
+    AgregarMateriaComponent,
   ],
   imports: [
     BrowserModule,

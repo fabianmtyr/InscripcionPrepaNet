@@ -26,11 +26,11 @@ export class RegistroTutorComponent implements OnInit {
   createForm() {
   	this.tutorForm = this.fb.group({
   		matricula: ['', [Validators.required, Validators.pattern("^[A|a][0-9]{8}")]],
-  		name: this.fb.group({
-  			first: ['', Validators.required],
-  			last: ['', Validators.required]
+  		nombre: this.fb.group({
+  			nombre: ['', Validators.required],
+  			apellido: ['', Validators.required]
   		}),
-  		email: ['', [Validators.required, Validators.pattern("[^ @\n,;]+@[^ @\n,;]+[\.][^ @\n,;]+")]],
+  		correo: ['', [Validators.required, Validators.pattern("[^ @\n,;]+@[^ @\n,;]+[\.][^ @\n,;]+")]],
   	});
   }
 

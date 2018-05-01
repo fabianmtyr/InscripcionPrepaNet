@@ -47,7 +47,8 @@ import { TablegitComponent } from './dashboard/view-tutors/tablegit/tablegit.com
 import { AgregarMateriaComponent } from './dashboard/agregar-materia/agregar-materia.component';
 import { EditarTutoresComponent, WarningComponent } from './dashboard/desplegar-tutores/editar-tutores/editar-tutores.component';
 
-
+// Pipes
+import { FiltroMaterias } from './dashboard/registro-tutor/filtroMaterias.pipe';
 
 
 
@@ -135,6 +136,7 @@ const appRoutes:Routes = [
     DesplegarTutoresComponent,
     EditarTutoresComponent,
     AgregarMateriaComponent,
+    FiltroMaterias
   ],
   imports: [
     BrowserModule,

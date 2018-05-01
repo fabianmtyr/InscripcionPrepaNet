@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class TutorService {
   private backend = "https://ipn-backend.herokuapp.com";
+  private _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
   constructor(private http: HttpClient) { 
 
@@ -28,7 +29,7 @@ export class TutorService {
   }
 
   editTutor(tutor: Tutor) {
-    return this.http.post(this.backend + '/tutors/edit', tutor);
+    return this.http.post(this.backend + '/tutors/edit', tutor, this._options);
   }
 
   removeTutor(matricula: string){
@@ -38,7 +39,11 @@ export class TutorService {
   }
 
   sendMail(tipo){
-    return this.http.post(this.backend + '/tutors/sendMail', tipo)
+    return this.http.post(this.backend + '/tutors/sendMail', tipo, this._options)
+  }
+
+  getAllMaterias():Observable<any> {
+    return this.http.get(this.backend + '/materias/list');
   }
 
 }

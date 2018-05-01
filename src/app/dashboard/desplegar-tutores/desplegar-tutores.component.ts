@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { MatPaginator } from '@angular/material';
 import { MatSort } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
@@ -14,6 +15,8 @@ import { DataSource } from '@angular/cdk/collections';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EditarTutoresComponent } from './editar-tutores/editar-tutores.component';
+import { SuccessComponent } from '../registro-tutor/registro-tutor.component';
+
 
 @Component({
   selector: 'app-desplegar-tutores',
@@ -29,10 +32,15 @@ export class DesplegarTutoresComponent implements OnInit {
 	tutors:Observable<any> = this.http.get('https://ipn-backend.herokuapp.com/tutors/new');
 
 	dataSource = new MatTableDataSource([]);
+  campuss:string[] = [
+    'PRN','AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL', 'PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
+  mailForm : FormGroup;
+  llegoRespuesta = true;
 
-	displayedColumns = ['matricula', 'campus', 'carrera', 'semestre', 'nombre', 'apellido', 'correo', 'promedio', 'cumplePromedio', 'calificacionCurso', 'pasoCurso' ];
+	displayedColumns = ['matricula', 'campus', 'carrera', 'semestre', 'nombre', 'apellido', 'correo', 'periodo', 'promedio', 'cumplePromedio', 'calificacionCurso', 'pasoCurso' ];
 
-	constructor(private tutorService: TutorService, private http: HttpClient, public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef, private userService: UserService,public svs: ExcelServiceService) { 
+	constructor(private tutorService: TutorService, private http: HttpClient, public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef, private userService: UserService, private fb: FormBuilder,public svs: ExcelServiceService) { 
+    this.createForm()
 	}
 
   Usercampus = this.userService.getLocalStorageCampus()
@@ -42,6 +50,11 @@ export class DesplegarTutoresComponent implements OnInit {
 		this.dataSource.paginator = this.paginator;
 	}
 
+  createForm(){
+    this.mailForm = this.fb.group({
+      campusSeleccionado: ['', Validators.required]
+    });
+  }
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -64,7 +77,6 @@ export class DesplegarTutoresComponent implements OnInit {
       else return list;
     }).subscribe((response) => {
       this.dataSource.data = response;
-
   		console.log(this.dataSource.data);
                 this.rows = response
                 this.length = this.rows.length
@@ -75,7 +87,7 @@ export class DesplegarTutoresComponent implements OnInit {
   	let dialogRef = this.dialog.open(EditarTutoresComponent, {
   		data: tutor,
       height: 'auto',
-      width: 'auto',
+      width: '400px',
   		disableClose: true,
   	}).afterClosed().subscribe(result => {
   		this.refresh();
@@ -128,19 +140,30 @@ export class DesplegarTutoresComponent implements OnInit {
 
   }
 
-  enviarCorreo(tipo) {
-    this.tutorService.sendMail({"type": tipo}).subscribe(
+  openSuccess(message, title){
+    let dialogRef = this.dialog.open(SuccessComponent, {
+      data: {m: message, t: title},
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.llegoRespuesta = true;
+    });
+  }
+
+  enviarCorreo(tipo, campus) {
+    this.tutorService.sendMail({"type": tipo, "campus": campus}).subscribe(
       (response) => {
         console.log(response);
         console.log("Se envio el correo correctamente!");
+        this.openSuccess(response, "Hola");
       },
       (error) => {
         console.log(error);
         console.log("No se pudo comunicar con el servidor!");
+        this.openSuccess("No se pudo enviar el correo!", "Error!")
       })
   }
-
-
   
     public downloadExcel(){
     //this.svs.exportAsExcelFile(this.rows,"tutores")
@@ -182,6 +205,20 @@ export class DesplegarTutoresComponent implements OnInit {
     };
   
 
+  correoPRN(tipo) {
+    this.llegoRespuesta = false;
+    this.tutorService.sendMail({"type": tipo, "campus": this.mailForm.value.campusSeleccionado}).subscribe(
+      (response) => {
+        console.log(response);
+        console.log("Se envio el correo correctamente!");
+        this.openSuccess(response['message'], "Hola");
+      },
+      (error) => {
+        console.log(error);
+        console.log("No se pudo comunicar con el servidor!");
+        this.openSuccess(this.mailForm.value.campusSeleccionado, "Error, no se pudo enviar un correo a los alumnos del campus:");
+      })
+  }
   
 }
 

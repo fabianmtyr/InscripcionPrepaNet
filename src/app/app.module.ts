@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MatDialogModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
+import { MatDialogModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatTabsModule  } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -45,6 +45,7 @@ import { EqualValidator } from './dashboard/registro-admins/passwordMatch.direct
 
 import { TablegitComponent } from './dashboard/view-tutors/tablegit/tablegit.component';
 import { AgregarMateriaComponent } from './dashboard/agregar-materia/agregar-materia.component';
+import { VerReportesComponent } from './dashboard/ver-reportes/ver-reportes.component';
 import { EditarTutoresComponent, WarningComponent } from './dashboard/desplegar-tutores/editar-tutores/editar-tutores.component';
 
 // Pipes
@@ -105,6 +106,11 @@ const appRoutes:Routes = [
     component: RegistroTutorComponent
   },
   {
+    path: 'dashboard/reportes',
+    canActivate: [AuthguardGuard],
+    component: VerReportesComponent
+  },
+  {
     path: 'dashboard/lista-tutores',
     canActivate: [AuthguardGuard],
     component: DesplegarTutoresComponent
@@ -136,6 +142,7 @@ const appRoutes:Routes = [
     DesplegarTutoresComponent,
     EditarTutoresComponent,
     AgregarMateriaComponent,
+    VerReportesComponent,
     FiltroMaterias
   ],
   imports: [
@@ -156,6 +163,7 @@ const appRoutes:Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
+    MatTabsModule,
     MatCardModule,
     MatButtonModule
     //PaginationModule.forRoot()

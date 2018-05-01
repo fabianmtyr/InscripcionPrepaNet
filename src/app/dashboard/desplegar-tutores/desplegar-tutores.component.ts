@@ -14,6 +14,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EditarTutoresComponent } from './editar-tutores/editar-tutores.component';
+import { SuccessComponent } from '../registro-tutor/registro-tutor.component';
 
 @Component({
   selector: 'app-desplegar-tutores',
@@ -132,15 +133,24 @@ export class DesplegarTutoresComponent implements OnInit {
 
   }
 
+  openSuccess(message, title){
+    let dialogRef = this.dialog.open(SuccessComponent, {
+      data: {m: message, t: title},
+      disableClose: true,
+    });
+  }
+
   enviarCorreo(tipo, campus) {
     this.tutorService.sendMail({"type": tipo, "campus": campus}).subscribe(
       (response) => {
         console.log(response);
         console.log("Se envio el correo correctamente!");
+        this.openSuccess("Se envio un correo a los alumnos de tu campus!", "Exito!");
       },
       (error) => {
         console.log(error);
         console.log("No se pudo comunicar con el servidor!");
+        this.openSuccess("No se pudo enviar el correo!", "Error!")
       })
   }
 
@@ -149,10 +159,12 @@ export class DesplegarTutoresComponent implements OnInit {
       (response) => {
         console.log(response);
         console.log("Se envio el correo correctamente!");
+        this.openSuccess(this.mailForm.value.campusSeleccionado, "Se envio exitosamante un correo a alumnos del siguiente campus:")
       },
       (error) => {
         console.log(error);
         console.log("No se pudo comunicar con el servidor!");
+        this.openSuccess(this.mailForm.value.campusSeleccionado, "Error, no se pudo enviar un correo a los alumnos del campus:")
       })
   }
   

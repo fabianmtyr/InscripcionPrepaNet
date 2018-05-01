@@ -1,8 +1,8 @@
 import { Component, OnInit, NgModule, Inject } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Tutor } from 'app/models/tutor.model';
-import { TutorService } from 'app/services/tutor.service';
+import { Tutor } from '../../models/tutor.model';
+import { TutorService } from '../../services/tutor.service';
 import { Observable } from 'rxjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { FiltroMaterias } from './filtroMaterias.pipe';
@@ -39,9 +39,12 @@ export class RegistroTutorComponent implements OnInit {
   		correo: ['', [Validators.required, Validators.pattern("[^ @\n,;]+@[^ @\n,;]+[\.][^ @\n,;]+")]],
       campus: ['', Validators.required],
       materias: this.fb.group({
-        materia1: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
-        materia2: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
-        materia3: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+        // materia1: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+        // materia2: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+        // materia3: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+        materia1: [''],
+        materia2: [''],
+        materia3: [''],
       }),
   	});
   }

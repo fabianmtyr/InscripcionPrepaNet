@@ -3,8 +3,9 @@
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
   </div-->
-<div>
-      <form [formGroup]="materiaForm" (ngSubmit)="agregarMateria()">
+<div class="container">
+    <h3>Materias</h3>
+      <form *ngIf="Usercampus=='PRN'" [formGroup]="materiaForm" (ngSubmit)="agregarMateria()">
     <div class="form-group">
       <label for="clave">Clave</label>
       <input type="text" class="form-control" required formControlName="clave">
@@ -37,7 +38,7 @@
 </div>
 
 
-<div>
+<div class="container">
 	<mat-table #table [dataSource]="dataSource">
 		<ng-container matColumnDef="clave">
 			<mat-header-cell *matHeaderCellDef>Clave</mat-header-cell>
@@ -49,7 +50,7 @@
 		</ng-container>
 		<ng-container matColumnDef="tetramestre">
 			<mat-header-cell *matHeaderCellDef>Tetramestre</mat-header-cell>
-			<mat-cell *matCellDef="let materia">{{materia.tetramestre}}</mat-cell>
+			<mat-cell *matCellDef="let materia">{{materia.periodo}}</mat-cell>
 		</ng-container>
 		<!--ng-container matColumnDef="isElegible">
 			<mat-header-cell *matHeaderCellDef>Elegible al Curso</mat-header-cell>

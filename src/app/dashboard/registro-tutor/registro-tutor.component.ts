@@ -46,7 +46,7 @@ export class RegistroTutorComponent implements OnInit {
   	});
   }
 
-  get diagnostic() { return JSON.stringify(this.tutorForm);}
+  //get diagnostic() { return JSON.stringify(this.tutorForm);}
 
   ngOnInit() {
   	this.tutorService.getAllMaterias().subscribe((response) =>{

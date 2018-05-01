@@ -46,4 +46,8 @@ export class TutorService {
     return this.http.get(this.backend + '/materias/list');
   }
 
+  generaBB(){
+    return this.http.get(this.backend + '/tutors/updateBb');
+  }
+
 }

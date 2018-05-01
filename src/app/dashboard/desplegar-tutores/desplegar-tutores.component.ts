@@ -37,7 +37,7 @@ export class DesplegarTutoresComponent implements OnInit {
   mailForm : FormGroup;
   llegoRespuesta = true;
 
-	displayedColumns = ['matricula', 'campus', 'carrera', 'semestre', 'nombre', 'apellido', 'correo', 'periodo', 'promedio', 'cumplePromedio', 'calificacionCurso', 'pasoCurso' ];
+	displayedColumns = ['matricula', 'campus', 'carrera', 'semestre', 'nombre', 'apellido', 'correo', 'periodo', 'promedio', 'cumplePromedio', 'calificacionCurso', 'esTutor' ];
 
 	constructor(private tutorService: TutorService, private http: HttpClient, public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef, private userService: UserService, private fb: FormBuilder,public svs: ExcelServiceService) { 
     this.createForm()
@@ -218,6 +218,16 @@ export class DesplegarTutoresComponent implements OnInit {
         console.log("No se pudo comunicar con el servidor!");
         this.openSuccess(this.mailForm.value.campusSeleccionado, "Error, no se pudo enviar un correo a los alumnos del campus:");
       })
+  }
+
+  updateBB(){
+    this.tutorService.generaBB().subscribe((response) => {
+      console.log(response)
+      this.refresh()
+    },
+    (error) => {
+      console.log(error);
+    })
   }
   
 }

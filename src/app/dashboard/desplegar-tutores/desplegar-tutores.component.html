@@ -33,6 +33,10 @@
       <mat-header-cell *matHeaderCellDef style="text-align: center">Correo Alterno</mat-header-cell>
       <mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.correo}}</mat-cell>
     </ng-container>
+    <ng-container matColumnDef="materias">
+      <mat-header-cell *matHeaderCellDef style="text-align: center">Materias</mat-header-cell>
+      <mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.materias[0]['materia1']}},<br> {{tutor.materias[0]['materia2']}},<br> {{tutor.materias[0]['materia3']}}</mat-cell>
+    </ng-container>
     <ng-container matColumnDef="periodo">
       <mat-header-cell *matHeaderCellDef style="text-align: center">Periodo</mat-header-cell>
       <mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.periodo}}</mat-cell>

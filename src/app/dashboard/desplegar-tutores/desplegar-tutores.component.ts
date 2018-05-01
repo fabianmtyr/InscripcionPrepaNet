@@ -37,7 +37,7 @@ export class DesplegarTutoresComponent implements OnInit {
   mailForm : FormGroup;
   llegoRespuesta = true;
 
-	displayedColumns = ['matricula', 'campus', 'carrera', 'semestre', 'nombre', 'apellido', 'correo', 'periodo', 'promedio', 'cumplePromedio', 'calificacionCurso', 'esTutor' ];
+	displayedColumns = ['matricula', 'campus', 'carrera', 'semestre', 'nombre', 'apellido', 'correo', 'materias', 'periodo', 'promedio', 'cumplePromedio', 'calificacionCurso', 'esTutor' ];
 
 	constructor(private tutorService: TutorService, private http: HttpClient, public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef, private userService: UserService, private fb: FormBuilder,public svs: ExcelServiceService) { 
     this.createForm()
@@ -212,7 +212,7 @@ export class DesplegarTutoresComponent implements OnInit {
       (response) => {
         console.log(response);
         console.log("Se envio el correo correctamente!");
-        this.openSuccess(response['message'], "Hola");
+        this.openSuccess(response['message'], "Correo");
       },
       (error) => {
         console.log(error);

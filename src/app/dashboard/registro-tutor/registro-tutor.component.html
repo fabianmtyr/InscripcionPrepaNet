@@ -2,7 +2,7 @@
   <h1>Registro de Tutores</h1>
   <form [formGroup]="tutorForm" (ngSubmit)="addTutor()">
     <div class="form-group">
-      <label class="center-block">Matricula:
+      <label class="center-block">Matricula/Nomina:
         <input class="form-control" formControlName="matricula">
       </label>
       <div class="alert alert-danger" *ngIf="tutorForm.controls['matricula'].errors && tutorForm.controls['matricula'].touched">

@@ -51,10 +51,10 @@
       <mat-header-cell *matHeaderCellDef>Calificacion Del Curso</mat-header-cell>
       <mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.calificacionCurso}}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="pasoCurso">
+    <ng-container matColumnDef="esTutor">
       <mat-header-cell *matHeaderCellDef>Elegible a ser Tutor</mat-header-cell>
-      <mat-cell *matCellDef="let tutor">
-        <button class="btn" [ngClass]="{'btn-success': tutor.pasoCurso, 'btn-danger': !tutor.pasoCurso }" (click)="toggleTutor(tutor)">{{tutor.pasoCurso == true ? 'Si' : (tutor.pasoCurso == false ? 'No' : '')}}</button>
+      <mat-cell *matCellDef="let tutor" >
+        <button class="btn" [ngClass]="{'btn-success': tutor.esTutor, 'btn-danger': !tutor.esTutor }" (click)="toggleTutor(tutor)">{{tutor.esTutor == true ? 'Si' : (tutor.esTutor == false ? 'No' : '')}}</button>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -82,11 +82,12 @@
             </option>
           </select>
         </label>
-        <button class="btn btn-primary" [disabled]="!mailForm.valid && llegoRespuesta === true" (click)="correoPRN('curso')">Enviar Convocatoria
+        <button class="btn btn-primary" [disabled]="!mailForm.valid && llegoRespuesta === true" (click)="correoPRN('curso')">Enviar correo Curso
         </button>
         <button class="btn btn-primary" [disabled]="!mailForm.valid && llegoRespuesta" (click)="correoPRN('inscripcion')">
           Enviar Correo de aceptacion
         </button>
+        <button class="pull-right btn btn-primary" (click)="updateBB()">Genera Blackboard</button>
       </form>
     </div>
   </div>

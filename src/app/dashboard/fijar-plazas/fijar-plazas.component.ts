@@ -19,7 +19,7 @@ import {MatButtonModule} from '@angular/material/button';
 export class FijarPlazasComponent {
   
   plazas:Observable<any> = this.http.get('https://ipn-backend.herokuapp.com/plazas/edit');
-  constructor(private plazaService: PlazaService, private userService: UserService, private http: HttpClient, public dialog: MatDialog) { }
+  constructor(public plazaService: PlazaService, public userService: UserService, public http: HttpClient, public dialog: MatDialog) { }
 
 
 
@@ -30,7 +30,7 @@ export class FijarPlazasComponent {
 
   isPRN = true;
 
-   plaza = new Plaza('PRN', 0, 0, 0);
+  plaza = new Plaza('PRN', 0, 0, 0);
 
   
    

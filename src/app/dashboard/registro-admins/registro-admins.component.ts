@@ -16,7 +16,7 @@ import { SuccessComponent } from '../registro-tutor/registro-tutor.component';
 })
 export class RegistroAdminsComponent implements OnInit {
 
-      campuss:string[] = [
+    campuss:string[] = [
     'AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL','PRN','PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
 
   model = new User();
@@ -26,7 +26,7 @@ export class RegistroAdminsComponent implements OnInit {
   fname: string;
   lname: string;
 
-  constructor(private userService: UserService, public dialog: MatDialog) { }
+  constructor(public userService: UserService, public dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -78,7 +78,7 @@ export class RegistroAdminsComponent implements OnInit {
   public confirmClicked: boolean = false;
 
 
-  constructor(private userService: UserService) { }
+  constructor(public userService: UserService) { }
 
   ngOnInit() {
     this.user = new User();

@@ -39,9 +39,12 @@ export class RegistroTutorComponent implements OnInit {
   		correo: ['', [Validators.required, Validators.pattern("[^ @\n,;]+@[^ @\n,;]+[\.][^ @\n,;]+")]],
       campus: ['', Validators.required],
       materias: this.fb.group({
-        materia1: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
-        materia2: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
-        materia3: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+        // materia1: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+        // materia2: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+        // materia3: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+        materia1: [''],
+        materia2: [''],
+        materia3: [''],
       }),
   	});
   }

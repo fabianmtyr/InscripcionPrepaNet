@@ -1,7 +1,7 @@
 import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { User } from 'app/models/user.model';
-import { UserService } from 'app/services/user.service';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';

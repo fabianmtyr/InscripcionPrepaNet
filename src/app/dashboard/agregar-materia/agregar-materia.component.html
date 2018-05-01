@@ -1,0 +1,88 @@
+  <!--div class="header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div-->
+<div>
+      <form (ngSubmit)="agregarMateria()" #agregaMateriaForm="ngForm">
+    <div class="form-group">
+      <label for="clave">Clave</label>
+      <input type="text" class="form-control" id="clave" disabled required [(ngModel)]="nMateria.clave" name="clave" #clave="ngModel">
+    </div>
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" class="form-control" id="nombre" required [(ngModel)]="nMateria.nombre" name="nombre" #nombre="ngModel">
+    </div>
+    <div class="form-group">
+      <label for="tetramestre">Tetramestre</label>
+      <select name="carlist" form="carform">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+      </select>
+      
+      <!--input type="text" class="form-control" id="last" required [(ngModel)]="nTutor.name.last" name="last" #last="ngModel"-->
+    </div>
+          
+          
+    </form>
+    
+    
+    
+     <!--button class="btn" (click)="downloadExcel()">Excel</button>
+    <button (click)="assignTutors()">Asignar</button-->
+</div>
+
+
+<div>
+	<mat-table #table [dataSource]="dataSource">
+		<ng-container matColumnDef="clave">
+			<mat-header-cell *matHeaderCellDef>Clave</mat-header-cell>
+			<mat-cell *matCellDef="let materia" (click)="onEdit(materia)"><a>{{materia.clave}}</a></mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="nombremateria">
+			<mat-header-cell *matHeaderCellDef>Campus</mat-header-cell>
+			<mat-cell *matCellDef="let materia">{{materia.nombre}}</mat-cell>
+		</ng-container>				
+		<ng-container matColumnDef="semestre">
+			<mat-header-cell *matHeaderCellDef>Semestre</mat-header-cell>
+			<mat-cell *matCellDef="let materia">{{materia.semestre}}</mat-cell>
+		</ng-container>
+		<!--ng-container matColumnDef="lastname">
+			<mat-header-cell *matHeaderCellDef>Apellido</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.name.last}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="email">
+			<mat-header-cell *matHeaderCellDef>Correo Alterno</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.email}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="average">
+			<mat-header-cell *matHeaderCellDef>Calificacion</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.average}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="isElegible">
+			<mat-header-cell *matHeaderCellDef>Elegible al Curso</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">
+				<button class="btn" [ngClass]="{'btn-success': tutor.isElegible, 'btn-danger': !tutor.isElegible }" (click)="toggleElegibilidad(tutor)">{{tutor.isElegible == true ? 'Si' : (tutor.isElegible == false ? 'No' : '')}}</button>
+			</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="courseGrade">
+			<mat-header-cell *matHeaderCellDef>Calificacion Del Curso</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.courseGrade}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef="isTutor">
+			<mat-header-cell *matHeaderCellDef>Elegible a ser Tutor</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">
+				<button class="btn" [ngClass]="{'btn-success': tutor.isTutor, 'btn-danger': !tutor.isTutor }" (click)="toggleTutor(tutor)">{{tutor.isTutor == true ? 'Si' : (tutor.isTutor == false ? 'No' : '')}}</button>
+			</mat-cell>
+		</ng-container-->
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row, columns: displayedColumns;"></mat-row>
+	</mat-table>
+	  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 15]"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>

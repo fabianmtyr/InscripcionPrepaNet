@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../services/user.service';
+import { User } from '../models/user.model';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+	isLoggedIn$: Observable<boolean>;
+  info = {'name': '', 'email': '', 'campus':''}
+	userEmail: string;
+  userName: string;
+  userCampus: string;
+
+
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.isLoggedIn$ = this.userService.isLoggedIn;
+
+  }
+
+  logoutUser() {
+  	this.userService.setUserLoggedOut();
   }
 
 }

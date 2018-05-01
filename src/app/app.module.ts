@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MatDialogModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
+import { MatDialogModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -23,9 +23,10 @@ import { RegistroAdminsComponent } from './dashboard/registro-admins/registro-ad
 import { RegistroComponent } from './dashboard/registro/registro.component';
 import { DescargaInteresadosComponent } from './dashboard/descarga-interesados/descarga-interesados.component';
 import { ViewTutorsComponent } from './dashboard/view-tutors/view-tutors.component';
-import { EditTutorComponent } from './dashboard/view-tutors/edit-tutor/edit-tutor.component';
-import { RegistroTutorComponent } from './dashboard/registro-tutor/registro-tutor.component';
+import { EditTutorComponent} from './dashboard/view-tutors/edit-tutor/edit-tutor.component';
+import { RegistroTutorComponent, SuccessComponent } from './dashboard/registro-tutor/registro-tutor.component';
 import { DesplegarTutoresComponent } from './dashboard/desplegar-tutores/desplegar-tutores.component';
+import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.component';
 
 // Servicios
 import { UserService } from './services/user.service';
@@ -36,15 +37,15 @@ import { ExcelServiceService } from './services/excel-service.service';
 
 
 //Guardias
-import { AuthguardGuard } from './guards/authguard.guard';
+import { AuthguardGuard, LoginGuard } from './guards/authguard.guard';
 
 // Directivos
 import { EqualValidator } from './dashboard/registro-admins/passwordMatch.directive';
 
-import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.component';
+
 import { TablegitComponent } from './dashboard/view-tutors/tablegit/tablegit.component';
-import { EditarTutoresComponent } from './dashboard/desplegar-tutores/editar-tutores/editar-tutores.component';
 import { AgregarMateriaComponent } from './dashboard/agregar-materia/agregar-materia.component';
+import { EditarTutoresComponent, WarningComponent } from './dashboard/desplegar-tutores/editar-tutores/editar-tutores.component';
 
 
 
@@ -59,6 +60,7 @@ const appRoutes:Routes = [
   },
   {
     path: 'login',
+    canActivate: [LoginGuard],
     component: LoginComponent
   },
     {
@@ -128,6 +130,8 @@ const appRoutes:Routes = [
     EditTutorComponent,
     TablegitComponent,
     RegistroTutorComponent,
+    SuccessComponent,
+    WarningComponent,
     DesplegarTutoresComponent,
     EditarTutoresComponent,
     AgregarMateriaComponent,
@@ -150,12 +154,13 @@ const appRoutes:Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
     //PaginationModule.forRoot()
   ],
-  providers: [RegistroService,UserService, AuthguardGuard, ExcelServiceService, TutorService, PlazaService],
+  providers: [RegistroService,UserService, AuthguardGuard, LoginGuard, ExcelServiceService, TutorService, PlazaService],
   bootstrap: [AppComponent],
-  entryComponents: [EditTutorComponent, EditarTutoresComponent]
+  entryComponents: [EditTutorComponent, EditarTutoresComponent, SuccessComponent, WarningComponent]
 
 })
 export class AppModule { }

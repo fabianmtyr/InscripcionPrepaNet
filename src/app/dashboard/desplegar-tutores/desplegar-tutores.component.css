@@ -15,3 +15,45 @@
   font-size: 14px;
   width: 100%;
 }
+/* Structure */
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  overflow: scroll;
+}
+
+.example-header {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  font-size: 20px;
+}
+
+
+.mat-table {
+  overflow: auto;
+}
+
+
+/* https://github.com/angular/material2/issues/6058#issuecomment-318612278 */
+.align-table .mat-table {
+    display: table;
+    width: 100%;
+}
+
+.align-table .mat-header-row, .align-table .mat-row {
+        display: table-row;
+        padding: 0;
+        border: none;
+}
+
+.align-table .mat-header-cell, .align-table .mat-cell {
+    display: table-cell;
+    height: 48px;
+    vertical-align: middle;
+    padding: 0 8px;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}

@@ -1,28 +1,69 @@
-<div class="login-container" style="
+<div ng-controller="toggleCampus()" class="login-container" style="
     margin-left: 40px;">
-    <h2> Selecciona la cantidad de plazas:</h2>
+    <h2> Selecciona la cantidad de plazas para el campus {{this.userService.getLocalStorageCampus()}}:</h2>
+</div>
+<!-- {{diagnostic}} -->
+
+<div [style.display]="isPRN ? 'block' : 'none'" class="form-group.col-sm-4">
+    <label for="campus">Selcciona tu Campus</label>
+    <select class="form-control" id="campus"  required
+          [(ngModel)]="plaza.campus" name="campus">>
+       <option *ngFor="let c of campuses" [value]="c">{{c}}</option>
+    </select>
 </div>
 <div class="row" style="
-    margin-left: 40px;">
-  <div class="col-sm-4">
-    <h5>Tutores</h5>
-    <p>Cupo Actual:</p>
-    <h5>Actualizar Cupo</h5>
-    <input type="number" id="fname" required [(ngModel)]="model.tutors" name="tutors" #tutors="ngModel"/>
-    <a routerLink="/" class="btn btn-primary">Actualizar Cupo</a>
-  </div>
+    margin: 10px;">
+  <form (ngSubmit)="onSubmit()" #plazaForm="ngForm">
+    <!-- <div class="col-sm-4">
+      <h5>Tutores</h5>
+      <p>Cantidad actual: {{this.plazaService.getPlaza()._id}}</p>
+      <h5>Actualizar Cupo</h5>
+      <input type="number" id="tutores" required
+       [(ngModel)]="plaza.tutores" name="tutores">
+       TODO: remove this: {{plaza.tutores}}
+      
+    </div> -->
+    <div class="col-sm-4">
+    <mat-card>
+      <mat-card-header >
+        <mat-card-title style="margin-left:-8px;" class="card-title"> Tutores</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Cantidad actual: {{this.plazaService.getPlaza()._id}}</p>
+        <h5>Actualizar Cupo</h5>
+        <input type="number" id="tutores" required
+         [(ngModel)]="plaza.tutores" name="tutores">
+      </mat-card-content>
+    </mat-card>
+    </div>
+    <div class="col-sm-4">
+      <mat-card>
+        <mat-card-header >
+          <mat-card-title style="margin-left:-8px;" class="card-title"> Staff</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Cantidad actual: {{this.plaza.staff}}</p>
+          <h5>Actualizar Cupo</h5>
+          <input type="number" id="staff" required
+           [(ngModel)]="plaza.staff" name="staff">
+        </mat-card-content>
+      </mat-card>
+    </div>
    <div class="col-sm-4">
-    <h5>Tutores</h5>
-    <p>Cupo Actual:</p>
-    <h5>Actualizar Cupo</h5>
-    <input type="number" />
-    <a routerLink="/" class="btn btn-primary">Actualizar Cupo</a>
+     <mat-card>
+        <mat-card-header >
+          <mat-card-title style="margin-left:-8px;" class="card-title"> Coordinadores</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Cantidad actual: {{this.plaza.coords}}</p>
+          <h5>Actualizar Cupo</h5>
+          <input type="number" id="coords" required
+           [(ngModel)]="plaza.coords" name="coords">
+        </mat-card-content>
+      </mat-card>
   </div>
-   <div class="col-sm-4">
-   <h5>Tutores</h5>
-    <p>Cupo Actual:</p>
-    <h5>Actualizar Cupo</h5>
-    <input type="number" />
-     <a routerLink="/" class="btn btn-primary">Actualizar Cupo</a>
+  <div>
+    <button mat-raised-button color="primary" type="submit" style="margin-top: 20px; margin-left: 15px;"(click)="editarPlaza()" [disabled]="!plazaForm.form.valid">Actualizar Cupos</button>
   </div>
+  </form>
 </div>

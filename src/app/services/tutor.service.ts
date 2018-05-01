@@ -37,4 +37,8 @@ export class TutorService {
 
   }
 
+  sendMail(tipo){
+    return this.http.post(this.backend + '/tutors/sendMail', tipo)
+  }
+
 }

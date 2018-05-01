@@ -20,10 +20,7 @@ import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { RegistroAdminsComponent } from './dashboard/registro-admins/registro-admins.component';
-import { RegistroComponent } from './dashboard/registro/registro.component';
 import { DescargaInteresadosComponent } from './dashboard/descarga-interesados/descarga-interesados.component';
-import { ViewTutorsComponent } from './dashboard/view-tutors/view-tutors.component';
-import { EditTutorComponent} from './dashboard/view-tutors/edit-tutor/edit-tutor.component';
 import { RegistroTutorComponent, SuccessComponent } from './dashboard/registro-tutor/registro-tutor.component';
 import { DesplegarTutoresComponent } from './dashboard/desplegar-tutores/desplegar-tutores.component';
 import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.component';
@@ -43,7 +40,6 @@ import { AuthguardGuard, LoginGuard } from './guards/authguard.guard';
 import { EqualValidator } from './dashboard/registro-admins/passwordMatch.directive';
 
 
-import { TablegitComponent } from './dashboard/view-tutors/tablegit/tablegit.component';
 import { AgregarMateriaComponent } from './dashboard/agregar-materia/agregar-materia.component';
 import { EditarTutoresComponent, WarningComponent } from './dashboard/desplegar-tutores/editar-tutores/editar-tutores.component';
 
@@ -63,10 +59,6 @@ const appRoutes:Routes = [
     path: 'login',
     canActivate: [LoginGuard],
     component: LoginComponent
-  },
-    {
-    path: 'registro',
-    component: RegistroComponent
   },
   {
     path: 'dashboard',
@@ -96,10 +88,6 @@ const appRoutes:Routes = [
     component: AgregarMateriaComponent
   },
   {
-    path: 'dashboard/tutors',
-    component:ViewTutorsComponent
-  },
-  {
     path: 'dashboard/registro-tutor',
     canActivate: [AuthguardGuard],
     component: RegistroTutorComponent
@@ -118,7 +106,6 @@ const appRoutes:Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistroComponent,
     HeaderComponent,
     FooterComponent,
     DashboardComponent,
@@ -126,10 +113,7 @@ const appRoutes:Routes = [
     RegistroAdminsComponent,
     EqualValidator,
     DescargaInteresadosComponent,
-    ViewTutorsComponent,
     FijarPlazasComponent,
-    EditTutorComponent,
-    TablegitComponent,
     RegistroTutorComponent,
     SuccessComponent,
     WarningComponent,
@@ -162,7 +146,7 @@ const appRoutes:Routes = [
   ],
   providers: [RegistroService,UserService, AuthguardGuard, LoginGuard, ExcelServiceService, TutorService, PlazaService],
   bootstrap: [AppComponent],
-  entryComponents: [EditTutorComponent, EditarTutoresComponent, SuccessComponent, WarningComponent]
+  entryComponents: [EditarTutoresComponent, SuccessComponent, WarningComponent]
 
 })
 export class AppModule { }

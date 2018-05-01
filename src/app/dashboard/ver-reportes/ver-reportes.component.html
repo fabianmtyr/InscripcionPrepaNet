@@ -1,15 +1,9 @@
-<h2>Reportes<h2>
+<h2 style="padding-left:15px">Reportes<h2>
 <mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
   <mat-tab label="Curso"></mat-tab>
   <mat-tab label="Materias"></mat-tab>
   <mat-tab label="Promedios"></mat-tab>
 </mat-tab-group>
-
-<!--
-		1. Reporte de quien paso curso: matricula, calificacionCurso (sorteada mayor a menor)
-		2. Reporte de materias: matricula, materias seleccionadas (solo de la gente que si paso el curso > 80)
-		3. Reporte de promedios: matricula, promedio (sorteados)
--->    
 
 <div>
 	<mat-table #table [dataSource]="dataSource">
@@ -47,11 +41,23 @@
 			<mat-header-cell *matHeaderCellDef>Calificacion Del Curso</mat-header-cell>
 			<mat-cell *matCellDef="let tutor">{{tutor.calificacionCurso | number:'1.2-2'}}</mat-cell>
 		</ng-container>
-                <ng-container matColumnDef="materias">
-			<mat-header-cell *matHeaderCellDef>Materias</mat-header-cell>
-			<mat-cell *matCellDef="let tutor">{{tutor.materias}}</mat-cell>
+                <ng-container matColumnDef="materia1">
+			<mat-header-cell *matHeaderCellDef>Materia 1</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.materias[0].materia1}}</mat-cell>
+		</ng-container>
+                <ng-container matColumnDef="materia2">
+			<mat-header-cell *matHeaderCellDef>Materia 2</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.materias[0].materia2}}</mat-cell>
+		</ng-container>
+                <ng-container matColumnDef="materia3">
+			<mat-header-cell *matHeaderCellDef>Materia 3</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.materias[0].materia3}}</mat-cell>
 		</ng-container>
                 
+                <!--ng-container matColumnDef="materias">
+			<mat-header-cell *matHeaderCellDef>Materias</mat-header-cell>
+			<mat-cell *matCellDef="let tutor">{{tutor.materias[0].materia3}}, {{tutor.materias[0].materia3}}, {{tutor.materias[0].materia3}}</mat-cell>
+		</ng-container-->
                 
 		<!--ng-container matColumnDef="isTutor">
 			<mat-header-cell *matHeaderCellDef>Elegible a ser Tutor</mat-header-cell>

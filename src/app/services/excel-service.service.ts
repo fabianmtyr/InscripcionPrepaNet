@@ -52,8 +52,11 @@ export class ExcelServiceService {
   public specialExport(json: any[], excelFileName: string): void {
       json.map(x => {JSON})
     var worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
-    worksheet.B1.v = "Nombre";
-    worksheet.C1.v = "Apellido";
+    worksheet.A1.v = "Nombre";
+    worksheet.B1.v = "Apellido";
+    worksheet.C1.v = "Materia 1";
+    worksheet.D1.v = "Materia 2";
+    worksheet.E1.v = "Materia 3";
     var wopts: XLSX.WritingOptions = { bookType: 'xlsx', bookSST: false, type: 'binary'};
       const wb: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       var wbout = XLSX.write(wb, wopts);

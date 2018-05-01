@@ -113,7 +113,8 @@ export class VerReportesComponent implements OnInit {
   }
   
   else if(tabChangeEvent.index == 1){
-      this.displayedColumns = ['matricula',  'materias' ];
+      this.displayedColumns = ['matricula', 'materia1', 'materia2', 'materia3'];
+      //this.displayedColumns = ['matricula', 'materias'];
       this.dataSource.data = this.rows.filter((tut) => {return (tut.calificacionCurso && tut.calificacionCurso > 80)})
       console.log(this.rows)
       this.dataSource._updateChangeSubscription()

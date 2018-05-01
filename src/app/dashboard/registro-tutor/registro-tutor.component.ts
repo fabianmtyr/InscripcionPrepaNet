@@ -31,7 +31,7 @@ export class RegistroTutorComponent implements OnInit {
 
   createForm() {
   	this.tutorForm = this.fb.group({
-  		matricula: ['', [Validators.required, Validators.pattern("^[A|a][0-9]{8}")]],
+  		matricula: ['', [Validators.required, Validators.pattern("^[A|a|L|l][0-9]{8}")]],
   		nombre: this.fb.group({
   			nombre: ['', Validators.required],
   			apellido: ['', Validators.required]
@@ -39,12 +39,9 @@ export class RegistroTutorComponent implements OnInit {
   		correo: ['', [Validators.required, Validators.pattern("[^ @\n,;]+@[^ @\n,;]+[\.][^ @\n,;]+")]],
       campus: ['', Validators.required],
       materias: this.fb.group({
-        // materia1: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
-        // materia2: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
-        // materia3: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
-        materia1: [''],
-        materia2: [''],
-        materia3: [''],
+        materia1: ['', [Validators.required, Validators.pattern("^[A-Za-z]+[^]*")]],
+        materia2: ['', [Validators.required, Validators.pattern("^[A-Za-z]+[^]*")]],
+        materia3: ['', [Validators.required, Validators.pattern("^[A-Za-z]+[^]*")]],
       }),
   	});
   }

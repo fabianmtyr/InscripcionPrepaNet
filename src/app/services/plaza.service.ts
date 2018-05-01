@@ -13,7 +13,11 @@ export class PlazaService {
 
 
   editPlaza(plaza: Plaza) {
-    return this.http.post(this.backend + '/tutors/plaza/edit', plaza);
+    return this.http.post(this.backend + '/plazas/edit', plaza);
+  }
+
+  getPlaza():Observable<any>{
+  	return this.http.get(this.backend + '/plazas/list');
   }
 
 }

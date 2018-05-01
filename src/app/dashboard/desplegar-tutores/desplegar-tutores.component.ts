@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { MatPaginator } from '@angular/material';
 import { MatSort } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
@@ -9,10 +10,13 @@ import { Observable } from 'rxjs/Observable';
 import { Tutor } from '../../models/tutor.model';
 import { TutorService } from '../../services/tutor.service';
 import { ExcelServiceService } from '../../services/excel-service.service';
+import { UserService } from '../../services/user.service';
 import { DataSource } from '@angular/cdk/collections';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EditarTutoresComponent } from './editar-tutores/editar-tutores.component';
+import { SuccessComponent } from '../registro-tutor/registro-tutor.component';
+
 
 @Component({
   selector: 'app-desplegar-tutores',
@@ -26,24 +30,53 @@ export class DesplegarTutoresComponent implements OnInit {
     
 
 	tutors:Observable<any> = this.http.get('https://ipn-backend.herokuapp.com/tutors/new');
+
 	dataSource = new MatTableDataSource([]);
-	displayedColumns = ['matricula', 'campus', 'name', 'lastname', 'email', 'average', 'isElegible', 'courseGrade', 'isTutor' ];
-	constructor(private tutorService: TutorService, private http: HttpClient, public dialog: MatDialog, 
-            private changeDetectorRefs: ChangeDetectorRef, public svs: ExcelServiceService,) { 
+  campuss:string[] = [
+    'PRN','AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL', 'PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
+  mailForm : FormGroup;
+  llegoRespuesta = true;
+
+	displayedColumns = ['matricula', 'campus', 'carrera', 'semestre', 'nombre', 'apellido', 'correo', 'periodo', 'promedio', 'cumplePromedio', 'calificacionCurso', 'pasoCurso' ];
+
+	constructor(private tutorService: TutorService, private http: HttpClient, public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef, private userService: UserService, private fb: FormBuilder,public svs: ExcelServiceService) { 
+    this.createForm()
 	}
 
+  Usercampus = this.userService.getLocalStorageCampus()
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	ngAfterViewInit() {
 		this.dataSource.paginator = this.paginator;
 	}
 
+  createForm(){
+    this.mailForm = this.fb.group({
+      campusSeleccionado: ['', Validators.required]
+    });
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
 
   ngOnInit() {
   	//console.log(this.dataSource)
+
   	this.tutors = this.http.get('https://ipn-backend.herokuapp.com/tutors/list');
-  	this.tutorService.getAllTutors().subscribe((response) => {
-                this.dataSource.data = response;
+  	this.tutorService.getAllTutors().map((list: any) => {
+      if(this.Usercampus !== 'PRN'){
+        return list.filter(value => {
+          if(value["campus"] == undefined) return true;
+          if(value["campus"] !== this.Usercampus) return false;
+          return true;
+        });
+      }
+      else return list;
+    }).subscribe((response) => {
+      this.dataSource.data = response;
   		console.log(this.dataSource.data);
                 this.rows = response
                 this.length = this.rows.length
@@ -52,8 +85,9 @@ export class DesplegarTutoresComponent implements OnInit {
 
   onEdit(tutor): void{
   	let dialogRef = this.dialog.open(EditarTutoresComponent, {
-  		width: '800px',
   		data: tutor,
+      height: 'auto',
+      width: '400px',
   		disableClose: true,
   	}).afterClosed().subscribe(result => {
   		this.refresh();
@@ -61,14 +95,23 @@ export class DesplegarTutoresComponent implements OnInit {
   }
 
   refresh() {
-  	this.tutorService.getAllTutors().subscribe((response) => {
+  	this.tutorService.getAllTutors().map((list: any) => {
+      if(this.Usercampus !== 'PRN'){
+        return list.filter(value => {
+          if(value["campus"] == undefined) return true;
+          if(value["campus"] !== this.Usercampus) return false;
+          return true;
+        });
+      }
+      else return list;
+    }).subscribe((response) => {
   		this.dataSource.data = response;
   		this.changeDetectorRefs.detectChanges();
   	})
   }
 
   toggleElegibilidad(tutor) {
-  	tutor.isElegible = !tutor.isElegible;
+  	tutor.cumplePromedio = !tutor.cumplePromedio;
     this.tutorService.editTutor(tutor).subscribe(
       (response) => {
         console.log(response);
@@ -77,13 +120,13 @@ export class DesplegarTutoresComponent implements OnInit {
       (error) => {
         console.log(error);
         console.log("No se pudo enviar forma.");
-        tutor.isElegible = !tutor.isElegible;
+        tutor.cumplePromedio = !tutor.cumplePromedio;
       });
 
   }
 
   toggleTutor(tutor) {
-  	tutor.isTutor = !tutor.isTutor;
+  	tutor.pasoCurso = !tutor.pasoCurso;
     this.tutorService.editTutor(tutor).subscribe(
       (response) => {
         console.log(response);
@@ -92,15 +135,34 @@ export class DesplegarTutoresComponent implements OnInit {
       (error) => {
         console.log(error);
         console.log("No se pudo enviar forma.");
-        tutor.isTutor = !tutor.isTutor;
+        tutor.pasoCurso = !tutor.pasoCurso;
       });
 
   }
-  
-    applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+
+  openSuccess(message, title){
+    let dialogRef = this.dialog.open(SuccessComponent, {
+      data: {m: message, t: title},
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.llegoRespuesta = true;
+    });
+  }
+
+  enviarCorreo(tipo, campus) {
+    this.tutorService.sendMail({"type": tipo, "campus": campus}).subscribe(
+      (response) => {
+        console.log(response);
+        console.log("Se envio el correo correctamente!");
+        this.openSuccess(response, "Hola");
+      },
+      (error) => {
+        console.log(error);
+        console.log("No se pudo comunicar con el servidor!");
+        this.openSuccess("No se pudo enviar el correo!", "Error!")
+      })
   }
   
     public downloadExcel(){
@@ -143,6 +205,21 @@ export class DesplegarTutoresComponent implements OnInit {
     };
   
 
+  correoPRN(tipo) {
+    this.llegoRespuesta = false;
+    this.tutorService.sendMail({"type": tipo, "campus": this.mailForm.value.campusSeleccionado}).subscribe(
+      (response) => {
+        console.log(response);
+        console.log("Se envio el correo correctamente!");
+        this.openSuccess(response['message'], "Hola");
+      },
+      (error) => {
+        console.log(error);
+        console.log("No se pudo comunicar con el servidor!");
+        this.openSuccess(this.mailForm.value.campusSeleccionado, "Error, no se pudo enviar un correo a los alumnos del campus:");
+      })
+  }
+  
 }
 
 export class TutorDataSource extends DataSource<any> {

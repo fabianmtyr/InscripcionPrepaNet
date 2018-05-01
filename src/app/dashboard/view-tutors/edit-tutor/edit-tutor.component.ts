@@ -9,32 +9,7 @@ import { TutorService } from '../../../services/tutor.service';
 })
 export class EditTutorComponent implements OnInit {
 
-    campuss:string[] = [
-    'AGS',
-    'CCM',
-    'CCV',
-    'CDJ',
-    'CEM',
-    'CHI',
-    'CHS',
-    'CSF',
-    'CVA',
-    'MTY',
-    'GDA',
-    'HGO',
-    'IRA',
-    'LAG',
-    'LEO',
-    'MRL',
-    'PUE',
-    'QRO',
-    'SAL',
-    'SIN',
-    'SLP',
-    'TAM',
-    'TOL',
-    'ZAC',
-  ];
+    campuss:string[] = ['AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL','PRN','PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
 
 
   constructor(public dialogRef: MatDialogRef<EditTutorComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private tutorService: TutorService) {}
@@ -43,8 +18,8 @@ export class EditTutorComponent implements OnInit {
 
   ngOnInit() {
 	this.nTutor.matricula = this.data.datos.matricula;
-	this.nTutor.name = {first: this.data.datos.name.first, last: this.data.datos.name.last}
-  this.nTutor.email = this.data.datos.email;
+	this.nTutor.nombre = {nombre: this.data.datos.nombre.nombre, apellido: this.data.datos.nombre.apellido}
+  this.nTutor.correo = this.data.datos.correo;
   this.nTutor.campus = this.data.datos.campus;
   console.log(this.nTutor);
   }

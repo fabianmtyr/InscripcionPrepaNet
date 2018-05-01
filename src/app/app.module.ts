@@ -26,6 +26,7 @@ import { ViewTutorsComponent } from './dashboard/view-tutors/view-tutors.compone
 import { EditTutorComponent} from './dashboard/view-tutors/edit-tutor/edit-tutor.component';
 import { RegistroTutorComponent, SuccessComponent } from './dashboard/registro-tutor/registro-tutor.component';
 import { DesplegarTutoresComponent } from './dashboard/desplegar-tutores/desplegar-tutores.component';
+import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.component';
 
 // Servicios
 import { UserService } from './services/user.service';
@@ -41,7 +42,7 @@ import { AuthguardGuard, LoginGuard } from './guards/authguard.guard';
 // Directivos
 import { EqualValidator } from './dashboard/registro-admins/passwordMatch.directive';
 
-import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.component';
+
 import { TablegitComponent } from './dashboard/view-tutors/tablegit/tablegit.component';
 import { EditarTutoresComponent, WarningComponent } from './dashboard/desplegar-tutores/editar-tutores/editar-tutores.component';
 

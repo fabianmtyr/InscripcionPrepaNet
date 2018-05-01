@@ -27,6 +27,7 @@ export class EditarTutoresComponent implements OnInit {
 
   ngOnInit() {
  	this.nTutor.matricula = this.data.matricula;
+
 	this.nTutor.nombre = {nombre: this.data.nombre.nombre, apellido: this.data.nombre.apellido}
   	this.nTutor.correo = this.data.correo;
   	this.nTutor.campus = this.data.campus;

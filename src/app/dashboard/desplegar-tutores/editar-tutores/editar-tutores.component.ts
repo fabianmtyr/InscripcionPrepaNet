@@ -16,6 +16,8 @@ export class EditarTutoresComponent implements OnInit {
 
     semesterss: number[] = [1,2,3,4,5,6,7,8,9,10];
 
+    periodos: string[] = ['Tetra 1', 'Tetra 2', 'Tetra 3'];
+
 
   constructor(public dialogRef: MatDialogRef<EditarTutoresComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private tutorService: TutorService, public dialog: MatDialog, private userService: UserService) { }
 
@@ -34,6 +36,7 @@ export class EditarTutoresComponent implements OnInit {
   	this.nTutor.pasoCurso = this.data.pasoCurso;
     this.nTutor.semestre = this.data.semestre;
     this.nTutor.carrera = this.data.carrera;
+    this.nTutor.periodo = this.data.periodo;
   	console.log(this.nTutor);
   }
 

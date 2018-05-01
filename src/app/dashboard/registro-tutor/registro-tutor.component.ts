@@ -51,11 +51,11 @@ export class RegistroTutorComponent implements OnInit {
 
   ngOnInit() {
   	this.tutorService.getAllMaterias().subscribe((response) =>{
-      //this.listaMaterias = response;
+      this.listaMaterias = response;
       //this.listaMaterias.forEach((item) => this.materiass.push(item.nombre))
       response.forEach((item) => this.materiass.push(item.nombre));
       console.log("materiass", this.materiass)
-      //console.log(this.listaMaterias)
+      console.log(this.listaMaterias)
       this.createForm()
     });
     this.createForm()

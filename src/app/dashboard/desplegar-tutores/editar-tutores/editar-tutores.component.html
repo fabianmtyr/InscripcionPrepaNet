@@ -74,6 +74,20 @@
           </div>
         </div>
       </div>
+      <div class="form-group">
+        <label for="periodo">Periodo</label>
+        <select class="form-control" id="periodo" required [(ngModel)]="nTutor.periodo" name="periodo" #periodo="ngModel">
+          <option *ngFor="let p of periodos" [value]="p">
+            {{p}}
+          </option>
+        </select>
+        <div *ngIf="periodo.invalid && periodo.touched" class="alert alert-danger">
+          <div *ngIf="periodo.errors.required">
+            Se necesita un periodo!
+          </div>
+        </div>
+      </div>
+
       <div class="spacer"></div>
       <mat-dialog-actions>
         <button type="button" class="btn btn-danger" (click)="closeDialog()">Cancelar</button>

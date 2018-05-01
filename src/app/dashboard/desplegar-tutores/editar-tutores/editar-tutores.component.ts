@@ -16,6 +16,8 @@ export class EditarTutoresComponent implements OnInit {
 
     semesterss: number[] = [1,2,3,4,5,6,7,8,9,10];
 
+    periodos: string[] = ['Tetra 1', 'Tetra 2', 'Tetra 3'];
+
 
   constructor(public dialogRef: MatDialogRef<EditarTutoresComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private tutorService: TutorService, public dialog: MatDialog, private userService: UserService) { }
 
@@ -25,15 +27,17 @@ export class EditarTutoresComponent implements OnInit {
 
   ngOnInit() {
  	this.nTutor.matricula = this.data.matricula;
+
 	this.nTutor.nombre = {nombre: this.data.nombre.nombre, apellido: this.data.nombre.apellido}
   	this.nTutor.correo = this.data.correo;
   	this.nTutor.campus = this.data.campus;
   	this.nTutor.promedio = this.data.promedio;
   	this.nTutor.calificacionCurso = this.data.calificacionCurso;
-  	this.nTutor.cumplePromedio = this.data.cumplePromedio;
-  	this.nTutor.pasoCurso = this.data.pasoCurso;
+  	//this.nTutor.cumplePromedio = this.data.cumplePromedio;
+  	//this.nTutor.pasoCurso = this.data.pasoCurso;
     this.nTutor.semestre = this.data.semestre;
     this.nTutor.carrera = this.data.carrera;
+    this.nTutor.periodo = this.data.periodo;
   	console.log(this.nTutor);
   }
 

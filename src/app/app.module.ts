@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MatDialogModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
+import { MatDialogModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatTabsModule  } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -26,6 +26,7 @@ import { ViewTutorsComponent } from './dashboard/view-tutors/view-tutors.compone
 import { EditTutorComponent} from './dashboard/view-tutors/edit-tutor/edit-tutor.component';
 import { RegistroTutorComponent, SuccessComponent } from './dashboard/registro-tutor/registro-tutor.component';
 import { DesplegarTutoresComponent } from './dashboard/desplegar-tutores/desplegar-tutores.component';
+import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.component';
 
 // Servicios
 import { UserService } from './services/user.service';
@@ -41,11 +42,14 @@ import { AuthguardGuard, LoginGuard } from './guards/authguard.guard';
 // Directivos
 import { EqualValidator } from './dashboard/registro-admins/passwordMatch.directive';
 
-import { FijarPlazasComponent } from './dashboard/fijar-plazas/fijar-plazas.component';
+
 import { TablegitComponent } from './dashboard/view-tutors/tablegit/tablegit.component';
+import { AgregarMateriaComponent } from './dashboard/agregar-materia/agregar-materia.component';
+import { VerReportesComponent } from './dashboard/ver-reportes/ver-reportes.component';
 import { EditarTutoresComponent, WarningComponent } from './dashboard/desplegar-tutores/editar-tutores/editar-tutores.component';
 
-
+// Pipes
+import { FiltroMaterias } from './dashboard/registro-tutor/filtroMaterias.pipe';
 
 
 
@@ -87,6 +91,12 @@ const appRoutes:Routes = [
     component: FijarPlazasComponent
   },
   {
+
+    path: 'dashboard/materias',
+    canActivate: [AuthguardGuard],
+    component: AgregarMateriaComponent
+  },
+  {
     path: 'dashboard/tutors',
     component:ViewTutorsComponent
   },
@@ -94,6 +104,11 @@ const appRoutes:Routes = [
     path: 'dashboard/registro-tutor',
     canActivate: [AuthguardGuard],
     component: RegistroTutorComponent
+  },
+  {
+    path: 'dashboard/reportes',
+    canActivate: [AuthguardGuard],
+    component: VerReportesComponent
   },
   {
     path: 'dashboard/lista-tutores',
@@ -126,6 +141,9 @@ const appRoutes:Routes = [
     WarningComponent,
     DesplegarTutoresComponent,
     EditarTutoresComponent,
+    AgregarMateriaComponent,
+    VerReportesComponent,
+    FiltroMaterias
   ],
   imports: [
     BrowserModule,
@@ -145,6 +163,7 @@ const appRoutes:Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
+    MatTabsModule,
     MatCardModule,
     MatButtonModule
     //PaginationModule.forRoot()

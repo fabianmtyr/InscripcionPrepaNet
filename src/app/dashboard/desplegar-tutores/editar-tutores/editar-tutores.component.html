@@ -16,8 +16,11 @@
       </div>
       <div class="form-group">
         <label for="correo">Correo</label>
-        <input type="text" class="form-control" id="correo" [(ngModel)]="nTutor.correo" name="correo" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #correo="ngModel">
+        <input type="text" class="form-control" id="correo" required [(ngModel)]="nTutor.correo" name="correo" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #correo="ngModel">
         <div *ngIf="correo.invalid && (correo.dirty || correo.touched)" class="alert alert-danger">
+          <div *ngIf="correo.errors.required">
+            Se necesita un correo!
+          </div>
           <div *ngIf="correo.errors.pattern">
             El correo tiene que tener este formato: 'usuario@algo.com'
           </div>
@@ -41,13 +44,21 @@
             {{s}}
           </option>
         </select>
+        <div *ngIf="semestre.invalid && semestre.touched" class="alert alert-danger">
+          <div *ngIf="semestre.errors.required">
+            Se necesita un semestre!
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label for="carrera">Carrera</label>
-        <input type="text" class="form-control" id="carrera" name="carrera" required [(ngModel)]="nTutor.carrera" pattern="^[A-Za-z]{3,4}" #carrera="ngModel">
+        <input type="text" class="form-control" id="carrera" name="carrera" required [(ngModel)]="nTutor.carrera" pattern="^[A-Za-z]{2,4}" #carrera="ngModel">
         <div *ngIf="carrera.invalid && carrera.touched" class="alert alert-danger">
+          <div *ngIf="carrera.errors.required">
+            Se necesita una carrera!
+          </div>
           <div *ngIf="carrera.errors.pattern">
-            Ingresa las iniciales de tu carrera.
+            Ingresa las iniciales de tu carrera (de 2 a 4 letras).
           </div>
         </div>
       </div>
@@ -55,11 +66,28 @@
         <label for="promedio">Promedio Escolar</label>
         <input type="number" class="form-control" id="promedio" required [(ngModel)]="nTutor.promedio" name="promedio" pattern="^(?:[1-9]\d?|100)$" #promedio="ngModel">
         <div *ngIf="promedio.invalid &&  promedio.touched" class="alert alert-danger">
+          <div *ngIf="promedio.errors.required">
+            Se necesita una promedio!
+          </div>
           <div *ngIf="promedio.errors.pattern">
             El promedio debe estar entre 0 y 100.
           </div>
         </div>
       </div>
+      <div class="form-group">
+        <label for="periodo">Periodo</label>
+        <select class="form-control" id="periodo" required [(ngModel)]="nTutor.periodo" name="periodo" #periodo="ngModel">
+          <option *ngFor="let p of periodos" [value]="p">
+            {{p}}
+          </option>
+        </select>
+        <div *ngIf="periodo.invalid && periodo.touched" class="alert alert-danger">
+          <div *ngIf="periodo.errors.required">
+            Se necesita un periodo!
+          </div>
+        </div>
+      </div>
+
       <div class="spacer"></div>
       <mat-dialog-actions>
         <button type="button" class="btn btn-danger" (click)="closeDialog()">Cancelar</button>

@@ -1,71 +1,93 @@
-  <div class="header">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
+<div class="header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+<div>
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="matricula">
+      <mat-header-cell *matHeaderCellDef style="text-align: center">Matricula/Nomina</mat-header-cell>
+      <mat-cell *matCellDef="let tutor" (click)="onEdit(tutor)" style="text-align: center"><a>{{tutor.matricula}}</a></mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="campus">
+      <mat-header-cell *matHeaderCellDef>Campus</mat-header-cell>
+      <mat-cell *matCellDef="let tutor">{{tutor.campus}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="carrera">
+      <mat-header-cell *matHeaderCellDef>Carrera</mat-header-cell>
+      <mat-cell *matCellDef="let tutor">{{tutor.carrera}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="semestre">
+      <mat-header-cell *matHeaderCellDef>Semestre</mat-header-cell>
+      <mat-cell *matCellDef="let tutor">{{tutor.semestre}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+      <mat-cell *matCellDef="let tutor">{{tutor.nombre.nombre}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="apellido">
+      <mat-header-cell *matHeaderCellDef>Apellido</mat-header-cell>
+      <mat-cell *matCellDef="let tutor">{{tutor.nombre.apellido}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="correo">
+      <mat-header-cell *matHeaderCellDef style="text-align: center">Correo Alterno</mat-header-cell>
+      <mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.correo}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="periodo">
+      <mat-header-cell *matHeaderCellDef style="text-align: center">Periodo</mat-header-cell>
+      <mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.periodo}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="promedio">
+      <mat-header-cell *matHeaderCellDef style="text-align: center">Promedio Escolar</mat-header-cell>
+      <mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.promedio}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="cumplePromedio">
+      <mat-header-cell *matHeaderCellDef>Elegible al Curso</mat-header-cell>
+      <mat-cell *matCellDef="let tutor">
+        <button class="btn" [ngClass]="{'btn-success': tutor.cumplePromedio, 'btn-danger': !tutor.cumplePromedio }" (click)="toggleElegibilidad(tutor)">{{tutor.cumplePromedio == true ? 'Si' : (tutor.cumplePromedio == false ? 'No' : '')}}</button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="calificacionCurso">
+      <mat-header-cell *matHeaderCellDef>Calificacion Del Curso</mat-header-cell>
+      <mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.calificacionCurso}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="pasoCurso">
+      <mat-header-cell *matHeaderCellDef>Elegible a ser Tutor</mat-header-cell>
+      <mat-cell *matCellDef="let tutor">
+        <button class="btn" [ngClass]="{'btn-success': tutor.pasoCurso, 'btn-danger': !tutor.pasoCurso }" (click)="toggleTutor(tutor)">{{tutor.pasoCurso == true ? 'Si' : (tutor.pasoCurso == false ? 'No' : '')}}</button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row, columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 15, 20, 25, 50, 75, 100]" [showFirstLastButtons]="true">
+  </mat-paginator>
+  <div class="container" *ngIf="Usercampus !== 'PRN'">
+    <div class="row">
+      <button class="pull-right btn btn-primary" (click)="enviarCorreo('inscripcion')">Enviar Correo de aceptacion</button>
+      <button class="pull-right btn btn-primary" (click)="enviarCorreo('curso',Usercampus)">Enviar Convocatoria</button>
+    </div>
   </div>
-
-<div >
-	<mat-table #table [dataSource]="dataSource">
-		<ng-container matColumnDef="matricula">
-			<mat-header-cell *matHeaderCellDef style="text-align: center">Matricula/Nomina</mat-header-cell>
-			<mat-cell *matCellDef="let tutor" (click)="onEdit(tutor)" style="text-align: center"><a>{{tutor.matricula}}</a></mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="campus">
-			<mat-header-cell *matHeaderCellDef>Campus</mat-header-cell>
-			<mat-cell *matCellDef="let tutor">{{tutor.campus}}</mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="carrera">
-			<mat-header-cell *matHeaderCellDef>Carrera</mat-header-cell>
-			<mat-cell *matCellDef="let tutor">{{tutor.carrera}}</mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="semestre">
-			<mat-header-cell *matHeaderCellDef>Semestre</mat-header-cell>
-			<mat-cell *matCellDef="let tutor">{{tutor.semestre}}</mat-cell>
-		</ng-container>	
-		<ng-container matColumnDef="nombre">
-			<mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
-			<mat-cell *matCellDef="let tutor">{{tutor.nombre.nombre}}</mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="apellido">
-			<mat-header-cell *matHeaderCellDef>Apellido</mat-header-cell>
-			<mat-cell *matCellDef="let tutor">{{tutor.nombre.apellido}}</mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="correo">
-			<mat-header-cell *matHeaderCellDef style="text-align: center">Correo Alterno</mat-header-cell>
-			<mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.correo}}</mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="promedio">
-			<mat-header-cell *matHeaderCellDef style="text-align: center">Promedio Escolar</mat-header-cell>
-			<mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.promedio}}</mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="cumplePromedio">
-			<mat-header-cell *matHeaderCellDef>Elegible al Curso</mat-header-cell>
-			<mat-cell *matCellDef="let tutor">
-				<button class="btn" [ngClass]="{'btn-success': tutor.cumplePromedio, 'btn-danger': !tutor.cumplePromedio }" (click)="toggleElegibilidad(tutor)">{{tutor.cumplePromedio == true ? 'Si' : (tutor.cumplePromedio == false ? 'No' : '')}}</button>
-			</mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="calificacionCurso">
-			<mat-header-cell *matHeaderCellDef>Calificacion Del Curso</mat-header-cell>
-			<mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.calificacionCurso}}</mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="pasoCurso">
-			<mat-header-cell *matHeaderCellDef>Elegible a ser Tutor</mat-header-cell>
-			<mat-cell *matCellDef="let tutor">
-				<button class="btn" [ngClass]="{'btn-success': tutor.pasoCurso, 'btn-danger': !tutor.pasoCurso }" (click)="toggleTutor(tutor)">{{tutor.pasoCurso == true ? 'Si' : (tutor.pasoCurso == false ? 'No' : '')}}</button>
-			</mat-cell>
-		</ng-container>
-		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-		<mat-row *matRowDef="let row, columns: displayedColumns;"></mat-row>
-	</mat-table>
-	  <mat-paginator #paginator
-                 [pageSize]="10"
-                 [pageSizeOptions]="[5, 10, 15, 20, 25, 50, 75, 100]"
-                 [showFirstLastButtons]="true">
-  	</mat-paginator>
- 	<div class="container" *ngIf="Usercampus == 'PRN'" >
-		<div class="row">
-			<button  class="pull-right btn btn-primary" (click)="enviarCorreo('curso')">Enviar Convocatoria</button>
-			<button class="pull-right btn btn-primary" (click)="enviarCorreo('inscripcion')">Enviar Correo de aceptacion</button>
-		</div>
-	</div>
+<div>
+     <button class="btn" (click)="downloadExcel()">Excel</button>
+    <!--button (click)="assignTutors()">Asignar</button-->
+</div>
+  <div class="container" *ngIf="Usercampus == 'PRN'">
+    <div class="row">
+      <form [formGroup]="mailForm">
+        <label class="center-block">Campus a enviar:
+          <select class="form-control" formControlName="campusSeleccionado">
+            <option *ngFor="let c of campuss" [value]="c">
+              {{c}}
+            </option>
+          </select>
+        </label>
+        <button class="btn btn-primary" [disabled]="!mailForm.valid && llegoRespuesta === true" (click)="correoPRN('curso')">Enviar Convocatoria
+        </button>
+        <button class="btn btn-primary" [disabled]="!mailForm.valid && llegoRespuesta" (click)="correoPRN('inscripcion')">
+          Enviar Correo de aceptacion
+        </button>
+      </form>
+    </div>
+  </div>
 </div>

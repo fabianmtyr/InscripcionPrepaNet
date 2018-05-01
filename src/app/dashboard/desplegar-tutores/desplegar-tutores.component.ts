@@ -173,6 +173,7 @@ export class DesplegarTutoresComponent implements OnInit {
       let x = this.dataSource.data.map((dt) => {
       //let x =this.rows.map((dt) => {
           delete dt['_id']
+          delete dt['__v']
     return this.flatten(dt);
     
     });

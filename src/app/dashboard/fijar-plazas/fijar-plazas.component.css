@@ -1,0 +1,14 @@
+h2{
+	font-family: Helvetica;
+	margin-bottom: 20px;
+}
+
+.mat-raised-button{
+	background-color: #0738A7;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #0738A7;
+    border-color: #0738A7;
+}

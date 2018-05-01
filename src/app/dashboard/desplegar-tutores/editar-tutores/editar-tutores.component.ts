@@ -25,16 +25,17 @@ export class EditarTutoresComponent implements OnInit {
 
   ngOnInit() {
  	this.nTutor.matricula = this.data.matricula;
-	this.nTutor.nombre = {nombre: this.data.nombre.nombre, apellido: this.data.nombre.apellido}
-  	this.nTutor.correo = this.data.correo;
-  	this.nTutor.campus = this.data.campus;
-  	this.nTutor.promedio = this.data.promedio;
-  	this.nTutor.calificacionCurso = this.data.calificacionCurso;
-  	this.nTutor.cumplePromedio = this.data.cumplePromedio;
-  	this.nTutor.pasoCurso = this.data.pasoCurso;
-    this.nTutor.semestre = this.data.semestre;
-    this.nTutor.carrera = this.data.carrera;
-  	console.log(this.nTutor);
+
+	this.nTutor.name = {first: this.data.name.first, last: this.data.name.last}
+	this.nTutor.email = this.data.email;
+	this.nTutor.campus = this.data.campus;
+	this.nTutor.average = this.data.average;
+	this.nTutor.courseGrade = this.data.courseGrade;
+	this.nTutor.isElegible = this.data.isElegible;
+	this.nTutor.isTutor = this.data.isTutor;
+  this.nTutor.semester = this.data.semester;
+  this.nTutor.major = this.data.major;
+	console.log(this.nTutor);
   }
 
     editarTutor() {

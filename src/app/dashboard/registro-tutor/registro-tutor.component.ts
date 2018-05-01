@@ -5,6 +5,7 @@ import { Tutor } from 'app/models/tutor.model';
 import { TutorService } from 'app/services/tutor.service';
 import { Observable } from 'rxjs';
 import { BrowserModule } from '@angular/platform-browser';
+import { FiltroMaterias } from './filtroMaterias.pipe';
 
 @Component({
   selector: 'app-registro-tutor',
@@ -15,12 +16,17 @@ export class RegistroTutorComponent implements OnInit {
 
 
 	tutorForm: FormGroup;
-	//tutor: Tutor;
+  campuss:string[] = [
+    'AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL', 'PRN', 'PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
 
-	//tutor = new Tutor();
+  materiass = [' ']
+  listaMaterias:Observable<any>;
+  private mat1: string = '';
+  private mat2: string = '';
+  private mat3: string = '';
 
   constructor(private tutorService: TutorService, private fb: FormBuilder, public dialog: MatDialog) {
-  	this.createForm();
+  	//this.createForm();
   }
 
   createForm() {
@@ -31,13 +37,26 @@ export class RegistroTutorComponent implements OnInit {
   			apellido: ['', Validators.required]
   		}),
   		correo: ['', [Validators.required, Validators.pattern("[^ @\n,;]+@[^ @\n,;]+[\.][^ @\n,;]+")]],
+      campus: ['', Validators.required],
+      materias: this.fb.group({
+        materia1: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+        materia2: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+        materia3: ['', [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+      }),
   	});
   }
 
-  //get diagnostic() { return JSON.stringify(this.tutor);}
+  get diagnostic() { return JSON.stringify(this.tutorForm);}
 
   ngOnInit() {
-  	
+  	this.tutorService.getAllMaterias().subscribe((response) =>{
+      this.listaMaterias = response;
+      response.forEach((item) => this.materiass.push(item.nombre));
+      console.log("materiass", this.materiass)
+      console.log(this.listaMaterias)
+      this.createForm()
+    });
+    this.createForm()
   }
 
   openSuccess(message, title){
@@ -53,7 +72,8 @@ export class RegistroTutorComponent implements OnInit {
   	tutor = this.tutorForm.value;
     //console.log(tutor)
     
-  	this.tutorService.registerTutor(tutor).subscribe(
+  	this.tutorService.registerTutor(tutor).map((lista) => {
+    }).subscribe(
   		(response) => {
   			console.log(response);
   			console.log("Se agrego tutor exitosamente");

@@ -78,9 +78,9 @@
             </option>
           </select>
         </label>
-        <button class="btn btn-primary" [disabled]="!mailForm.valid" (click)="correoPRN('curso')">Enviar Convocatoria
+        <button class="btn btn-primary" [disabled]="!mailForm.valid && llegoRespuesta === true" (click)="correoPRN('curso')">Enviar Convocatoria
         </button>
-        <button class="btn btn-primary" [disabled]="!mailForm.valid" (click)="correoPRN('inscripcion')">
+        <button class="btn btn-primary" [disabled]="!mailForm.valid && llegoRespuesta" (click)="correoPRN('inscripcion')">
           Enviar Correo de aceptacion
         </button>
       </form>

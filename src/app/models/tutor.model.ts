@@ -4,6 +4,7 @@ export class Tutor {
     public matricula: string;
     public correo: string;
     public campus: string;
+    public periodo: string;
     public promedio: number;
     public calificacionCurso: number;
     public cumplePromedio: boolean;

@@ -32,8 +32,8 @@ export class EditarTutoresComponent implements OnInit {
   	this.nTutor.campus = this.data.campus;
   	this.nTutor.promedio = this.data.promedio;
   	this.nTutor.calificacionCurso = this.data.calificacionCurso;
-  	this.nTutor.cumplePromedio = this.data.cumplePromedio;
-  	this.nTutor.pasoCurso = this.data.pasoCurso;
+  	//this.nTutor.cumplePromedio = this.data.cumplePromedio;
+  	//this.nTutor.pasoCurso = this.data.pasoCurso;
     this.nTutor.semestre = this.data.semestre;
     this.nTutor.carrera = this.data.carrera;
     this.nTutor.periodo = this.data.periodo;

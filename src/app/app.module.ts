@@ -127,7 +127,7 @@ const appRoutes:Routes = [
     WarningComponent,
     DesplegarTutoresComponent,
     EditarTutoresComponent,
-    FiltroMaterias
+    FiltroMaterias,
   ],
   imports: [
     BrowserModule,

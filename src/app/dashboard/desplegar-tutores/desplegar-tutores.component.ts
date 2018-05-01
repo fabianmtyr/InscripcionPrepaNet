@@ -16,6 +16,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { EditarTutoresComponent } from './editar-tutores/editar-tutores.component';
 import { SuccessComponent } from '../registro-tutor/registro-tutor.component';
 
+
 @Component({
   selector: 'app-desplegar-tutores',
   templateUrl: './desplegar-tutores.component.html',
@@ -28,7 +29,8 @@ export class DesplegarTutoresComponent implements OnInit {
 	dataSource = new MatTableDataSource([]);
   campuss:string[] = [
     'PRN','AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL', 'PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
-  mailForm = FormGroup;
+  mailForm : FormGroup;
+  llegoRespuesta = true;
 
 	displayedColumns = ['matricula', 'campus', 'carrera', 'semestre', 'nombre', 'apellido', 'correo', 'periodo', 'promedio', 'cumplePromedio', 'calificacionCurso', 'pasoCurso' ];
 
@@ -70,8 +72,6 @@ export class DesplegarTutoresComponent implements OnInit {
       else return list;
     }).subscribe((response) => {
       this.dataSource.data = response;
-
-
   		console.log(this.dataSource.data);
   	});
   }
@@ -138,6 +138,10 @@ export class DesplegarTutoresComponent implements OnInit {
       data: {m: message, t: title},
       disableClose: true,
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.llegoRespuesta = true;
+    });
   }
 
   enviarCorreo(tipo, campus) {
@@ -145,7 +149,7 @@ export class DesplegarTutoresComponent implements OnInit {
       (response) => {
         console.log(response);
         console.log("Se envio el correo correctamente!");
-        this.openSuccess("Se envio un correo a los alumnos de tu campus!", "Exito!");
+        this.openSuccess(response, "Hola");
       },
       (error) => {
         console.log(error);
@@ -155,16 +159,17 @@ export class DesplegarTutoresComponent implements OnInit {
   }
 
   correoPRN(tipo) {
+    this.llegoRespuesta = false;
     this.tutorService.sendMail({"type": tipo, "campus": this.mailForm.value.campusSeleccionado}).subscribe(
       (response) => {
         console.log(response);
         console.log("Se envio el correo correctamente!");
-        this.openSuccess(this.mailForm.value.campusSeleccionado, "Se envio exitosamante un correo a alumnos del siguiente campus:")
+        this.openSuccess(response['message'], "Hola");
       },
       (error) => {
         console.log(error);
         console.log("No se pudo comunicar con el servidor!");
-        this.openSuccess(this.mailForm.value.campusSeleccionado, "Error, no se pudo enviar un correo a los alumnos del campus:")
+        this.openSuccess(this.mailForm.value.campusSeleccionado, "Error, no se pudo enviar un correo a los alumnos del campus:");
       })
   }
   

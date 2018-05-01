@@ -9,7 +9,6 @@ import { FiltroMaterias } from './filtroMaterias.pipe';
 
 @Component({
   selector: 'app-registro-tutor',
-  pipes: [FiltroMaterias],
   templateUrl: './registro-tutor.component.html',
   styleUrls: ['./registro-tutor.component.css']
 })
@@ -20,7 +19,7 @@ export class RegistroTutorComponent implements OnInit {
   campuss:string[] = [
     'AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL', 'PRN', 'PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
 
-  materiass:Observable<string> = [' ']
+  materiass = [' ']
   listaMaterias:Observable<any>;
   private mat1: string = '';
   private mat2: string = '';
@@ -47,12 +46,11 @@ export class RegistroTutorComponent implements OnInit {
   	});
   }
 
-  get diagnostic() { return JSON.stringify(this.tutor);}
+  get diagnostic() { return JSON.stringify(this.tutorForm);}
 
   ngOnInit() {
   	this.tutorService.getAllMaterias().subscribe((response) =>{
       this.listaMaterias = response;
-      //this.listaMaterias.forEach((item) => this.materiass.push(item.nombre))
       response.forEach((item) => this.materiass.push(item.nombre));
       console.log("materiass", this.materiass)
       console.log(this.listaMaterias)
@@ -74,7 +72,8 @@ export class RegistroTutorComponent implements OnInit {
   	tutor = this.tutorForm.value;
     //console.log(tutor)
     
-  	this.tutorService.registerTutor(tutor).subscribe(
+  	this.tutorService.registerTutor(tutor).map((lista) => {
+    }).subscribe(
   		(response) => {
   			console.log(response);
   			console.log("Se agrego tutor exitosamente");

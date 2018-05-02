@@ -47,9 +47,6 @@ import { EditarTutoresComponent, WarningComponent } from './dashboard/desplegar-
 // Pipes
 import { FiltroMaterias } from './dashboard/registro-tutor/filtroMaterias.pipe';
 
-
-
-
 // Rutas
 const appRoutes:Routes = [
   {

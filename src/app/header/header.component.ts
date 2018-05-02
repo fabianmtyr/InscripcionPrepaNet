@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   userName: string;
   userCampus: string;
 
+  
 
   constructor(private userService: UserService) { }
 

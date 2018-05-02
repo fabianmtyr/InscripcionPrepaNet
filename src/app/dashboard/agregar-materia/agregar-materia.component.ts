@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { Tutor } from '../../models/tutor.model';
 import { TutorService } from '../../services/tutor.service';
 import { ExcelServiceService } from '../../services/excel-service.service';
+import { UserService } from '../../services/user.service';
 import { DataSource } from '@angular/cdk/collections';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -23,6 +24,7 @@ export class AgregarMateriaComponent implements OnInit {
 
       private rows: Array<any> = [];
       public length:number = 0;
+      public Usercampus:string;
       /*
        * {"clave":clave, "nombre":nombre}
        * POST: <appname>/materias/edit
@@ -34,10 +36,13 @@ export class AgregarMateriaComponent implements OnInit {
       materias:Observable<any> = this.http.get('https://ipn-backend.herokuapp.com/materias/list');
       dataSource = new MatTableDataSource([]);
       displayedColumns = ['clave','nombre','tetramestre'];
+      //Usercampus = this.userService.getLocalStorageCampus()
 
   constructor(private http: HttpClient, public dialog: MatDialog, 
-            private changeDetectorRefs: ChangeDetectorRef, 
-            private fb: FormBuilder) { 
+            private changeDetectorRefs: ChangeDetectorRef,private userService: UserService, 
+            private fb: FormBuilder) {
+            this.Usercampus = this.userService.getLocalStorageCampus()
+            console.log(this.Usercampus)
             this.createForm();
             }
             

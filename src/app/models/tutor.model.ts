@@ -8,7 +8,7 @@ export class Tutor {
     public promedio: number;
     public calificacionCurso: number;
     public cumplePromedio: boolean;
-    public pasoCurso: boolean;
+    public esTutor: boolean;
     public semestre: number;
     public carrera: string;
     public materias: Materias;

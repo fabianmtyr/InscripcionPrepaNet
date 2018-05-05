@@ -30,6 +30,7 @@ export class DesplegarTutoresComponent implements OnInit {
     
 
 	tutors:Observable<any> = this.http.get('https://ipn-backend.herokuapp.com/tutors/new');
+  listaMaterias:Observable<any>;
 
 	dataSource = new MatTableDataSource([]);
   campuss:string[] = [
@@ -64,9 +65,17 @@ export class DesplegarTutoresComponent implements OnInit {
 
   ngOnInit() {
   	//console.log(this.dataSource)
+    this.tutorService.getAllMaterias().subscribe((response) =>{
+      this.listaMaterias = response;
+      console.log("lista Materias:",this.listaMaterias)
+      this.loadTutors();
 
-  	this.tutors = this.http.get('https://ipn-backend.herokuapp.com/tutors/list');
-  	this.tutorService.getAllTutors().map((list: any) => {
+    });
+  }
+
+  loadTutors(){
+        this.tutors = this.http.get('https://ipn-backend.herokuapp.com/tutors/list');
+    this.tutorService.getAllTutors().map((list: any) => {
       if(this.Usercampus !== 'PRN'){
         return list.filter(value => {
           if(value["campus"] == undefined) return true;
@@ -75,12 +84,28 @@ export class DesplegarTutoresComponent implements OnInit {
         });
       }
       else return list;
+    }).map((list: any) => {
+      console.log(list);
+      list.forEach((item) => {
+        this.listaMaterias.forEach((nom) => {
+          if(item.materias[0].materia1 == nom.nombre){
+            item.materias[0].materia1 = nom.clave
+          }
+          else if(item.materias[0].materia2 == nom.nombre){
+            item.materias[0].materia2 = nom.clave
+          }
+          else if(item.materias[0].materia3 == nom.nombre){
+            item.materias[0].materia3 = nom.clave
+          }
+        })
+      })
+      return list;
     }).subscribe((response) => {
       this.dataSource.data = response;
-  		console.log(this.dataSource.data);
+      console.log(this.dataSource.data);
                 this.rows = response
                 this.length = this.rows.length
-  	});
+    });
   }
 
   onEdit(tutor): void{
@@ -104,6 +129,22 @@ export class DesplegarTutoresComponent implements OnInit {
         });
       }
       else return list;
+    }).map((list: any) => {
+      console.log(list);
+      list.forEach((item) => {
+        this.listaMaterias.forEach((nom) => {
+          if(item.materias[0].materia1 == nom.nombre){
+            item.materias[0].materia1 = nom.clave
+          }
+          else if(item.materias[0].materia2 == nom.nombre){
+            item.materias[0].materia2 = nom.clave
+          }
+          else if(item.materias[0].materia3 == nom.nombre){
+            item.materias[0].materia3 = nom.clave
+          }
+        })
+      })
+      return list;
     }).subscribe((response) => {
   		this.dataSource.data = response;
   		this.changeDetectorRefs.detectChanges();
@@ -212,7 +253,8 @@ export class DesplegarTutoresComponent implements OnInit {
       (response) => {
         console.log(response);
         console.log("Se envio el correo correctamente!");
-        this.openSuccess(response['message'], "Correo");
+
+        this.openSuccess(response['message'], "Estatus del Correo");
       },
       (error) => {
         console.log(error);

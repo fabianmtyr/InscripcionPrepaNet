@@ -80,7 +80,7 @@
     <div class="row">
       <form [formGroup]="mailForm">
         <label class="center-block">Campus a enviar:
-          <select class="form-control" formControlName="campusSeleccionado">
+          <select class="form-control" style="width: 150px" formControlName="campusSeleccionado">
             <option *ngFor="let c of campuss" [value]="c">
               {{c}}
             </option>

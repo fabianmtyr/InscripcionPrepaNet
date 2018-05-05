@@ -33,8 +33,6 @@ export class EditarTutoresComponent implements OnInit {
   	this.nTutor.campus = this.data.campus;
   	this.nTutor.promedio = this.data.promedio;
   	this.nTutor.calificacionCurso = this.data.calificacionCurso;
-  	//this.nTutor.cumplePromedio = this.data.cumplePromedio;
-  	//this.nTutor.pasoCurso = this.data.pasoCurso;
     this.nTutor.semestre = this.data.semestre;
     this.nTutor.carrera = this.data.carrera;
     this.nTutor.periodo = this.data.periodo;
@@ -100,12 +98,13 @@ export class EditarTutoresComponent implements OnInit {
 
   <div>
     <p>
-      <strong>Estas a punto de borrar a el siguiente candidato a tutor:</strong></p>
-      <ul>
-        <li>{{data.matricula}}</li>
-        <li>{{data.nombre.nombre}} {{data.nombre.apellido}}</li>
-      </ul>
-    
+      <strong>Estas a punto de borrar al siguiente candidato a tutor:</strong></p>
+      <div class="center">
+      <p>Nombre: {{data.nombre.nombre}} {{data.nombre.apellido}}
+      <br>
+      Matricula: {{data.matricula}}
+      </p>
+      </div>
     <p>
       <strong>Esta accion no se puede revertir. ¿Estas seguro que quieres continuar?</strong>
     </p>

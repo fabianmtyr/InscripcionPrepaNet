@@ -253,7 +253,8 @@ export class DesplegarTutoresComponent implements OnInit {
       (response) => {
         console.log(response);
         console.log("Se envio el correo correctamente!");
-        this.openSuccess(response['message'], "Correo");
+
+        this.openSuccess(response['message'], "Estatus del Correo");
       },
       (error) => {
         console.log(error);

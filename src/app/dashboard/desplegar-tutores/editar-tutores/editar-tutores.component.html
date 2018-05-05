@@ -91,7 +91,9 @@
       <div class="spacer"></div>
       <mat-dialog-actions>
         <button type="button" class="btn btn-danger" (click)="closeDialog()">Cancelar</button>
+        <br>
         <button type="submit" class="btn btn-success" [disabled]="(editTutorForm.form.dirty || editTutorForm.form.touched) && !editTutorForm.form.valid">Aceptar Cambios</button>
+        <br>
         <button type="button" class="btn btn-danger" (click)="openWarning()">Borrar Tutor</button>
       </mat-dialog-actions>
     </form>

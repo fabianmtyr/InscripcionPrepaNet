@@ -2,12 +2,13 @@
     margin-left: 40px;">
     <h2> Selecciona la cantidad de plazas para el campus {{this.userService.getLocalStorageCampus()}}:</h2>
 </div>
-<!-- {{diagnostic}} -->
+<!--  {{diagnostic}} -->
 
-<div [style.display]="isPRN ? 'block' : 'none'" class="form-group.col-sm-4">
-    <label for="campus">Selcciona tu Campus</label>
-    <select class="form-control" id="campus"  required
-          [(ngModel)]="plaza.campus" name="campus">>
+<div style="margin-left: 30px;"[style.display]="isPRN ? 'block' : 'none'" class="form-group.col-lg-4">
+    <label for="campus">Selecciona tu Campus</label>
+    <br>
+    <select class="form-control.col-lg-4" id="campus"     required
+          [(ngModel)]="plaza.campus" (change)="updateCampus()" name="campus">>
        <option *ngFor="let c of campuses" [value]="c">{{c}}</option>
     </select>
 </div>
@@ -29,7 +30,7 @@
         <mat-card-title style="margin-left:-8px;" class="card-title"> Tutores</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p>Cantidad actual: {{this.plazaService.getPlaza()._id}}</p>
+        <!-- <p>Cantidad actual: {{this.plazaService.getPlaza().tutore}}</p> -->
         <h5>Actualizar Cupo</h5>
         <input type="number" id="tutores" required
          [(ngModel)]="plaza.tutores" name="tutores">
@@ -39,10 +40,10 @@
     <div class="col-sm-4">
       <mat-card>
         <mat-card-header >
-          <mat-card-title style="margin-left:-8px;" class="card-title"> Staff</mat-card-title>
+          <mat-card-title style="margin-left:-8px;" class="card-title"> Tutor Staff</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>Cantidad actual: {{this.plaza.staff}}</p>
+          <!-- <p>Cantidad actual: {{this.plaza.staff}}</p> -->
           <h5>Actualizar Cupo</h5>
           <input type="number" id="staff" required
            [(ngModel)]="plaza.staff" name="staff">
@@ -55,7 +56,7 @@
           <mat-card-title style="margin-left:-8px;" class="card-title"> Coordinadores</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>Cantidad actual: {{this.plaza.coords}}</p>
+          <!-- <p>Cantidad actual: {{this.plaza.coords}}</p> -->
           <h5>Actualizar Cupo</h5>
           <input type="number" id="coords" required
            [(ngModel)]="plaza.coords" name="coords">

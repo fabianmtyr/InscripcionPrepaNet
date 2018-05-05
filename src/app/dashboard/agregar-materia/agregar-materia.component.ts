@@ -97,11 +97,23 @@ export class AgregarMateriaComponent implements OnInit {
       width: '400px',
   		disableClose: true,
   	}).afterClosed().subscribe(result => {
-  		//this.refresh();
+            console.log(result)
+            this.refresh();
+            this.dataSource._updateChangeSubscription()
                 
   	});
         
         
      }
+  }
+  
+  refresh(){
+        this.materias = this.http.get('https://ipn-backend.herokuapp.com/materias/list');
+  	this.materias.subscribe((response) => {
+                this.dataSource.data = response;
+                this.rows = response
+                this.length = this.rows.length
+  	});
+      
   }
 }

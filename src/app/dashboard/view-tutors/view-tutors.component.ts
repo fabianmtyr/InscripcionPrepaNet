@@ -119,6 +119,7 @@ export class ViewTutorsComponent implements OnInit {
       var pth=''
       let x =this.rows.map((dt) => {
           delete dt['_id']
+          delete dt['__v']
     return this.flatten(dt);
     
     });

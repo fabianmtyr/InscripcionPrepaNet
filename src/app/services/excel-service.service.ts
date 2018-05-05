@@ -60,7 +60,8 @@ export class ExcelServiceService {
     var wopts: XLSX.WritingOptions = { bookType: 'xlsx', bookSST: false, type: 'binary'};
       const wb: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       var wbout = XLSX.write(wb, wopts);
-      FileSaver.saveAs(new Blob([this.s2ab(wbout)], { type: '' }), 'test.xlsx');
+      let fname = 'tutores_export_' + new Date().getTime() + '.xlsx'
+      FileSaver.saveAs(new Blob([this.s2ab(wbout)], { type: '' }), fname);
   }
   
   s2ab(s: any) { var buf = new ArrayBuffer(s.length); var view = new Uint8Array(buf); 

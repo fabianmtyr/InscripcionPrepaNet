@@ -1,0 +1,13 @@
+<div class="fixActionRow">
+  <h1 mat-dialog-title>Editar Materia</h1>
+  <div mat-dialog-content>
+    <form (ngSubmit)="editarMateria()" #editMateriaForm="ngForm">
+      <div class="spacer"></div>
+      <mat-dialog-actions>
+        <button type="button" class="btn btn-danger" (click)="closeDialog()">Cancelar</button>
+        <!--button type="submit" class="btn btn-success" [disabled]="(editMateriaForm.form.dirty || editMateriaForm.form.touched) && !editMateriaForm.form.valid">Aceptar Cambios</button-->
+        <button type="button" class="btn btn-danger" (click)="openWarning()">Borrar Materia</button>
+      </mat-dialog-actions>
+    </form>
+  </div>
+</div>

@@ -14,6 +14,7 @@ import { UserService } from '../../services/user.service';
 import { DataSource } from '@angular/cdk/collections';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SelectionModel } from '@angular/cdk/collections';
+import {EditarMateriaComponent} from './editar-materia/editar-materia.component';
 
 @Component({
   selector: 'app-agregar-materia',
@@ -83,8 +84,24 @@ export class AgregarMateriaComponent implements OnInit {
   	this.materiaForm = this.fb.group({
   		clave: ['', Validators.required],
   		nombre:['', Validators.required],
-  		tetramestre: ['',  Validators.required]
+  		periodo: ['',  Validators.required]
   	});
   }
-
+  
+  onEdit(materia): void{
+      
+      if (this.Usercampus==="PRN"){
+  	let dialogRef = this.dialog.open(EditarMateriaComponent, {
+  		data: materia,
+      height: 'auto',
+      width: '400px',
+  		disableClose: true,
+  	}).afterClosed().subscribe(result => {
+  		//this.refresh();
+                
+  	});
+        
+        
+     }
+  }
 }

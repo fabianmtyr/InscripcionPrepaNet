@@ -60,7 +60,7 @@ export class ExcelServiceService {
     var wopts: XLSX.WritingOptions = { bookType: 'xlsx', bookSST: false, type: 'binary'};
       const wb: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       var wbout = XLSX.write(wb, wopts);
-      let fname = 'tutores_export_' + new Date().getTime() + '.xlsx');
+      let fname = 'tutores_export_' + new Date().getTime() + '.xlsx'
       FileSaver.saveAs(new Blob([this.s2ab(wbout)], { type: '' }), fname);
   }
   

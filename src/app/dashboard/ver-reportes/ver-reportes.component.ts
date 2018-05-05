@@ -44,9 +44,9 @@ export class VerReportesComponent implements OnInit {
   	//console.log(this.dataSource)
   	this.tutors = this.http.get('https://ipn-backend.herokuapp.com/tutors/list');
   	this.tutorService.getAllTutors().subscribe((response) => {
-                this.dataSource.data = response;
-  		console.log(this.dataSource.data);
                 this.rows = response
+                this.dataSource.data= response.sort((a, b) => {return ((b.calificacionCurso || -1*1) - (a.calificacionCurso || -1*1))})
+  		console.log(this.dataSource.data);
                 this.length = this.rows.length
   	});
   }
@@ -116,10 +116,9 @@ export class VerReportesComponent implements OnInit {
       this.displayedColumns = ['matricula', 'materia1', 'materia2', 'materia3'];
       //this.displayedColumns = ['matricula', 'materias'];
       this.dataSource.data = this.rows.filter((tut) => {return (tut.calificacionCurso && tut.calificacionCurso > 80)})
+        .sort((a, b) => {return ((b.calificacionCurso || -1*1) - (a.calificacionCurso || -1*1))})
       console.log(this.rows)
       this.dataSource._updateChangeSubscription()
-      //filter by courseGrade > 80
-      //this.dataSource.data
   }
   
   else {

@@ -1,4 +1,4 @@
-<h2 style="padding-left:15px">Reportes<h2>
+<h2 style="padding-left:15px;padding-right:15px">Reportes<h2>
 <mat-tab-group #tabGroup (selectedTabChange)="tabChanged($event)">
   <mat-tab label="Curso"></mat-tab>
   <mat-tab label="Materias"></mat-tab>
@@ -39,7 +39,7 @@
 		</ng-container-->
 		<ng-container matColumnDef="courseGrade">
 			<mat-header-cell *matHeaderCellDef>Calificacion Del Curso</mat-header-cell>
-			<mat-cell *matCellDef="let tutor">{{tutor.calificacionCurso | number:'1.2-2'}}</mat-cell>
+			<mat-cell *matCellDef="let tutor">{{(tutor.calificacionCurso || 0.00) | number:'1.2-2'}}</mat-cell>
 		</ng-container>
                 <ng-container matColumnDef="materia1">
 			<mat-header-cell *matHeaderCellDef>Materia 1</mat-header-cell>

@@ -20,4 +20,5 @@ export class PlazaService {
   	return this.http.get(this.backend + '/plazas/list');
   }
 
+
 }

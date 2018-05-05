@@ -4,7 +4,7 @@
     <fieldset ngModelGroup="name">
       <div class="form-group">
         <label for="first">Nombre</label>
-        <input type="text" class="form-control" id="first" required [(ngModel)]="this.fname" name="first" #first="ngModel">
+        <input type="text" class="form-control.col-lg-10" id="first" required [(ngModel)]="this.fname" name="first" #first="ngModel">
         <div *ngIf="first.invalid &&  first.touched" class="alert alert-danger">
           <div *ngIf="first.errors.required">
             Se requiere un nombre.
@@ -13,7 +13,7 @@
       </div>
       <div class="form-group">
         <label for="last">Apellido</label>
-        <input type="text" class="form-control" id="last" required [(ngModel)]="this.lname" name="last" #last="ngModel">
+        <input type="text" class="form-control.col-lg-6" id="last" required [(ngModel)]="this.lname" name="last" #last="ngModel">
         <div *ngIf="last.invalid &&  last.touched" class="alert alert-danger">
           <div *ngIf="last.errors.required">
             Se requiere un apellido.
@@ -23,7 +23,7 @@
     </fieldset>
     <div class="form-group">
       <label for="campus">Campus</label>
-      <select class="form-control" id="campus" required [(ngModel)]=model.campus name="campus" #campus=ngModel>
+      <select class="form-control.col-lg-6" id="campus" required [(ngModel)]=model.campus name="campus" #campus=ngModel>
         <option *ngFor="let c of campuss" [value]="c">{{c}}</option>
       </select>
       <div *ngIf="campus.invalid && (campus.dirty || email.touched)" class="alert alert-danger">
@@ -34,7 +34,7 @@
     </div>
     <div class="form-group">
       <label for="campus">Correo</label>
-      <input type="select" class="form-control" id="email" required [(ngModel)]="model.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel">
+      <input type="select" class="form-control.col-lg-6" id="email" required [(ngModel)]="model.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel">
       <div *ngIf="email.invalid &&  email.touched" class="alert alert-danger">
         <div *ngIf="email.errors.required">
           Se necesita un correo
@@ -46,7 +46,7 @@
     </div>
     <div class="form-group">
       <label for="password">Contrase&ntilde;a</label>
-      <input type="password" class="form-control" id="password" required minlength="6" [(ngModel)]="model.password" name="password" #password="ngModel">
+      <input type="password" class="form-control.col-lg-6" id="password" required minlength="6" [(ngModel)]="model.password" name="password" #password="ngModel">
       <div *ngIf="password.invalid &&  password.touched" class="alert alert-danger">
         <div *ngIf="password.errors.required">
           Se necesita una contrase&ntilde;a.
@@ -58,7 +58,7 @@
     </div>
     <div class="form-group">
       <label for="passwordVerify">Confirmar Contrase&ntilde;a</label>
-      <input type="password" class="form-control" id="passwordVerify" required minlength="6" validateEqual="password" [(ngModel)]="passwordVerify" name="passwordVerify" #passwordVerify1="ngModel">
+      <input type="password" class="form-control.col-lg-6" id="passwordVerify" required minlength="6" validateEqual="password" [(ngModel)]="passwordVerify" name="passwordVerify" #passwordVerify1="ngModel">
       <div *ngIf="passwordVerify1.invalid &&  passwordVerify1.touched" class="alert alert-danger">
         Las contrase&ntilde;as no coinciden.
       </div>

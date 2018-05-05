@@ -43,12 +43,10 @@ import { EqualValidator } from './dashboard/registro-admins/passwordMatch.direct
 import { AgregarMateriaComponent } from './dashboard/agregar-materia/agregar-materia.component';
 import { VerReportesComponent } from './dashboard/ver-reportes/ver-reportes.component';
 import { EditarTutoresComponent, WarningComponent } from './dashboard/desplegar-tutores/editar-tutores/editar-tutores.component';
+import { EditarMateriaComponent, WarnComponent } from './dashboard/agregar-materia/editar-materia/editar-materia.component';
 
 // Pipes
 import { FiltroMaterias } from './dashboard/registro-tutor/filtroMaterias.pipe';
-
-
-
 
 // Rutas
 const appRoutes:Routes = [
@@ -121,11 +119,13 @@ const appRoutes:Routes = [
     RegistroTutorComponent,
     SuccessComponent,
     WarningComponent,
+    WarnComponent,
     DesplegarTutoresComponent,
     EditarTutoresComponent,
     AgregarMateriaComponent,
     VerReportesComponent,
-    FiltroMaterias
+    FiltroMaterias,
+    EditarMateriaComponent
   ],
   imports: [
     BrowserModule,
@@ -152,7 +152,7 @@ const appRoutes:Routes = [
   ],
   providers: [RegistroService,UserService, AuthguardGuard, LoginGuard, ExcelServiceService, TutorService, PlazaService],
   bootstrap: [AppComponent],
-  entryComponents: [EditarTutoresComponent, SuccessComponent, WarningComponent]
+  entryComponents: [EditTutorComponent, EditarTutoresComponent, EditarMateriaComponent, SuccessComponent, WarningComponent, WarnComponent]
 
 })
 export class AppModule { }

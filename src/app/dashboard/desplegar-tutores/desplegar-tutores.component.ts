@@ -68,10 +68,14 @@ export class DesplegarTutoresComponent implements OnInit {
     this.tutorService.getAllMaterias().subscribe((response) =>{
       this.listaMaterias = response;
       console.log("lista Materias:",this.listaMaterias)
-    });
+      this.loadTutors();
 
-  	this.tutors = this.http.get('https://ipn-backend.herokuapp.com/tutors/list');
-  	this.tutorService.getAllTutors().map((list: any) => {
+    });
+  }
+
+  loadTutors(){
+        this.tutors = this.http.get('https://ipn-backend.herokuapp.com/tutors/list');
+    this.tutorService.getAllTutors().map((list: any) => {
       if(this.Usercampus !== 'PRN'){
         return list.filter(value => {
           if(value["campus"] == undefined) return true;
@@ -98,12 +102,11 @@ export class DesplegarTutoresComponent implements OnInit {
       return list;
     }).subscribe((response) => {
       this.dataSource.data = response;
-  		console.log(this.dataSource.data);
+      console.log(this.dataSource.data);
                 this.rows = response
                 this.length = this.rows.length
-  	});
+    });
   }
-
 
   onEdit(tutor): void{
   	let dialogRef = this.dialog.open(EditarTutoresComponent, {

@@ -152,7 +152,7 @@ const appRoutes:Routes = [
   ],
   providers: [RegistroService,UserService, AuthguardGuard, LoginGuard, ExcelServiceService, TutorService, PlazaService],
   bootstrap: [AppComponent],
-  entryComponents: [EditTutorComponent, EditarTutoresComponent, EditarMateriaComponent, SuccessComponent, WarningComponent, WarnComponent]
+  entryComponents: [EditarTutoresComponent, EditarMateriaComponent, SuccessComponent, WarningComponent, WarnComponent]
 
 })
 export class AppModule { }

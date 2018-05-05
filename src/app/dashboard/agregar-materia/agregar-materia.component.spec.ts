@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TablegitComponent } from './tablegit.component';
+import { AgregarMateriaComponent } from './agregar-materia.component';
 
-describe('TablegitComponent', () => {
-  let component: TablegitComponent;
-  let fixture: ComponentFixture<TablegitComponent>;
+describe('AgregarMateriaComponent', () => {
+  let component: AgregarMateriaComponent;
+  let fixture: ComponentFixture<AgregarMateriaComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TablegitComponent ]
+      declarations: [ AgregarMateriaComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TablegitComponent);
+    fixture = TestBed.createComponent(AgregarMateriaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

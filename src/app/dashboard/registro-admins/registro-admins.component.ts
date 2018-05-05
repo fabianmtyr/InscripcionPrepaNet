@@ -1,7 +1,7 @@
 import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { User } from 'app/models/user.model';
-import { UserService } from 'app/services/user.service';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
@@ -16,7 +16,7 @@ import { SuccessComponent } from '../registro-tutor/registro-tutor.component';
 })
 export class RegistroAdminsComponent implements OnInit {
 
-      campuss:string[] = [
+    campuss:string[] = [
     'AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL','PRN','PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
 
   model = new User();
@@ -26,7 +26,7 @@ export class RegistroAdminsComponent implements OnInit {
   fname: string;
   lname: string;
 
-  constructor(private userService: UserService, public dialog: MatDialog) { }
+  constructor(public userService: UserService, public dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -78,7 +78,7 @@ export class RegistroAdminsComponent implements OnInit {
   public confirmClicked: boolean = false;
 
 
-  constructor(private userService: UserService) { }
+  constructor(public userService: UserService) { }
 
   ngOnInit() {
     this.user = new User();

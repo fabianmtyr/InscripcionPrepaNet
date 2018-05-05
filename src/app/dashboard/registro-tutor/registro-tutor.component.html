@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="width: 500px">
   <h1>Registro de Tutores</h1>
   <form [formGroup]="tutorForm" (ngSubmit)="addTutor()">
     <div class="form-group">
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <fieldset formGroupName="nombre">
+    <fieldset formGroupName="nombre" style="border: 0">
       <div class="form-group">
         <label class="center-block">Nombre:
           <input class="form-control" formControlName="nombre">
@@ -63,7 +63,7 @@
         </div>
       </div>
     </div>
-    <fieldset formGroupName="materias">
+    <fieldset formGroupName="materias" style="border: 0">
       <div class="form-group">
         <label class="center-block">Materia 1:
           <select class="form-control" formControlName="materia1" [(ngModel)]="mat1">

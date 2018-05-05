@@ -30,6 +30,7 @@ export class DesplegarTutoresComponent implements OnInit {
     
 
 	tutors:Observable<any> = this.http.get('https://ipn-backend.herokuapp.com/tutors/new');
+  listaMaterias:Observable<any>;
 
 	dataSource = new MatTableDataSource([]);
   campuss:string[] = [
@@ -64,6 +65,10 @@ export class DesplegarTutoresComponent implements OnInit {
 
   ngOnInit() {
   	//console.log(this.dataSource)
+    this.tutorService.getAllMaterias().subscribe((response) =>{
+      this.listaMaterias = response;
+      console.log("lista Materias:",this.listaMaterias)
+    });
 
   	this.tutors = this.http.get('https://ipn-backend.herokuapp.com/tutors/list');
   	this.tutorService.getAllTutors().map((list: any) => {
@@ -75,6 +80,22 @@ export class DesplegarTutoresComponent implements OnInit {
         });
       }
       else return list;
+    }).map((list: any) => {
+      console.log(list);
+      list.forEach((item) => {
+        this.listaMaterias.forEach((nom) => {
+          if(item.materias[0].materia1 == nom.nombre){
+            item.materias[0].materia1 = nom.clave
+          }
+          else if(item.materias[0].materia2 == nom.nombre){
+            item.materias[0].materia2 = nom.clave
+          }
+          else if(item.materias[0].materia3 == nom.nombre){
+            item.materias[0].materia3 = nom.clave
+          }
+        })
+      })
+      return list;
     }).subscribe((response) => {
       this.dataSource.data = response;
   		console.log(this.dataSource.data);
@@ -82,6 +103,7 @@ export class DesplegarTutoresComponent implements OnInit {
                 this.length = this.rows.length
   	});
   }
+
 
   onEdit(tutor): void{
   	let dialogRef = this.dialog.open(EditarTutoresComponent, {
@@ -104,6 +126,22 @@ export class DesplegarTutoresComponent implements OnInit {
         });
       }
       else return list;
+    }).map((list: any) => {
+      console.log(list);
+      list.forEach((item) => {
+        this.listaMaterias.forEach((nom) => {
+          if(item.materias[0].materia1 == nom.nombre){
+            item.materias[0].materia1 = nom.clave
+          }
+          else if(item.materias[0].materia2 == nom.nombre){
+            item.materias[0].materia2 = nom.clave
+          }
+          else if(item.materias[0].materia3 == nom.nombre){
+            item.materias[0].materia3 = nom.clave
+          }
+        })
+      })
+      return list;
     }).subscribe((response) => {
   		this.dataSource.data = response;
   		this.changeDetectorRefs.detectChanges();

@@ -1,5 +1,8 @@
 <nav class="navbar navbar-default">
-  <a class="navbar-brand" href="/dashboard">
+  <a *ngIf="isLoggedIn$ | async" class="navbar-brand" href="/dashboard">
+    <img src="../../assets/images/prepanet_logo_azul.png" width="190" height="50" alt="">
+  </a>
+  <a *ngIf="!(isLoggedIn$ | async)" class="navbar-brand" href="/">
     <img src="../../assets/images/prepanet_logo_azul.png" width="190" height="50" alt="">
   </a>
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

@@ -16,7 +16,7 @@ export class EditarTutoresComponent implements OnInit {
 
     semesterss: number[] = [1,2,3,4,5,6,7,8,9,10];
 
-    periodos: string[] = ['Tetra 1', 'Tetra 2', 'Tetra 3'];
+    periodos: string[] = ['enero-abril', 'mayo-agosto', 'septiembre - diciembre'];
 
 
   constructor(public dialogRef: MatDialogRef<EditarTutoresComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private tutorService: TutorService, public dialog: MatDialog, private userService: UserService) { }

@@ -10,8 +10,8 @@
       <mat-cell *matCellDef="let tutor" (click)="onEdit(tutor)" style="text-align: center"><a>{{tutor.matricula}}</a></mat-cell>
     </ng-container>
     <ng-container matColumnDef="campus">
-      <mat-header-cell *matHeaderCellDef>Campus</mat-header-cell>
-      <mat-cell *matCellDef="let tutor">{{tutor.campus}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef style="text-align: center">Campus</mat-header-cell>
+      <mat-cell *matCellDef="let tutor" style="text-align: center">{{tutor.campus}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="carrera">
       <mat-header-cell *matHeaderCellDef>Carrera</mat-header-cell>

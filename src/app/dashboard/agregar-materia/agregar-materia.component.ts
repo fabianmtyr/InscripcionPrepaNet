@@ -26,24 +26,18 @@ export class AgregarMateriaComponent implements OnInit {
       private rows: Array<any> = [];
       public length:number = 0;
       public Usercampus:string;
-      /*
-       * {"clave":clave, "nombre":nombre}
-       * POST: <appname>/materias/edit
-       * GET: <appname>/materias/list
-       */
       
       materiaForm: FormGroup;
       
       materias:Observable<any> = this.http.get('https://ipn-backend.herokuapp.com/materias/list');
       dataSource = new MatTableDataSource([]);
       displayedColumns = ['clave','nombre','tetramestre'];
-      //Usercampus = this.userService.getLocalStorageCampus()
 
   constructor(private http: HttpClient, public dialog: MatDialog, 
             private changeDetectorRefs: ChangeDetectorRef,private userService: UserService, 
             private fb: FormBuilder) {
             this.Usercampus = this.userService.getLocalStorageCampus()
-            console.log(this.Usercampus)
+            //console.log(this.Usercampus)
             this.createForm();
             }
             
@@ -55,28 +49,22 @@ export class AgregarMateriaComponent implements OnInit {
         }
 
   ngOnInit() {
-        //console.log(this.dataSource)
   	this.materias = this.http.get('https://ipn-backend.herokuapp.com/materias/list');
   	this.materias.subscribe((response) => {
                 this.dataSource.data = response;
-  		console.log(this.dataSource.data);
                 this.rows = response
                 this.length = this.rows.length
   	});
   }
   
   agregarMateria(){
-        let materia = 0;
-  	materia = this.materiaForm.value;
-        delete materia['tetramestre']
-    console.log(materia)
+      let materia = 0;
+      materia = this.materiaForm.value;
       let resp = this.http.post("https://ipn-backend.herokuapp.com/materias/edit" , materia)
       
-      //resp.subscribe()
       resp.subscribe((mat) => {this.dataSource.data.push(mat)
       this.dataSource._updateChangeSubscription()
       })
-      console.log(resp)
       
   }
   
@@ -88,6 +76,7 @@ export class AgregarMateriaComponent implements OnInit {
   	});
   }
   
+  //Abrir Dialog para borrar materia
   onEdit(materia): void{
       
       if (this.Usercampus==="PRN"){
@@ -107,6 +96,7 @@ export class AgregarMateriaComponent implements OnInit {
      }
   }
   
+  //Get Materias de nuevo
   refresh(){
         this.materias = this.http.get('https://ipn-backend.herokuapp.com/materias/list');
   	this.materias.subscribe((response) => {

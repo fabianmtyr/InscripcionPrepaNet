@@ -1,3 +1,5 @@
+// Modelo de tutor
+
 export class Tutor {
     public id: number;
     public nombre: Names;
@@ -24,16 +26,3 @@ export class Materias {
     public materia2: string;
     public materia3: string;
 }
-
-/*
-export class Tutor {
-    public id: number;
-    public name: Names;
-    public matricula: string;
-    public correo: string;
-    public email: string;
-    public grades?: number;
-    public course?: string;
-    public campus: string;
-}
-*/

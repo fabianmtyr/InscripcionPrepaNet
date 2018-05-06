@@ -24,57 +24,79 @@ import { SuccessComponent } from '../registro-tutor/registro-tutor.component';
   styleUrls: ['./desplegar-tutores.component.css']
 })
 export class DesplegarTutoresComponent implements OnInit {
+  
+  //Declaracion de arreglo de renglones y tamaño
+  private rows: Array<any> = []
+  public length:number = 0;
     
-      private rows: Array<any> = []
-      public length:number = 0;
-    
-
+  //Observables de tipo tutores y lista materias
 	tutors:Observable<any> = this.http.get('https://ipn-backend.herokuapp.com/tutors/new');
   listaMaterias:Observable<any>;
 
+  //declaracion de objecto tipo datasource para guardar info en tabla
 	dataSource = new MatTableDataSource([]);
+
+  // El arreglo que desplega las opciones de los diferentes campus
   campuss:string[] = [
     'PRN','AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL', 'PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
+
+  // Objeto para guardar los valores de la forma
   mailForm : FormGroup;
+
+  // booleano para ver si llego respuesta y deshabilitar botones de enviar correos
   llegoRespuesta = true;
 
+  // arreglo de nombres de columnas para desplegar en la tabla
 	displayedColumns = ['matricula', 'campus', 'carrera', 'semestre', 'nombre', 'apellido', 'correo', 'materias', 'periodo', 'promedio', 'cumplePromedio', 'calificacionCurso', 'esTutor' ];
 
 	constructor(private tutorService: TutorService, private http: HttpClient, public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef, private userService: UserService, private fb: FormBuilder,public svs: ExcelServiceService) { 
     this.createForm()
 	}
 
+  // almacena el campus registrado a la cuenta de usuario
   Usercampus = this.userService.getLocalStorageCampus()
+
+  // view child para configurar paginador
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 
+  // afterViewInit para configurar el paginador con los datos de tabla
 	ngAfterViewInit() {
 		this.dataSource.paginator = this.paginator;
 	}
 
+  //funcion para crear la forma que se enviara al servidor para enviar correos
   createForm(){
     this.mailForm = this.fb.group({
       campusSeleccionado: ['', Validators.required]
     });
   }
 
+  // filtro para el buscador en la tabla
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
 
+  // funcion que se ejecuta al principio
   ngOnInit() {
-  	//console.log(this.dataSource)
+  	//obtiene las materias y las guarda en 
     this.tutorService.getAllMaterias().subscribe((response) =>{
       this.listaMaterias = response;
       console.log("lista Materias:",this.listaMaterias)
+      // cuando tiene todas las materias carga los datos a la tabla
       this.loadTutors();
 
     });
   }
 
+  // funcion para descargar datos de tutores a la tabla
   loadTutors(){
-        this.tutors = this.http.get('https://ipn-backend.herokuapp.com/tutors/list');
+    //asigna a tutor el observable de lista de tutores
+    this.tutors = this.http.get('https://ipn-backend.herokuapp.com/tutors/list');
+
+    // pide la lista de tutores y los filtra dependiendo del campus 
+    // registrado en la cuenta de usuario 
     this.tutorService.getAllTutors().map((list: any) => {
       if(this.Usercampus !== 'PRN'){
         return list.filter(value => {
@@ -84,6 +106,9 @@ export class DesplegarTutoresComponent implements OnInit {
         });
       }
       else return list;
+
+      //despues de filtrar, cambia los nombres de las materias
+      // por las claves para que la tabla sea mas legible
     }).map((list: any) => {
       console.log(list);
       list.forEach((item) => {
@@ -100,6 +125,8 @@ export class DesplegarTutoresComponent implements OnInit {
         })
       })
       return list;
+
+      //se subscribe a los datos
     }).subscribe((response) => {
       this.dataSource.data = response;
       console.log(this.dataSource.data);
@@ -108,6 +135,8 @@ export class DesplegarTutoresComponent implements OnInit {
     });
   }
 
+  // funcion que abre el dialogo de editar cuando se hace clic en
+  // la matricula del candidato en la tabla
   onEdit(tutor): void{
   	let dialogRef = this.dialog.open(EditarTutoresComponent, {
   		data: tutor,
@@ -119,6 +148,8 @@ export class DesplegarTutoresComponent implements OnInit {
   	});
   }
 
+  // funcion para actualizar los datos con los cambios hechos
+  // Es muy similar a la funcion de load tutors
   refresh() {
   	this.tutorService.getAllTutors().map((list: any) => {
       if(this.Usercampus !== 'PRN'){
@@ -151,6 +182,8 @@ export class DesplegarTutoresComponent implements OnInit {
   	})
   }
 
+  // funcion para cambiar el 'si' o 'no' en el boton
+  // de cumplePromedio del tutor en la tabla
   toggleElegibilidad(tutor) {
   	tutor.cumplePromedio = !tutor.cumplePromedio;
     this.tutorService.editTutor(tutor).subscribe(
@@ -166,8 +199,9 @@ export class DesplegarTutoresComponent implements OnInit {
 
   }
 
+  // igual que toggleElegibilidad es Tutor
   toggleTutor(tutor) {
-  	tutor.pasoCurso = !tutor.pasoCurso;
+  	tutor.esTutor = !tutor.esTutor;
     this.tutorService.editTutor(tutor).subscribe(
       (response) => {
         console.log(response);
@@ -176,11 +210,12 @@ export class DesplegarTutoresComponent implements OnInit {
       (error) => {
         console.log(error);
         console.log("No se pudo enviar forma.");
-        tutor.pasoCurso = !tutor.pasoCurso;
+        tutor.esTutor = !tutor.esTutor;
       });
 
   }
 
+  // funcion para abrir dialogo de exito cuando se envia un correo
   openSuccess(message, title){
     let dialogRef = this.dialog.open(SuccessComponent, {
       data: {m: message, t: title},
@@ -192,6 +227,8 @@ export class DesplegarTutoresComponent implements OnInit {
     });
   }
 
+  // funcion para mandar la forma de correo cuando se hace clic en un boton
+  // de enviar correo
   enviarCorreo(tipo, campus) {
     this.tutorService.sendMail({"type": tipo, "campus": campus}).subscribe(
       (response) => {
@@ -205,7 +242,7 @@ export class DesplegarTutoresComponent implements OnInit {
         this.openSuccess("No se pudo enviar el correo!", "Error!")
       })
   }
-  
+
     public downloadExcel(){
     //this.svs.exportAsExcelFile(this.rows,"tutores")
       console.log(this.rows)
@@ -246,7 +283,8 @@ export class DesplegarTutoresComponent implements OnInit {
     return result;
     };
   
-
+    // funcion para mandar correo cuando el usuario tiene el campus
+    // 'PRN' registrado en su cuenta
   correoPRN(tipo) {
     this.llegoRespuesta = false;
     this.tutorService.sendMail({"type": tipo, "campus": this.mailForm.value.campusSeleccionado}).subscribe(
@@ -263,6 +301,7 @@ export class DesplegarTutoresComponent implements OnInit {
       })
   }
 
+  // Funcion para simular calificaciones de blackboard
   updateBB(){
     this.tutorService.generaBB().subscribe((response) => {
       console.log(response)
@@ -275,6 +314,9 @@ export class DesplegarTutoresComponent implements OnInit {
   
 }
 
+// Clase para habilitar el dataSource de los tutores
+// se utiliza para configurar el paginador y agregar
+// tutores al datasource
 export class TutorDataSource extends DataSource<any> {
 	constructor(private tutorService: TutorService) {
 		super();

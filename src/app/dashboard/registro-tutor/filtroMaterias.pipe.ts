@@ -1,3 +1,5 @@
+// Pipe que se usa para filtrar la lista de materias que 
+// se pueden seleccionar con las materias previamente seleccionadas
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

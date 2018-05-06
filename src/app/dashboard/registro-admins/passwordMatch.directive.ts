@@ -1,3 +1,5 @@
+// Codigo para validar que la contraseña tecleada sea igual a la contraseña de confirmacion
+
 import { Directive, forwardRef, Attribute } from '@angular/core';
 import { NG_VALIDATORS,Validator,
   Validators,AbstractControl,ValidatorFn } from '@angular/forms';

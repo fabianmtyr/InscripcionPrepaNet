@@ -16,13 +16,27 @@ import { SuccessComponent } from '../registro-tutor/registro-tutor.component';
 })
 export class RegistroAdminsComponent implements OnInit {
 
-    campuss:string[] = [
+  // arreglo que guarda valores que se van a desplegar
+  // en la barra de seleccion de campus
+  campuss:string[] = [
     'AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL','PRN','PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
 
+  //objeto de modelo usuario que guarda los valores ingresados en la forma 
+  // despues se manda este objeto al servidor
   model = new User();
+
+  // View child que se usa para pasar los datos de este
+  // componente a la venta de dialogo
   @ViewChild('adminForm') form: any;
+
+  // se usa para guardar el valor del input de confirmacion
+  // de contraseña y se compara contra la del modelo
   public passwordVerify: string;
+
+  // checa si ya se mando la forma
   submitted = false;
+
+  // almacena el nombre y apellido del registro para luego hacer un string
   fname: string;
   lname: string;
 
@@ -31,11 +45,12 @@ export class RegistroAdminsComponent implements OnInit {
   ngOnInit() {
   }
 
-
+  // se ejecuta cuando se envia la forma
   onSubmit() {
     this.submitted = true;
   }
   
+  // se usa para abrir la ventana de dailogo 
   openSuccess(message, title){
     let dialogRef = this.dialog.open(SuccessComponent, {
       data: {m: message, t: title},
@@ -44,6 +59,7 @@ export class RegistroAdminsComponent implements OnInit {
 
   }
 
+  // funcion que se corre cuando se madna la forma
   addUser() {
     this.submitted = true;
     console.log(this.model);
@@ -63,65 +79,4 @@ export class RegistroAdminsComponent implements OnInit {
         console.log("No se pudo enviar forma.");
       });
   }
-  
-/*
-  user: User;
-
-	registerAdminForm: FormGroup;
-	fname: FormControl;
-	lname: FormControl;
-	email: FormControl;
-	password: FormControl;
-	passwordVerify: FormControl;
-
-  public popoverTitle: string = 'Usuario Agregado Exitosamente';
-  public confirmClicked: boolean = false;
-
-
-  constructor(public userService: UserService) { }
-
-  ngOnInit() {
-    this.user = new User();
-  	this.createFormControls();
-  	this.createForm();
-  }
-
-  createFormControls() {
-  	this.fname = new FormControl('', Validators.required);
-  	this.lname = new FormControl('', Validators.required);
-  	this.email = new FormControl('', [
-      Validators.required,
-      Validators.email
-    ]);
-  	this.password = new FormControl('', [Validators.required, Validators.minLength(6)]);
-  	this.passwordVerify = new FormControl('', [Validators.required, Validators.minLength(6)]);
-  }
-
-  createForm() {
-  	this.registerAdminForm = new FormGroup({
-  		fname: this.fname,
-  		lname: this.lname,
-  		email: this.email,
-  		password: this.password,
-  		passwordVerify: this.passwordVerify
-  	});
-  }
-
-  addUser() {
-    console.log(this.user);
-
-    this.userService.registerUser(this.user).subscribe(
-      (response) => {
-        console.log(response);
-        console.log("Se agrego usuario");
-        alert("Usuario creado exitosamente.");
-        this.user = new User();
-        this.registerAdminForm.reset();
-      },
-      (error) => {
-        console.log(error);
-        console.log("No se pudo enviar forma.");
-      });
-  }
-  */
 }

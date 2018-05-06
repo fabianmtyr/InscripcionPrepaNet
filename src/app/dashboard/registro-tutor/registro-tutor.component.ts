@@ -14,13 +14,22 @@ import { FiltroMaterias } from './filtroMaterias.pipe';
 })
 export class RegistroTutorComponent implements OnInit {
 
-
+  // declaracion de objeto FormGroup
 	tutorForm: FormGroup;
+
+  // arreglo que contiene valores de campus para 
+  // barra de seleccion de campus
   campuss:string[] = [
     'AGS','CCM','CCV','CDJ','CEM','CHI','CHS','CSF','CVA','MTY','GDA','HGO','IRA','LAG','LEO','MRL', 'PRN', 'PUE','QRO','SAL','SIN','SLP','TAM','TOL','ZAC'];
 
+  // lista de materias con valor en blanco para evitar
+  // que se filtre la primera materia en la lista
   materiass = [' ']
+
+  // Observable que va a guardar la lista de materias
   listaMaterias:Observable<any>;
+
+  // Se guarda las materias que se escogieron para despues filtrarlas
   private mat1: string = '';
   private mat2: string = '';
   private mat3: string = '';
@@ -29,6 +38,7 @@ export class RegistroTutorComponent implements OnInit {
   	//this.createForm();
   }
 
+  // crea la forma con todos los validadores
   createForm() {
   	this.tutorForm = this.fb.group({
   		matricula: ['', [Validators.required, Validators.pattern("^[A|a|L|l][0-9]{8}")]],
@@ -46,11 +56,16 @@ export class RegistroTutorComponent implements OnInit {
   	});
   }
 
-  //get diagnostic() { return JSON.stringify(this.tutorForm);}
-
+  // Funcion que se ejecuta cuando se inicialize el componente
+  // Pide la lista de materias al servidor
   ngOnInit() {
   	this.tutorService.getAllMaterias().subscribe((response) =>{
+      // guarda la lista de materias en el observable listaMaterias
       this.listaMaterias = response;
+
+      // guarda el nombre (exclue la clave y id) de las materias
+      // en el arreglo que va a desplegar las materias en 
+      // las barras de seleccion de materias
       response.forEach((item) => this.materiass.push(item.nombre));
       console.log("materiass", this.materiass)
       console.log(this.listaMaterias)
@@ -59,6 +74,7 @@ export class RegistroTutorComponent implements OnInit {
     this.createForm()
   }
 
+  // abre una ventana de dialogo cuando se haya enviado la forma
   openSuccess(message, title){
     let dialogRef = this.dialog.open(SuccessComponent, {
       data: {m: message, t: title},
@@ -66,8 +82,8 @@ export class RegistroTutorComponent implements OnInit {
     });
   }
 
+  // Funcion que se ejecuta cuado se hace clic en agregar
   addTutor() {
-    
   	let tutor = new Tutor();
   	tutor = this.tutorForm.value;
     //console.log(tutor)
@@ -88,6 +104,8 @@ export class RegistroTutorComponent implements OnInit {
   }
 }
 
+// compoente para la ventana de dialogo
+// guarda el html
 @Component({
   selector: 'success-dialog',
   template: `

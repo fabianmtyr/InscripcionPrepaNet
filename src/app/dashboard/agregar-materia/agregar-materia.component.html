@@ -1,8 +1,3 @@
-  <!--div class="header">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-  </div-->
 <div class="container">
     <h3>Materias</h3>
       <form *ngIf="Usercampus=='PRN'" [formGroup]="materiaForm" (ngSubmit)="agregarMateria()">
@@ -27,14 +22,9 @@
         <option value="6">6</option>
       </select>
       
-      <!--input type="text" class="form-control" id="last" required [(ngModel)]="nTutor.name.last" name="last" #last="ngModel"-->
     </div>
-          <!--[disabled]="!materiaForm.valid"-->
     <button type="submit" class="btn btn-success">Agregar</button>
-    <!--input type="submit" value="Agregar"-->
     </form>
-     <!--button class="btn" (click)="downloadExcel()">Excel</button>
-    <button (click)="assignTutors()">Asignar</button-->
 </div>
 
 
@@ -52,27 +42,6 @@
 			<mat-header-cell *matHeaderCellDef>Tetramestre</mat-header-cell>
 			<mat-cell *matCellDef="let materia">{{materia.periodo}}</mat-cell>
 		</ng-container>
-                <!--ng-container matColumnDef="buttons">
-                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                        <mat-cell *matCellDef="let materia" (click)="$event.stopPropagation()">
-                        <button mat-button (click)="onDelete(group.id)">
-                                <mat-icon>delete</mat-icon>
-                        </button>
-                        </mat-cell>
-                </ng-container-->
-            
-		<!--ng-container matColumnDef="isElegible">
-			<mat-header-cell *matHeaderCellDef>Elegible al Curso</mat-header-cell>
-			<mat-cell *matCellDef="let tutor">
-				<button class="btn" [ngClass]="{'btn-success': tutor.isElegible, 'btn-danger': !tutor.isElegible }" (click)="toggleElegibilidad(tutor)">{{tutor.isElegible == true ? 'Si' : (tutor.isElegible == false ? 'No' : '')}}</button>
-			</mat-cell>
-		</ng-container>
-		<ng-container matColumnDef="isTutor">
-			<mat-header-cell *matHeaderCellDef>Elegible a ser Tutor</mat-header-cell>
-			<mat-cell *matCellDef="let tutor">
-				<button class="btn" [ngClass]="{'btn-success': tutor.isTutor, 'btn-danger': !tutor.isTutor }" (click)="toggleTutor(tutor)">{{tutor.isTutor == true ? 'Si' : (tutor.isTutor == false ? 'No' : '')}}</button>
-			</mat-cell>
-		</ng-container-->
 		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 		<mat-row *matRowDef="let row, columns: displayedColumns;"></mat-row>
 	</mat-table>

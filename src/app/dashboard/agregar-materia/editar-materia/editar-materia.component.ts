@@ -13,7 +13,7 @@ export class EditarMateriaComponent implements OnInit {
   constructor(private http: HttpClient,public dialogRef: MatDialogRef<EditarMateriaComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private userService: UserService)
   { }
   
-  nMateria = {"clave":'XXXX' , "nombre":'XXXX', "periodo":-1}
+  nMateria = {"clave":'XXXX' , "nombre":'XXXX', "periodo":-1}//Valores default de Materia
   Usercampus = this.userService.getLocalStorageCampus()
   @ViewChild('editMateriaForm') form:  any;
   
@@ -43,19 +43,17 @@ export class EditarMateriaComponent implements OnInit {
           let clave1 = {'clave': this.nMateria.clave}
       this.http.post("https://ipn-backend.herokuapp.com/materias/remove", clave1).subscribe(
       (response) => {
-        console.log(response);
-        console.log("Se elimino materia");
+        //console.log(response);
+        //console.log("Se elimino materia");
       },
       (error) => {
-        console.log(this.nMateria)
         console.log(error);
-        console.log("No se pudo eliminar");
+        //console.log("No se pudo eliminar");
         this.dialogRef.close();
       }); 
   }
 
   closeDialog(): void {
-    //this.form.reset();
     this.dialogRef.close();
   }
 

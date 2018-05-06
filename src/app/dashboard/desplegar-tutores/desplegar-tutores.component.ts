@@ -243,22 +243,26 @@ export class DesplegarTutoresComponent implements OnInit {
       })
   }
 
+    //Funcion para pasar Tutores a Excel
     public downloadExcel(){
-    //this.svs.exportAsExcelFile(this.rows,"tutores")
-      console.log(this.rows)
-      let flat = {};
-      var pth=''
+        
+      //Limpiado de DataSourceTutores (Aplanar/borrar atributos no deseados)
       let x = this.dataSource.data.map((dt) => {
-      //let x =this.rows.map((dt) => {
           delete dt['_id']
           delete dt['__v']
     return this.flatten(dt);
     
     });
-      console.log(x)
-      this.svs.specialExport(x,"tutores")      
+      
+      //Llamada a servicio de Excel
+      this.svs.specialExport(x,"tutores")
+      
+      //Save Excel alterno, no usado
+      //this.svs.exportAsExcelFile(this.rows,"tutores")    
   }
   
+  //Funcion de ayuda para aplanar un Objeto 
+  //Usada para pasar tutores a Excel correctamente
    flatten (data) {
    var result = {};
     function recurse (cur, prop) {
